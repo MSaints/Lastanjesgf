@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ab0215</color>
+    <color name="colorPrimaryDark">#7D0210</color>
+    <color name="colorAccent">#ab0417</color>
+    <color name="white">#fff</color>
+
+    <color name="cinza">#f7f7f7</color>
+
+    <!--=============Cor dos Butoes=================-->
+    <color name="but_white">#FFF</color>
+    <color name="but_red">#b71c1c</color>
+
+
+
+    <!--=============Cor dos textos=================-->
+    <color name="txt_white">#FFF</color>
+    <color name="txt_red">#b71c1c</color>
+    <color name="txt_black">#0a0a0a</color>
+</resources>
+
+

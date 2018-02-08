@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">MOZÊ</string>
+    <string name="home_name">Mozemp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_version">Versão 1.0.1 Beta</string>
+
+
+    <!--======================Navegation Drawer Icon Text=========================-->
+    <string name="drawer_perfil">Minha conta</string>
+    <string name="drawer_definicoes">Definições</string>
+    <string name="drawer_sair">Sair</string>
+    <string name="drawer_mensagens">Mensagens</string>
+
+    <!--================== butoes ==================-->
+    <string name="but_registar">REGISTAR</string>
+    <string name="but_entrar">ENTRAR</string>
+    <string name="but_recuperar">RECUPERAR</string>
+
+    <!--================== Links ==================-->
+    <string name="link_registar">REGISTAR</string>
+    <string name="link_recuperar_senha">Recuperar PIN.</string>
+    <string name="link_entrar">Esqueceu a Senha?</string>
+
+    <!--================== Form ==================-->
+    <string name="nome_usuario">Nome Completo</string>
+    <string name="cell_usuario">Celular</string>
+    <string name="email_usuario">Email</string>
+    <string name="password_usuario">Senha</string>
+    <string name="re_pass_usuario">Repetir Senha</string>
+    <string name="recuperar">Email ou Cell</string>
+
+    <!--================== texto ==================-->
+    <string name="txt_login">Preecha os campos acima e clique em ENTRAR.
+Se não possui uma conta clique em Registar.</string>
+
+    <string name="txt_recuperar_pin">Recuperar PIN</string>
+
+    <string name="moze">Moz Empreendedor</string>
+
+    <string name="add_foto">Adicionar foto</string>
+
+
+    <!--============================Hints===================================-->
+    <string name="hint_numero_telefone">Número de telefone</string>
+    <string name="hint_nome_completo">Nome Completo</string>
+    <string name="hint_email">Escreva seu Email</string>
+    <string name="hint_pin">PIN</string>
+    <string name="hint_repetir_pin">Repetir PIN</string>
+    <string name="hint_recuperar_pin">Email ou Número do cell</string>
+
+    <!-- ============================ Home Screen Buttons =================================== -->
+    <string name="home_relatorios">Relatorios</string>
+    <string name="home_stock">Gestão de Stock</string>
+    <string name="home_caixa">Saldo</string>
+    <string name="home_vendas">Vendas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="stock">Gestão de Stock</string>
+
+
+</resources>

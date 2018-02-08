@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.afrofx.code.anjesgf.Fragments.AddProdutosFragment"
+    android:layout_margin="20dp">
+
+    <EditText
+        android:id="@+id/add_nome"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome do produto"
+        android:background="@drawable/edit_style"/>
+
+    <EditText
+        android:id="@+id/add_quantidade"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Quantidade"
+        android:background="@drawable/edit_style"/>
+
+    <EditText
+        android:id="@+id/add_preco_compra"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Preço de Compra"
+        android:background="@drawable/edit_style"/>
+
+    <EditText
+        android:id="@+id/add_preco_venda"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Preço de Venda"
+        android:background="@drawable/edit_style"/>
+
+
+    <Button
+        android:id="@+id/add_produto"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Adicionar Produto"
+        android:background="@drawable/but_style_red"/>
+
+
+</LinearLayout>

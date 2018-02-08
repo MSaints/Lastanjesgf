@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/start_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/start_background"
+    android:orientation="vertical"
+    tools:context="com.afrofx.code.anjesgf.Activities.SplashActivity">
+
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/logo"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_version"
+        android:textStyle="bold"
+        android:layout_margin="20dp"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

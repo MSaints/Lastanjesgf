@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.afrofx.code.anjesgf.Activities.RememberActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_remember" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/txt_recuperar_pin"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edit_recuperar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edit_style"
+        android:hint="@string/hint_recuperar_pin"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/but_enviar_recuperar"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/but_size"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/but_style_white"
+        android:text="@string/but_recuperar"
+        android:textColor="#000" />
+
+</LinearLayout>

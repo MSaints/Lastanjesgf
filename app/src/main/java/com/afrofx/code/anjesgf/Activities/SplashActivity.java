@@ -29,15 +29,14 @@ public class SplashActivity extends AppCompatActivity {
         se = new sessionController(this);
 
 
-
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
 
-                if(!se.loggedIn()){
+                if (!se.loggedIn()) {
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     finish();
-                }else{
+                } else {
                     startActivity(new Intent(getApplicationContext(), MainScreenActivity.class));
                     finish();
                 }

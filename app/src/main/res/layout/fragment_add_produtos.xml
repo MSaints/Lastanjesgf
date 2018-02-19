@@ -1,54 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     android:orientation="vertical"
-    tools:context="com.afrofx.code.anjesgf.Fragments.AddProdutosFragment"
-    android:layout_margin="20dp">
+    tools:context="com.afrofx.code.anjesgf.Fragments.AddProdutosFragment">
 
-    <EditText
-        android:id="@+id/add_nome"
-        android:layout_marginTop="20dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nome do produto"
-        android:background="@drawable/edit_style"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/add_quantidade"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Quantidade"
-        android:background="@drawable/edit_style"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/add_preco_compra"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Preço de Compra"
-        android:background="@drawable/edit_style"/>
+            <EditText
+                android:id="@+id/add_nome_produto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_style"
+                android:hint="Nome do produto"
+                android:inputType="text"
+                android:singleLine="true" />
 
-    <EditText
-        android:id="@+id/add_preco_venda"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Preço de Venda"
-        android:background="@drawable/edit_style"/>
+            <AutoCompleteTextView
+                android:id="@+id/add_categoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_style"
+                android:hint="Categoria"
+                android:inputType="text"
+                android:singleLine="true" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/add_produto"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:text="Adicionar Produto"
-        android:background="@drawable/but_style_red"/>
+                <EditText
+                    android:id="@+id/add_quantidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Quant."
+                    android:inputType="number"
+                    android:singleLine="true" />
 
+                <AutoCompleteTextView
+                    android:id="@+id/add_unidade"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Uni."
+                    android:singleLine="true" />
 
+                <EditText
+                    android:tooltipText="Quantidade/Unidade"
+                    android:id="@+id/add_quantidade_unidade"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Q/Uni"
+                    android:inputType="number"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/add_preco_compra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Custo Total"
+                    android:inputType="number"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/add_preco_venda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Pre. Venda"
+                    android:inputType="number"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/add_validade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/edit_style"
+                    android:hint="Validade"
+                    android:inputType="date"
+                    android:singleLine="true" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_fornecedor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Fornecedor"
+                    android:inputType="text"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/add_quantidade_minima"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Q. Minima"
+                    android:inputType="text"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/add_produto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/but_style_1"
+                android:text="Adicionar Produto"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

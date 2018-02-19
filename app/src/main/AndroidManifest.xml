@@ -24,10 +24,19 @@
         <activity android:name=".Activities.RegisterActivity">
         </activity>
 
+        <activity android:name=".Activities.VendasActivity">
+        </activity>
+
         <activity android:name=".Activities.CaixaActivity">
         </activity>
 
+        <activity android:name=".Activities.RelatorioActivity">
+        </activity>
+
         <activity android:name=".Activities.StockActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".Activities.LoginActivity">

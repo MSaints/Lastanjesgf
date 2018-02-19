@@ -1,83 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.afrofx.code.anjesgf.Activities.CaixaActivity">
 
-    <android.support.v7.widget.CardView
-    android:id="@+id/card_entrar_stock"
+
+    <android.support.v7.widget.RecyclerView
+    android:id="@+id/recycleViewConta"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="10dp"
-    android:clickable="true">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/caixa_adicionar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"
-            android:text="Saldo Disponível"
-            android:textSize="18sp"/>
-
-        <TextView
-            android:id="@+id/txt_saldo_caixa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginTop="5dp"
-            android:text="2000.00"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display2"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginTop="5dp"
-            android:text="MZN"
-            android:textSize="18sp"/>
-
-    </LinearLayout>
-</android.support.v7.widget.CardView>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        app:layout_anchorGravity="bottom|right"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="10dp"
-        android:clickable="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginTop="10dp"
-                android:text="Origem do Saldo"
-                android:textSize="18sp"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:background="#616161"/>
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
+</RelativeLayout>

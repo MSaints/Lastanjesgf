@@ -2,28 +2,35 @@ package com.afrofx.code.anjesgf.adpters;
 
 import android.app.LauncherActivity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.afrofx.code.anjesgf.Activities.StockActivity;
+import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.models.StockModel;
 
 import java.util.List;
 
-/**
- * Created by Afro FX on 2/6/2018.
- */
 
-public class ProductAdpter extends RecyclerView.Adapter<ProductAdpter.ViewHolder>{
+
+public class ProductAdpter extends RecyclerView.Adapter<ProductAdpter.ViewHolder> {
 
     private List<StockModel> listItems;
     private Context context;
+    private DatabaseHelper db;
 
-    public ProductAdpter(Context context,List<StockModel> listItems) {
+    public ProductAdpter(Context context, List<StockModel> listItems) {
         this.listItems = listItems;
         this.context = context;
     }
@@ -37,17 +44,132 @@ public class ProductAdpter extends RecyclerView.Adapter<ProductAdpter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        StockModel listItem = listItems.get(position);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        final StockModel listItem = listItems.get(position);
 
         holder.txt_produto.setText(listItem.getProduto_nome());
-        holder.txt_categoria.setText(listItem.getProduto_categoria());
-        int p_quatidade = listItem.getProduto_quantidade();
+        holder.txt_categoria.setText(listItem.getCategoria());
+        double p_quatidade = listItem.getProduto_quantidade();
         String p_quant = String.valueOf(p_quatidade);
         holder.txt_quantidade.setText(p_quant);
         double preco_venda = listItem.getProduto_preco_venda();
-        String p_venda = String.valueOf(preco_venda);
+        String p_venda = String.valueOf(preco_venda) + " MZN";
         holder.txt_preco.setText(p_venda);
+
+        db = new DatabaseHelper(context);
+
+        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(context, holder.buttonViewOption);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.options_menu);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu1:
+                                //handle menu1 click
+                                break;
+                            case R.id.menu2:
+                                LayoutInflater li = LayoutInflater.from(context);
+                                View quantiView = li.inflate(R.layout.prompt_stock, null);
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+                                // set prompts.xml to alertdialog builder
+                                alertDialogBuilder.setView(quantiView);
+
+                                final EditText userInput = (EditText) quantiView.findViewById(R.id.editTextDialogUserInput);
+
+                                // set dialog message
+                                alertDialogBuilder.setCancelable(false).setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        double quantidade = Double.parseDouble(userInput.getText().toString()) + listItem.getProduto_quantidade();
+                                        String nome_produto = listItem.getProduto_nome();
+                                        if (db.updateQuatidade(nome_produto, quantidade)) {
+                                            Toast.makeText(context, "Produto Actualizado", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                                // Criar O Alerta
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                                // Mostra o alerta
+                                alertDialog.show();
+
+                                break;
+
+                            //Configuracoes da Opcao Editar
+                            case R.id.menu3:
+                                LayoutInflater li2 = LayoutInflater.from(context);
+                                View editView = li2.inflate(R.layout.edit_produto, null);
+                                AlertDialog.Builder alert3 = new AlertDialog.Builder(context);
+
+                                // set prompts.xml to alertdialog builder
+                                alert3.setView(editView);
+
+                                final EditText txt_nome = (EditText) editView.findViewById(R.id.edit_nome);
+                                final EditText txt_preco_compra = (EditText) editView.findViewById(R.id.edit_preco_compra);
+                                final EditText txt_preco_venda = (EditText) editView.findViewById(R.id.edit_preco_venda);
+
+                                txt_nome.setText(listItem.getProduto_nome());
+                                txt_preco_compra.setText(listItem.getProduto_preco_compra() + "");
+                                txt_preco_venda.setText(listItem.getProduto_preco_venda() + "");
+
+                                // set dialog message
+                                alert3.setCancelable(false).setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        double preco_compra = Double.parseDouble(txt_preco_compra.getText().toString());
+                                        double preco_venda = Double.parseDouble(txt_preco_venda.getText().toString());
+                                        String nome_produto = txt_nome.getText().toString();
+
+                                        String nome_conf = listItem.getProduto_nome();
+                                        if (db.updateProduto(nome_conf, nome_produto, preco_compra, preco_venda)) {
+                                            Toast.makeText(context, "Produto Actualizado", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                                // create alert dialog
+                                AlertDialog alertDialog3 = alert3.create();
+
+                                // show it
+                                alertDialog3.show();
+                                break;
+                            case R.id.menu4:
+                                String nome = listItem.getProduto_nome();
+                                double quant = listItem.getProduto_quantidade();
+
+                                if (quant == 0) {
+                                    if (db.eliminarProduto(nome)) {
+                                        Toast.makeText(context, "O produto foi eliminado", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(context, "O produto ja foi eliminado", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(context, "O produto ainda nao Acabou", Toast.LENGTH_SHORT).show();
+                                }
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                //displaying the popup
+                popup.show();
+            }
+        });
     }
 
     @Override
@@ -55,16 +177,18 @@ public class ProductAdpter extends RecyclerView.Adapter<ProductAdpter.ViewHolder
         return listItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txt_produto, txt_categoria, txt_quantidade, txt_preco;
+        public ImageButton buttonViewOption;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            txt_produto = (TextView)itemView.findViewById(R.id.lista_titulo);
-            txt_categoria = (TextView)itemView.findViewById(R.id.lista_descricao);
-            txt_quantidade = (TextView)itemView.findViewById(R.id.list_item_quantidade);
-            txt_preco = (TextView)itemView.findViewById(R.id.list_item_preco);
+            txt_produto = (TextView) itemView.findViewById(R.id.lista_titulo);
+            txt_categoria = (TextView) itemView.findViewById(R.id.list_item_dec);
+            txt_quantidade = (TextView) itemView.findViewById(R.id.list_item_quantidade);
+            txt_preco = (TextView) itemView.findViewById(R.id.list_item_preco);
+            buttonViewOption = (ImageButton) itemView.findViewById(R.id.butViewOptions);
         }
     }
 

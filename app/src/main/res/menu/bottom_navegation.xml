@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottomMenu1"
+        android:title="@string/bottom_home"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/bottomMenu2"
+        android:title="@string/bottom_notificatios"
+        android:icon="@drawable/ic_notificacoes"/>
+
+    <item
+        android:id="@+id/bottomMenu3"
+        android:title="@string/bottom_clientes"
+        android:icon="@drawable/ic_clientes"/>
+
+    <item
+        android:id="@+id/bottomMenu4"
+        android:title="@string/bottom_ajuda"
+        android:icon="@drawable/ic_help"/>
+
+</menu>

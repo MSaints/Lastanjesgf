@@ -1,17 +1,20 @@
 package com.afrofx.code.anjesgf.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.models.UserModel;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,7 +22,7 @@ import java.util.Date;
  * Created by Afro FX on 2/2/2018.
  */
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText edit_nome, edit_numero, edit_pin, edit_repetir_pin, edit_email;
     Button but_registar;
@@ -45,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.but_registar:
                 adicionarUser();
                 break;
@@ -53,42 +56,40 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void adicionarUser(){
+    public void adicionarUser() {
 
         String nome = edit_nome.getText().toString();
         String email = edit_email.getText().toString();
 
         String p = edit_pin.getText().toString().trim();
-        String rp =  edit_repetir_pin.getText().toString().trim();
-        String un =  edit_numero.getText().toString().trim();
+        String rp = edit_repetir_pin.getText().toString().trim();
+        String un = edit_numero.getText().toString().trim();
 
-        final int pin = !p.equals("")?Integer.parseInt(p) : 0;
-        final int re_pin = !rp.equals("")?Integer.parseInt(rp) : 0;
-        final int u_numero = !un.equals("")?Integer.parseInt(un) : 0;
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String strDate = sdf.format(new Date());
+        final int pin = !p.equals("") ? Integer.parseInt(p) : 0;
+        final int re_pin = !rp.equals("") ? Integer.parseInt(rp) : 0;
+        final int u_numero = !un.equals("") ? Integer.parseInt(un) : 0;
 
         UserModel userModel = db.procurar(u_numero);
 
-        if(nome ==""|| pin!=re_pin || edit_numero.length()!=9 || edit_pin.length()!=4){
+        if (nome == "" || pin != re_pin || edit_numero.length() != 9 || edit_pin.length() != 4) {
 
             mensagem("Verifique as credenciais");
-        }else{
-            if(userModel==null) {
-                userModel = new UserModel(nome, u_numero,pin,email, strDate);
+        } else {
+            if (userModel == null) {
+                userModel = new UserModel(u_numero, pin, nome, email);
                 db.inserirUser(userModel);
                 mensagem("Usuario Registado");
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 finish();
-            }else {
+            } else {
                 mensagem("O Numero ja foi usado");
             }
         }
     }
 
-    private void mensagem(String msg){
-        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+
+    private void mensagem(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
 

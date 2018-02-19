@@ -9,7 +9,7 @@ import com.afrofx.code.anjesgf.R;
  * Created by Afro FX on 2/2/2018.
  */
 
-public class RememberActivity extends AppCompatActivity{
+public class RememberActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

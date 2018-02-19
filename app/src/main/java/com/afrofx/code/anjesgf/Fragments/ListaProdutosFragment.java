@@ -3,6 +3,7 @@ package com.afrofx.code.anjesgf.Fragments;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,25 +25,27 @@ public class ListaProdutosFragment extends Fragment {
 
     View v;
 
-    private RecyclerView recyclerView;
     private List<StockModel> lstlist;
+
     DatabaseHelper db;
 
     public ListaProdutosFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_lista_produtos, container, false);
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.recycleView);
-        ProductAdpter productAdpter = new ProductAdpter(getContext(),lstlist);
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
+        recyclerView.setHasFixedSize(true);
+        ProductAdpter productAdpter = new ProductAdpter(getContext(), lstlist);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         recyclerView.setAdapter(productAdpter);
 
         return v;
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,21 +55,19 @@ public class ListaProdutosFragment extends Fragment {
 
         Cursor data = db.listProduto();
 
-        if(data.getCount()==0){
-            Toast.makeText(getActivity(),"Nao Existem Produtos",Toast.LENGTH_LONG).show();
-        }else{
-            while(data.moveToNext()){
-                int quantidade = Integer.parseInt(data.getString(3));
-                double preco_venda = Double.parseDouble(data.getString(5)),
-                        preco_compra = Double.parseDouble(data.getString(4));
-                String nome = data.getString(2), categoria = "Categoria";
+        if (data.getCount() == 0) {
+            Toast.makeText(getActivity(), "Nao Existem Produtos", Toast.LENGTH_LONG).show();
+        } else {
+            while (data.moveToNext()) {
+                int id_produto = Integer.parseInt(data.getString(0));
+                String id_categoria = data.getString(data.getColumnIndex("categoria_nome"));
+                String nome = data.getString(4);
+                double quantidade = Double.parseDouble(data.getString(5));
+                double preco_venda = Double.parseDouble(data.getString(9));
 
-                StockModel listItem = new StockModel(quantidade,preco_venda,
-                        nome,categoria);
+                StockModel listItem = new StockModel(id_produto, quantidade, preco_venda, nome, id_categoria);
                 lstlist.add(listItem);
             }
         }
-
-
     }
 }

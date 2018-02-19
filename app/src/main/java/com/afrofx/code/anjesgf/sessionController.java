@@ -14,19 +14,19 @@ public class sessionController {
 
     Context ctx;
 
-    public sessionController(Context ctx){
+    public sessionController(Context ctx) {
         this.ctx = ctx;
         prefs = ctx.getSharedPreferences("myapp", Context.MODE_PRIVATE);
         editor = prefs.edit();
 
     }
 
-    public void setLoggedIn(boolean logggedIn){
+    public void setLoggedIn(boolean logggedIn) {
         editor.putBoolean("loggedInmode", logggedIn);
         editor.commit();
     }
 
-    public boolean loggedIn(){
+    public boolean loggedIn() {
         return prefs.getBoolean("loggedInmode", false);
     }
 }

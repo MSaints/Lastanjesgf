@@ -3,9 +3,11 @@ package com.afrofx.code.anjesgf.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.DatabaseHelper;
@@ -50,36 +52,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.but_login_entrar:
                 login();
-            break;
+                break;
 
             case R.id.but_login_registar:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 finish();
-            break;
+                break;
             default:
         }
     }
 
-    private void login(){
+    private void login() {
 
         String num = edit_number.getText().toString();
         String pinn = edit_pin.getText().toString();
 
-        if(num.isEmpty() || pinn.isEmpty() || pinn=="" || num==""){
+        if (num.isEmpty() || pinn.isEmpty() || pinn == "" || num == "") {
             Toast.makeText(getApplicationContext(), "Preencha os campos", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             int userNumber = Integer.parseInt(num);
             int userPin = Integer.parseInt(pinn);
 
             UserModel userModel = db.userLogin(userNumber, userPin);
 
-            if(userModel!=null){
+            if (userModel != null) {
                 se.setLoggedIn(true);
-                startActivity(new Intent(LoginActivity.this, MainScreenActivity.class));
-            }else{
+                Intent s = new Intent(LoginActivity.this, MainScreenActivity.class);
+                startActivity(s);
+            } else {
                 Toast.makeText(getApplicationContext(), "Dados Errados", Toast.LENGTH_LONG).show();
             }
         }

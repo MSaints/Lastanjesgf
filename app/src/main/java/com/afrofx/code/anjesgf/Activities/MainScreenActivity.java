@@ -3,6 +3,7 @@ package com.afrofx.code.anjesgf.Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,7 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afrofx.code.anjesgf.BottomNavHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.models.UserModel;
 import com.afrofx.code.anjesgf.sessionController;
@@ -27,27 +30,34 @@ public class MainScreenActivity extends AppCompatActivity
     private sessionController se;
 
 
-
     UserModel userModel = new UserModel();
+
+    private BottomNavigationView bottomBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.main_screen);
 
         se = new sessionController(this);
 
-        if(!se.loggedIn()){
+        if (!se.loggedIn()) {
             logout();
         }
+
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        bottomBar  =(BottomNavigationView)findViewById(R.id.bottonNavBar);
+        BottomNavHelper.disableShiftMode(bottomBar);
 
 
-        final CardView cardView_Stock = (CardView)findViewById(R.id.card_entrar_stock);
+        final CardView cardView_Stock = (CardView) findViewById(R.id.card_entrar_stock);
         cardView_Stock.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -56,12 +66,30 @@ public class MainScreenActivity extends AppCompatActivity
             }
         });
 
-        final CardView cardView_Caixa = (CardView)findViewById(R.id.card_entrar_caixa);
+        final CardView cardView_Caixa = (CardView) findViewById(R.id.card_entrar_caixa);
         cardView_Caixa.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainScreenActivity.this, CaixaActivity.class));
+            }
+        });
+
+        final CardView cardView_relatorio = (CardView) findViewById(R.id.card_entrar_relatorio);
+        cardView_relatorio.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainScreenActivity.this, RelatorioActivity.class));
+            }
+        });
+
+        final CardView cardView_Vendas = (CardView) findViewById(R.id.card_entrar_vendas);
+        cardView_Vendas.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainScreenActivity.this, VendasActivity.class));
             }
         });
 
@@ -75,14 +103,13 @@ public class MainScreenActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-       /* View header=navigationView.getHeaderView(0);
+       View header=navigationView.getHeaderView(0);
         TextView username = (TextView)header.findViewById(R.id.user_perfil_nome);
         if(userModel!=null){
-            username.setText(userModel.getUser_nome());
+
         }else{
             username.setText("Nome do Perfil");
-        }*/
-
+        }
 
 
     }
@@ -113,6 +140,7 @@ public class MainScreenActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.but_vender) {
+            Toast.makeText(getApplication(), "Clickei", Toast.LENGTH_LONG).show();
             return true;
         }
 
@@ -127,7 +155,6 @@ public class MainScreenActivity extends AppCompatActivity
 
         if (id == R.id.txt_perfil) {
 
-
         } else if (id == R.id.txt_mensagens) {
 
         } else if (id == R.id.txt_sair) {
@@ -141,7 +168,7 @@ public class MainScreenActivity extends AppCompatActivity
         return true;
     }
 
-    private void logout(){
+    private void logout() {
         se.setLoggedIn(false);
         finish();
         startActivity(new Intent(MainScreenActivity.this, LoginActivity.class));

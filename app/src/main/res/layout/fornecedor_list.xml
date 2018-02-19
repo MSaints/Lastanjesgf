@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/letraFornecedor"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:text="M"
+                android:textColor="@color/txt_white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/cicle_ico"
+                android:gravity="center_vertical" />
+
+            <LinearLayout
+                android:layout_toRightOf="@id/letraFornecedor"
+                android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:id="@+id/nomeFornecedor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Handling"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <TextView
+                    android:id="@+id/tipoFornecedor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bebidas"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ligarFornecedor"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_call_black_24dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

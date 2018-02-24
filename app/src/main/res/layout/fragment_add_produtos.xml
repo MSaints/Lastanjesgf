@@ -53,16 +53,17 @@
                     android:inputType="number"
                     android:singleLine="true" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/add_unidade"
-                    android:layout_width="fill_parent"
+                <EditText
+                    android:id="@+id/add_preco_compra"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_style"
-                    android:hint="Uni."
+                    android:hint="Custo Total"
+                    android:inputType="number"
                     android:singleLine="true" />
+
 
                 <EditText
                     android:tooltipText="Quantidade/Unidade"
@@ -83,16 +84,18 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/add_preco_compra"
-                    android:layout_width="match_parent"
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_unidade"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_style"
-                    android:hint="Custo Total"
-                    android:inputType="number"
+                    android:hint="Unidades"
                     android:singleLine="true" />
+
 
                 <EditText
                     android:id="@+id/add_preco_venda"
@@ -112,17 +115,6 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/add_validade"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1.5"
-                    android:background="@drawable/edit_style"
-                    android:hint="Validade"
-                    android:inputType="date"
-                    android:singleLine="true" />
-
                 <AutoCompleteTextView
                     android:id="@+id/add_fornecedor"
                     android:layout_width="match_parent"
@@ -131,9 +123,12 @@
                     android:background="@drawable/edit_style"
                     android:hint="Fornecedor"
                     android:inputType="text"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:layout_marginRight="5dp"/>
 
                 <EditText
+
+                    android:layout_marginLeft="5dp"
                     android:id="@+id/add_quantidade_minima"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -151,8 +146,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:paddingHorizontal="30dp"
                 android:background="@drawable/but_style_1"
-                android:text="Adicionar Produto"
+                android:text="Comprar"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
         </LinearLayout>

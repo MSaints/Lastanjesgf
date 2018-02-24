@@ -18,9 +18,11 @@ import android.widget.Toast;
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.adpters.CategoriaAdapter;
+import com.afrofx.code.anjesgf.adpters.FornecedorAdapter;
 import com.afrofx.code.anjesgf.adpters.PageAdapters;
 import com.afrofx.code.anjesgf.adpters.UnidadeAdapter;
 import com.afrofx.code.anjesgf.models.CategoriaModel;
+import com.afrofx.code.anjesgf.models.FornecedorModel;
 import com.afrofx.code.anjesgf.models.StockModel;
 import com.afrofx.code.anjesgf.models.UnidadeModel;
 
@@ -37,12 +39,16 @@ public class AddProdutosFragment extends Fragment {
 
     List<CategoriaModel> mList;
     List<UnidadeModel> unidadeList;
+    List<FornecedorModel> fornecedorList;
+
     CategoriaAdapter adapter;
     UnidadeAdapter unidadeAdapter;
+    FornecedorAdapter fornecedorAdapter;
 
     DatabaseHelper db;
 
-    public AddProdutosFragment() {}
+    public AddProdutosFragment() {
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,23 +86,24 @@ public class AddProdutosFragment extends Fragment {
         unidadeAdapter = new UnidadeAdapter(getActivity(), R.layout.fragment_add_produtos, R.layout.linha_categoria, unidadeList);
         txt_unidade.setAdapter(unidadeAdapter);
 
+        fornecedorList = addFornecedor();
+        txt_fornecedor.setThreshold(1);
+        fornecedorAdapter = new FornecedorAdapter(getActivity(), R.layout.fragment_add_produtos, R.layout.linha_categoria, fornecedorList);
+        txt_fornecedor.setAdapter(fornecedorAdapter);
+
         return v;
     }
-
 
 
     public void addProduto() {
         String produto_nome = edit_nome.getText().toString();
         String produto_unidade = txt_unidade.getText().toString();
         String produto_fornecedor = txt_fornecedor.getText().toString();
-        String produto_categoria = txt_categoria.getText().toString();
+        String produto_categoria = txt_categoria.getText().toString().trim();
 
         int id_categoria = 0;
-        String cate;
         int id_unidade = 0;
-        String uni;
         int id_fornecedor = 0;
-        String forne;
 
         final double produto_quantidade = !edit_quantidade.getText().toString().equals("") ?
                 Double.parseDouble(edit_quantidade.getText().toString()) : 0.0;
@@ -110,6 +117,8 @@ public class AddProdutosFragment extends Fragment {
                 Double.parseDouble(edit_quantidade_minima.getText().toString()) : 0.0;
         StockModel stockModel = db.procuraProduto(produto_nome);
 
+        double quantidade_final = produto_quantidade_unidade * produto_quantidade;
+
         if (produto_nome.equals("")) {
             mensagem("Preencha os Campos");
         } else {
@@ -118,16 +127,19 @@ public class AddProdutosFragment extends Fragment {
                     id_categoria = db.procuraCategoria(produto_categoria);
                 } else {
                     id_categoria = db.procuraCategoria(produto_categoria);
-                }
-
-                if(addUnit()){
+                } if (addUnit()) {
                     id_unidade = db.procuraUnidade(produto_unidade);
-                }else{
+                } else {
                     id_categoria = db.procuraCategoria(produto_categoria);
+                }if (findFornecedor() && produto_fornecedor.length() > 2) {
+                    mensagem("O Fornecedor nao existe");
+                } else if (!findFornecedor() || produto_fornecedor.equals("")) {
+                    id_fornecedor = db.procuraFornecedor(produto_fornecedor);
                 }
 
-                stockModel = new StockModel(id_categoria, id_unidade, id_fornecedor, produto_quantidade, produto_preco_compra,
-                        produto_quantidade_minima, produto_preco_venda, produto_quantidade_unidade, produto_nome);
+
+                stockModel = new StockModel(id_categoria, id_unidade, id_fornecedor, quantidade_final, produto_preco_compra,
+                        produto_quantidade_minima, produto_preco_venda, produto_nome);
 
                 db.inserirProduto(stockModel);
 
@@ -139,8 +151,9 @@ public class AddProdutosFragment extends Fragment {
                 viewPager = getActivity().findViewById(R.id.pageViewer);
 
                 pageAdapters = new PageAdapters(getActivity().getSupportFragmentManager());
-                pageAdapters.AddFragment(new ListaProdutosFragment(), "Estoque");
+                pageAdapters.AddFragment(new ListaProdutosFragment(), "Produtos");
                 pageAdapters.AddFragment(new AddProdutosFragment(), "Adicionar");
+                pageAdapters.AddFragment(new FornecedorFragment(), "Fornecedor");
 
                 viewPager.setAdapter(pageAdapters);
 
@@ -150,6 +163,7 @@ public class AddProdutosFragment extends Fragment {
             }
         }
     }
+
 
     private boolean addCategory() {
         boolean r;
@@ -162,6 +176,18 @@ public class AddProdutosFragment extends Fragment {
             r = false;
         } else {
             db.procuraCategoria(produto_categoria);
+            r = true;
+        }
+        return r;
+    }
+
+    private boolean findFornecedor() {
+        boolean r = false;
+        String fornecedores = txt_fornecedor.getText().toString();
+        FornecedorModel fornecedorModel = db.procurarForndecedor(fornecedores);
+
+        if (fornecedorModel == null) {
+            db.procuraFornecedor(fornecedores);
             r = true;
         }
         return r;
@@ -201,6 +227,23 @@ public class AddProdutosFragment extends Fragment {
         return lista;
     }
 
+    private List<FornecedorModel> addFornecedor() {
+        List<FornecedorModel> lista = new ArrayList<>();
+        db = new DatabaseHelper(getActivity());
+        Cursor data = db.listFornecedor();
+        if (data.getCount() == 0) {
+            Toast.makeText(getActivity(), "Nao Existem Unidades", Toast.LENGTH_LONG).show();
+        } else {
+            while (data.moveToNext()) {
+                int id_fornecedor = Integer.parseInt(data.getString(0));
+                String nome = data.getString(2);
+                FornecedorModel listItem = new FornecedorModel(id_fornecedor, nome);
+                lista.add(listItem);
+            }
+        }
+        return lista;
+    }
+
     private boolean addUnit() {
         boolean r;
         String produto_unidade = txt_unidade.getText().toString();
@@ -216,8 +259,6 @@ public class AddProdutosFragment extends Fragment {
         }
         return r;
     }
-
-
 
 
     private void mensagem(String msg) {

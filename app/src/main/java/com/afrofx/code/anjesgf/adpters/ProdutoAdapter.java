@@ -10,7 +10,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import com.afrofx.code.anjesgf.R;
-import com.afrofx.code.anjesgf.models.FornecedorModel;
+import com.afrofx.code.anjesgf.models.StockModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,22 +19,24 @@ import java.util.List;
  * Created by Afro FX on 2/22/2018.
  */
 
-public class FornecedorAdapter extends ArrayAdapter<FornecedorModel> {
+public class ProdutoAdapter extends ArrayAdapter<StockModel> {
 
     Context context;
     int resource, textViewResourceId;
-    List<FornecedorModel> items, tempItems, suggestions;
+    List<StockModel> items, tempItems, suggestions;
 
 
-    public FornecedorAdapter(@NonNull Context context, int resource, int textViewResourceId, @NonNull List<FornecedorModel> objects) {
-        super(context, resource, textViewResourceId, objects);
+
+    public ProdutoAdapter(@NonNull Context context, int resource, int textViewResourceId, List<StockModel> items) {
+        super(context, resource, textViewResourceId, items);
         this.context = context;
         this.resource = resource;
         this.textViewResourceId = textViewResourceId;
-        this.items = objects;
-        tempItems = new ArrayList<FornecedorModel>(items);
-        suggestions = new ArrayList<FornecedorModel>();
+        this.items = items;
+        tempItems = new ArrayList<StockModel>(items); // this makes the difference.
+        suggestions = new ArrayList<StockModel>();
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -43,14 +45,15 @@ public class FornecedorAdapter extends ArrayAdapter<FornecedorModel> {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.linha_categoria, parent, false);
         }
-        FornecedorModel cmodel = items.get(position);
+        StockModel cmodel = items.get(position);
         if (cmodel != null) {
             TextView lblName = (TextView) view.findViewById(R.id.lbl_name);
             if (lblName != null)
-                lblName.setText(cmodel.getFornecedor_nome());
+                lblName.setText(cmodel.getProduto_nome());
         }
         return view;
     }
+
 
     @Override
     public Filter getFilter() {
@@ -63,7 +66,7 @@ public class FornecedorAdapter extends ArrayAdapter<FornecedorModel> {
     Filter nameFilter = new Filter() {
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            String str = ((FornecedorModel) resultValue).getFornecedor_nome();
+            String str = ((StockModel) resultValue).getProduto_nome();
             return str;
         }
 
@@ -71,8 +74,8 @@ public class FornecedorAdapter extends ArrayAdapter<FornecedorModel> {
         protected FilterResults performFiltering(CharSequence constraint) {
             if (constraint != null) {
                 suggestions.clear();
-                for (FornecedorModel cmodel : tempItems) {
-                    if (cmodel.getFornecedor_nome().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                for (StockModel cmodel : tempItems) {
+                    if (cmodel.getProduto_nome().toLowerCase().contains(constraint.toString().toLowerCase())) {
                         suggestions.add(cmodel);
                     }
                 }
@@ -87,14 +90,16 @@ public class FornecedorAdapter extends ArrayAdapter<FornecedorModel> {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            List<FornecedorModel> filterList = (ArrayList<FornecedorModel>) results.values;
+            List<StockModel> filterList = (ArrayList<StockModel>) results.values;
             if (results != null && results.count > 0) {
                 clear();
-                for (FornecedorModel cmodel : filterList) {
+                for (StockModel cmodel : filterList) {
                     add(cmodel);
                     notifyDataSetChanged();
                 }
             }
         }
     };
+
+
 }

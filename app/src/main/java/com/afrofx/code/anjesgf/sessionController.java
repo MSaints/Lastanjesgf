@@ -29,4 +29,5 @@ public class sessionController {
     public boolean loggedIn() {
         return prefs.getBoolean("loggedInmode", false);
     }
+
 }

@@ -1,6 +1,5 @@
 package com.afrofx.code.anjesgf.adpters;
 
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +22,13 @@ import java.util.List;
 
 
 
-public class ProductAdpter extends RecyclerView.Adapter<ProductAdpter.ViewHolder> {
+public class ProductRecyclerAdpter extends RecyclerView.Adapter<ProductRecyclerAdpter.ViewHolder> {
 
     private List<StockModel> listItems;
     private Context context;
     private DatabaseHelper db;
 
-    public ProductAdpter(Context context, List<StockModel> listItems) {
+    public ProductRecyclerAdpter(Context context, List<StockModel> listItems) {
         this.listItems = listItems;
         this.context = context;
     }

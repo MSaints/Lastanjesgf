@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
-import com.afrofx.code.anjesgf.adpters.ProductAdpter;
+import com.afrofx.code.anjesgf.adpters.ProductRecyclerAdpter;
 import com.afrofx.code.anjesgf.models.StockModel;
 
 import java.util.ArrayList;
@@ -38,10 +38,10 @@ public class ListaProdutosFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
-        ProductAdpter productAdpter = new ProductAdpter(getContext(), lstlist);
+        ProductRecyclerAdpter productRecyclerAdpter = new ProductRecyclerAdpter(getContext(), lstlist);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        recyclerView.setAdapter(productAdpter);
+        recyclerView.setAdapter(productRecyclerAdpter);
 
         return v;
     }
@@ -60,12 +60,12 @@ public class ListaProdutosFragment extends Fragment {
         } else {
             while (data.moveToNext()) {
                 int id_produto = Integer.parseInt(data.getString(0));
-                String id_categoria = data.getString(data.getColumnIndex("categoria_nome"));
+                String nome_categoria = data.getString(data.getColumnIndex("categoria_nome"));
                 String nome = data.getString(4);
                 double quantidade = Double.parseDouble(data.getString(5));
-                double preco_venda = Double.parseDouble(data.getString(9));
+                double preco_venda = Double.parseDouble(data.getString(8));
 
-                StockModel listItem = new StockModel(id_produto, quantidade, preco_venda, nome, id_categoria);
+                StockModel listItem = new StockModel(id_produto,nome, quantidade, preco_venda, nome_categoria);
                 lstlist.add(listItem);
             }
         }

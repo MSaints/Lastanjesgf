@@ -20,7 +20,6 @@ import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.adpters.PageAdapters;
 import com.afrofx.code.anjesgf.models.StockModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,7 +61,7 @@ public class StockActivity extends AppCompatActivity {
         pageAdapters = new PageAdapters(getSupportFragmentManager());
 
 
-        pageAdapters.AddFragment(new ListaProdutosFragment(), "Produtos");
+        pageAdapters.AddFragment(new ListaProdutosFragment(), "Stock");
         pageAdapters.AddFragment(new AddProdutosFragment(), "Registar");
         pageAdapters.AddFragment(new FornecedorFragment(), "Fornecedor");
         viewPager.setAdapter(pageAdapters);

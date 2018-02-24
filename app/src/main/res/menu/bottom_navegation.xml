@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/bottomMenu4"
-        android:title="@string/bottom_ajuda"
-        android:icon="@drawable/ic_help"/>
+        android:title="Relatório"
+        android:icon="@drawable/ic_equalizer"/>
 
 </menu>

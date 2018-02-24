@@ -1,7 +1,9 @@
 package com.afrofx.code.anjesgf.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -79,8 +81,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             UserModel userModel = db.userLogin(userNumber, userPin);
 
             if (userModel != null) {
+
                 se.setLoggedIn(true);
-                Intent s = new Intent(LoginActivity.this, MainScreenActivity.class);
+                Intent s = new Intent(this, MainScreenActivity.class);
+                String nome = userModel.getUsuario_nome();
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("NameOfShared", nome);
+                editor.commit();
                 startActivity(s);
             } else {
                 Toast.makeText(getApplicationContext(), "Dados Errados", Toast.LENGTH_LONG).show();

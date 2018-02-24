@@ -6,12 +6,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.afrofx.code.anjesgf.models.CategoriaModel;
+import com.afrofx.code.anjesgf.models.ClienteModel;
+import com.afrofx.code.anjesgf.models.ContaModel;
+import com.afrofx.code.anjesgf.models.FornecedorModel;
 import com.afrofx.code.anjesgf.models.StockModel;
 import com.afrofx.code.anjesgf.models.UnidadeModel;
 import com.afrofx.code.anjesgf.models.UserModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -67,12 +72,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PR_COL_4 = "id_fornecedor";
     private static final String PR_COL_5 = "produto_nome";
     private static final String PR_COL_6 = "produto_quantidade";
-    private static final String PR_COL_7 = "produto_quanti_unidade";
-    private static final String PR_COL_8 = "produto_quanti_minima";
-    private static final String PR_COL_9 = "produto_preco_compra";
-    private static final String PR_COL_10 = "produto_preco_venda";
-    private static final String PR_COL_11 = "produto_data_registo";
-    private static final String PR_COL_12 = "produto_validade";
+    private static final String PR_COL_7 = "produto_quanti_minima";
+    private static final String PR_COL_8 = "produto_preco_compra";
+    private static final String PR_COL_9 = "produto_preco_venda";
+    private static final String PR_COL_10 = "produto_data_registo";
+    private static final String PR_COL_11 = "produto_validade";
 
     //==========COLUNAS PRODUTO_CATEGORIA_TABLE
     private static final String PC_COL_1 = "id_categoria";
@@ -103,6 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String RO_COL_2 = "id_conta";
     private static final String RO_COL_3 = "id_operacao";
     private static final String RO_COL_4 = "operacao_valor";
+    private static final String RO_COL_5 = "operacao_data";
 
     //==========COLUNAS OPERACOES_TABLE
     private static final String OP_COL_1 = "id_operacao";
@@ -123,6 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String FO_COL_4 = "fornecedor_contacto";
     private static final String FO_COL_5 = "fornecedor_email";
     private static final String FO_COL_6 = "fornecedor_tipo";
+    private static final String FO_COL_7 = "fornecedor_registo";
 
     //==========COLUNAS CLIENTES_TABLE=====================*/
     private static final String CL_COL_1 = "id_cliente";
@@ -166,8 +172,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*==================Criacao da tabela produto categoria na bd=====================*/
     private static final String query_fornecedor = "CREATE TABLE " + FORNECEDOR_TABLE + "("
             + FO_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," + FO_COL_2 + " INTEGER REFERENCES " + ENDERECO_TABLE
-            + "(" + EN_COL_1 + ")," + FO_COL_3 + " VARCHAR NOT NULL," + FO_COL_4 + "INTEGER," + FO_COL_5 + " VARCHAR," +
-            FO_COL_6 + " VARCHAR)";
+            + "(" + EN_COL_1 + ")," + FO_COL_3 + " VARCHAR NOT NULL," + FO_COL_4 + " INTEGER," + FO_COL_5 + " VARCHAR," +
+            FO_COL_6 + " VARCHAR,"+ FO_COL_7 + " DATE DEFAULT (CURRENT_TIMESTAMP))";
 
     /*==================Criacao da tabela PRODUTOS na bd=====================*/
     private static final String query_produto = "CREATE TABLE " + PRODUTO_TABLE + "("
@@ -175,9 +181,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             PR_COL_2 + " INTEGER REFERENCES " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_1 + ")DEFAULT 0," +
             PR_COL_3 + " INTEGER REFERENCES " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_1 + ")DEFAULT 0," +
             PR_COL_4 + " INTEGER REFERENCES " + FORNECEDOR_TABLE + "(" + FO_COL_1 + ")DEFAULT 0," +
-            PR_COL_5 + " VARCHAR NOT NULL," + PR_COL_6 + " REAL," + PR_COL_7 + " REAL," +
-            PR_COL_8 + " REAL, " + PR_COL_9 + " REAL ," + PR_COL_10 + " REAL ," + PR_COL_11 + " DATE DEFAULT (CURRENT_TIMESTAMP)," +
-            PR_COL_12 + " DATE DEFAULT Nenhuma)";
+            PR_COL_5 + " VARCHAR NOT NULL," + PR_COL_6+ " REAL," + PR_COL_7+ " REAL," +
+            PR_COL_8 + " REAL, " + PR_COL_9+ " REAL ," + PR_COL_10+ " DATE DEFAULT (CURRENT_TIMESTAMP) ," + PR_COL_11 + " DATE)";
 
     /*==================Criacao da tabela REGISTO VENDA na bd=====================*/
     private static final String query_registo_venda = "CREATE TABLE " + REGISTO_VENDA_TABLE + "("
@@ -200,7 +205,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + RO_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
             RO_COL_2 + " INTEGER REFERENCES " + REGISTO_CONTA_TABLE + "(" + RC_COL_1 + ") NOT NULL," +
             RO_COL_3 + " INTEGER REFERENCES " + OPERACOES_TABLE + "(" + OP_COL_1 + ") NOT NULL," +
-            RO_COL_4 + " REAL NOT NULL)";
+            RO_COL_4 + " REAL NOT NULL,"+RO_COL_5+" DATE DEFAULT (CURRENT_TIMESTAMP))";
 
     private static final String query_operecaoes = "CREATE TABLE " + OPERACOES_TABLE + "("
             + OP_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
@@ -246,6 +251,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO " + CARGO_TABLE + "(" + CA_COL_2 + ") VALUES('Administrador')");
         db.execSQL("INSERT INTO " + CARGO_TABLE + "(" + CA_COL_2 + ") VALUES('Colaborador')");
+
+        db.execSQL("INSERT INTO " + OPERACOES_TABLE + "(" + OP_COL_2 + ") VALUES('Entrada')");
+        db.execSQL("INSERT INTO " + OPERACOES_TABLE + "(" + OP_COL_2 + ") VALUES('Saida')");
     }
 
     @Override
@@ -343,7 +351,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public StockModel procuraProduto(String nome) {
         String sqlQuery = "SELECT * FROM " + PRODUTO_TABLE + " WHERE " + PR_COL_5 + " = '" + nome + "'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         cursor = db.rawQuery(sqlQuery, null);
 
@@ -364,6 +372,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor listProduto() {
         String sqlQuery = "SELECT * FROM " + PRODUTO_TABLE + " NATURAL JOIN " + PRODUTO_CATEGORIA_TABLE + " ORDER BY " + PR_COL_5;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor listFornecedor(){
+        String sqlQuery = "SELECT * FROM " + FORNECEDOR_TABLE;
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         cursor = db.rawQuery(sqlQuery, null);
@@ -405,16 +423,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void inserirProduto(StockModel stockModel) {
 
         ContentValues contentValues = new ContentValues();
+
         contentValues.put(PR_COL_2, stockModel.getId_categoria());
         contentValues.put(PR_COL_3, stockModel.getId_unidade());
         contentValues.put(PR_COL_4, stockModel.getId_fornecedor());
         contentValues.put(PR_COL_5, stockModel.getProduto_nome());
         contentValues.put(PR_COL_6, stockModel.getProduto_quantidade());
-        contentValues.put(PR_COL_7, stockModel.getProduto_quanti_unidade());
-        contentValues.put(PR_COL_8, stockModel.getProduto_quanti_minima());
-        contentValues.put(PR_COL_9, stockModel.getProduto_preco_compra());
-        contentValues.put(PR_COL_10, stockModel.getProduto_preco_venda());
-        contentValues.put(PR_COL_12, stockModel.getProduto_validade());
+        contentValues.put(PR_COL_7, stockModel.getProduto_quanti_minima());
+        contentValues.put(PR_COL_8, stockModel.getProduto_preco_compra());
+        contentValues.put(PR_COL_9, stockModel.getProduto_preco_venda());
+        contentValues.put(PR_COL_10, stockModel.getProduto_data_registo());
+        contentValues.put(PR_COL_11, stockModel.getProduto_validade());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -438,6 +457,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return id_categoria;
     }
+
+    public FornecedorModel procurarForndecedor(String fornecedor) {
+        String sqlQuery = "SELECT " + FO_COL_1 + " FROM " + FORNECEDOR_TABLE + " WHERE " + FO_COL_3 + " = '" + fornecedor + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        FornecedorModel fornecedorModel = new FornecedorModel();
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            fornecedorModel.setId_fornecedor(Integer.parseInt(cursor.getString(cursor.getColumnIndex(FO_COL_1))));
+            cursor.close();
+        } else {
+            fornecedorModel = null;
+        }
+
+        db.close();
+        return fornecedorModel;
+    }
+
+
 
     public CategoriaModel procurarCategoria(String nome) {
         String sqlQuery = "SELECT * FROM " + PRODUTO_CATEGORIA_TABLE + " WHERE " + PC_COL_2 + " = '" + nome + "'";
@@ -522,6 +562,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id_unidade;
     }
 
+    public int procuraFornecedor(String fornecedor) {
+        String sqlQuery = "SELECT " + FO_COL_1 + " FROM " + FORNECEDOR_TABLE + " WHERE " + FO_COL_3 + " = '" + fornecedor + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        int id_fornecedor = 0;
+
+        cursor.moveToFirst();
+
+        if (cursor.getCount() > 0) {
+            id_fornecedor = cursor.getInt(0);
+        }
+        return id_fornecedor;
+    }
+
 
     public boolean eliminarProduto(String nome) {
         boolean result = false;
@@ -540,12 +596,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(PR_COL_3, nome);
-        contentValues.put(PR_COL_5, preco_compra);
-        contentValues.put(PR_COL_7, preco_venda);
+        contentValues.put(PR_COL_5, nome);
+        contentValues.put(PR_COL_8, preco_compra);
+        contentValues.put(PR_COL_9, preco_venda);
 
         SQLiteDatabase db = this.getWritableDatabase();
-        db.update(PRODUTO_TABLE, contentValues, PR_COL_3 + " = '" + nome_conf + "'", null);
+        db.update(PRODUTO_TABLE, contentValues, PR_COL_5 + " = '" + nome_conf + "'", null);
         db.close();
         return true;
     }
@@ -555,7 +611,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /*    =============Mostra o Valor total do Stock caso sejam vendidos todos os produtos====================*/
     public double saldoCaixa() {
-        String sqlQuery = "SELECT SUM((" + PR_COL_6 + "*" + PR_COL_7 + ")*(" + PR_COL_10 + ")) FROM " + PRODUTO_TABLE;
+        String sqlQuery = "SELECT SUM((" + PR_COL_6+ ")*(" + PR_COL_9 + ")) FROM " + PRODUTO_TABLE;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -570,16 +626,147 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return total;
     }
 
+    public void registarFornecedor(FornecedorModel fornecedorModel) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FO_COL_3, fornecedorModel.getFornecedor_nome());
+        contentValues.put(FO_COL_4, fornecedorModel.getFornecedor_contacto());
+        contentValues.put(FO_COL_5, fornecedorModel.getFornecedor_email());
+        contentValues.put(FO_COL_6, fornecedorModel.getFornecedor_tipo());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(FORNECEDOR_TABLE, null, contentValues);
+
+        db.close();
+    }
+
+
+    public void registarCliente(ClienteModel clienteModel) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CL_COL_3, clienteModel.getNomeCliente());
+        contentValues.put(CL_COL_4, clienteModel.getNumeroCliente());
+        contentValues.put(CL_COL_5, clienteModel.getEmailCliente());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(CLIENTE_TABLE, null, contentValues);
+
+        db.close();
+    }
+
+    public Cursor listCliente() {
+        String sqlQuery = "SELECT * FROM " + CLIENTE_TABLE + " ORDER BY " + CL_COL_3;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+    }
+
+
     /*    =============Mostra o Valor total do Stock caso sejam vendidos todos os produtos====================*/
-    public void registarConta() {
+    public void registarConta(ContaModel contaModel) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(RC_COL_2, contaModel.getNomeConta());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(REGISTO_CONTA_TABLE, null, contentValues);
+
+        db.close();
+    }
+
+    public void registarValor(ContaModel contaModel) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(RO_COL_2, contaModel.getId_conta());
+        contentValues.put(RO_COL_3, contaModel.getId_operacao());
+        contentValues.put(RO_COL_4, contaModel.getSaldoConta());
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(REGISTO_OPERACOES_TABLE, null, contentValues);
+
+        db.close();
+    }
 
 
+    public Cursor listOperacoes() {
+
+        String Entrada = "Entrada", Saida = "Saida";
+
+        String sqlQuery = "SELECT "+REGISTO_CONTA_TABLE+"."+RC_COL_1+", "+REGISTO_CONTA_TABLE+"."+RC_COL_2+
+                ", SUM(CASE WHEN "+OP_COL_2+" = '"+Entrada+"'"+
+                "THEN "+REGISTO_OPERACOES_TABLE+"."+RO_COL_4+" ELSE 0 END)- SUM(CASE WHEN "+OP_COL_2+"='"+Saida+"'" +
+                "THEN "+REGISTO_OPERACOES_TABLE+"."+RO_COL_4+" ELSE 0 END) FROM "+REGISTO_CONTA_TABLE+ " NATURAL JOIN "+
+                REGISTO_OPERACOES_TABLE+" NATURAL JOIN "+OPERACOES_TABLE+" GROUP BY "+REGISTO_CONTA_TABLE+"."+RC_COL_2;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+
+    }
+
+
+    public int idConta(String Nome){
+        String sqlQuery = "SELECT " + RC_COL_1 + " FROM " + REGISTO_CONTA_TABLE + " WHERE " + RC_COL_2 + " = '" + Nome + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        int id_conta = 0;
+
+        cursor.moveToFirst();
+
+        if (cursor.getCount() > 0) {
+            id_conta = cursor.getInt(0);
+        }
+        return id_conta;
+    }
+
+    public int idOperacao(String Nome){
+        String sqlQuery = "SELECT " + OP_COL_1 + " FROM " + OPERACOES_TABLE + " WHERE " + OP_COL_2 + " = '" + Nome + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        int id_operacao = 0;
+
+        cursor.moveToFirst();
+
+        if (cursor.getCount() > 0) {
+            id_operacao = cursor.getInt(0);
+        }
+        return id_operacao;
     }
 
      /*    =============Mostra o Valor total do Stock caso sejam vendidos todos os produtos====================*/
 
-    public void mostrarConta() {
+    public List<String> listContas() {
+        List<String> labels = new ArrayList<String>();
 
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + REGISTO_CONTA_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                labels.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+
+        // closing connection
+        cursor.close();
+        db.close();
+
+        // returning lables
+        return labels;
     }
 
 

@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/letraFornecedor"
+                android:id="@+id/letraCliente"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
@@ -27,7 +27,7 @@
                 android:gravity="center_vertical" />
 
             <LinearLayout
-                android:layout_toRightOf="@id/letraFornecedor"
+                android:layout_toRightOf="@id/letraCliente"
                 android:layout_width="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_height="wrap_content"
@@ -35,21 +35,21 @@
                 android:layout_margin="5dp">
 
                 <TextView
-                    android:id="@+id/nomeFornecedor"
+                    android:id="@+id/nomeCliente"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Handling"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                 <TextView
-                    android:id="@+id/tipoFornecedor"
+                    android:id="@+id/numeroCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bebidas"/>
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/ligarFornecedor"
+                android:id="@+id/ligarCliente"
                 android:padding="10dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
@@ -58,5 +58,6 @@
                 app:srcCompat="@drawable/ic_call_black_24dp"/>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
 
 </LinearLayout>

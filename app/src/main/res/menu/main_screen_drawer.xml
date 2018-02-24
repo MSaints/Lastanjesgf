@@ -21,10 +21,20 @@
             android:title="@string/drawer_definicoes" />
 
         <item
+            android:id="@+id/txt_acerca"
+            android:title="Acerca"
+            android:icon="@drawable/ic_assignment"/>
+
+        <item
+            android:id="@+id/txt_ajuda"
+            android:title="@string/bottom_ajuda"
+            android:icon="@drawable/ic_help"/>
+
+
+        <item
             android:id="@+id/txt_sair"
             android:icon="@drawable/ic_sair"
             android:title="@string/drawer_sair" />
-
     </group>
 
 

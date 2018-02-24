@@ -1,109 +1,133 @@
 package com.afrofx.code.anjesgf.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
+import com.afrofx.code.anjesgf.adpters.ClienteRecyclerAdapter;
+import com.afrofx.code.anjesgf.models.ClienteModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ClientFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ClientFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class ClientFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private View v;
 
-    private OnFragmentInteractionListener mListener;
+    private List<ClienteModel> listaClients;
+
+    private FloatingActionButton butAddCliente;
+
+    private DatabaseHelper db;
+
 
     public ClientFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ClientFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ClientFragment newInstance(String param1, String param2) {
-        ClientFragment fragment = new ClientFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_client, container, false);
-    }
+        db = new DatabaseHelper(getActivity());
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+        listaClients = new ArrayList<>();
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        Cursor cursor = db.listCliente();
+
+        if (cursor.getCount() == 0) {
+            Toast.makeText(getActivity(), "Nao Existem Clientes", Toast.LENGTH_LONG).show();
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            while (cursor.moveToNext()) {
+                int id_forn = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_cliente")));
+                int cont_forn = Integer.parseInt(cursor.getString(cursor.getColumnIndex("cliente_cell")));
+                String nome_forn = cursor.getString(cursor.getColumnIndex("cliente_nome"));
+                String email_forn = cursor.getString(cursor.getColumnIndex("cliente_email"));
+                String data_registo = cursor.getString(cursor.getColumnIndex("cliente_data_registo"));
+
+                ClienteModel listItem = new ClienteModel(nome_forn, email_forn, data_registo, id_forn, cont_forn);
+                listaClients.add(listItem);
+            }
         }
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        v = inflater.inflate(R.layout.fragment_client, container, false);
+
+        butAddCliente = (FloatingActionButton)v.findViewById(R.id.add_clienteFragment);
+        db = new DatabaseHelper(getActivity());
+
+
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewClients);
+        recyclerView.setHasFixedSize(true);
+        ClienteRecyclerAdapter clienteRecyclerAdapter = new ClienteRecyclerAdapter(getContext(), listaClients);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recyclerView.setAdapter(clienteRecyclerAdapter);
+
+        butAddCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater li = LayoutInflater.from(getActivity());
+                View forneView = li.inflate(R.layout.add_cliente, null);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(forneView);
+
+                final EditText nomeCliente = (EditText) forneView.findViewById(R.id.add_cliente_nome);
+                final EditText emailCliente = (EditText) forneView.findViewById(R.id.add_cliente_email);
+                final EditText numeroCliente = (EditText) forneView.findViewById(R.id.add_cliente_numero);
+
+                // set dialog message
+                alertDialogBuilder.setCancelable(false).setPositiveButton("Registar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        String nomef = nomeCliente.getText().toString();
+                        String tipof = emailCliente.getText().toString();
+                        String emailf = numeroCliente.getText().toString();
+                        int numerof = Integer.parseInt(numeroCliente.getText().toString());
+
+                        ClienteModel clienteModel = new ClienteModel(nomef, tipof, numerof);
+                        db.registarCliente(clienteModel);
+                        mensagem("Cliente Registado");
+
+                    }
+                }).setNegativeButton("Fechar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+                // Criar O Alerta
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // Mostra o alerta
+                alertDialog.show();
+
+            }
+        });
+
+
+        return v;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+
+    private void mensagem(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
     }
+
 }

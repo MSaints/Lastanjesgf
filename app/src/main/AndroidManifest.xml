@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.afrofx.code.anjesgf">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,45 +11,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".Activities.SplashActivity"
             android:label="@string/home_name"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activities.RegisterActivity">
-        </activity>
-
-        <activity android:name=".Activities.VendasActivity">
-        </activity>
-
-        <activity android:name=".Activities.CaixaActivity">
-        </activity>
-
-        <activity android:name=".Activities.RelatorioActivity">
-        </activity>
-
+        <activity android:name=".Activities.RegisterActivity"></activity>
+        <activity android:name=".Activities.VendasActivity"></activity>
+        <activity android:name=".Activities.CaixaActivity"></activity>
+        <activity android:name=".Activities.RelatorioActivity"></activity>
         <activity android:name=".Activities.StockActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activities.LoginActivity">
-        </activity>
-
-        <activity android:name=".Activities.RememberActivity">
-        </activity>
-
-        <activity android:name=".Activities.MainScreenActivity">
-        </activity>
-
+        <activity android:name=".Activities.LoginActivity"></activity>
+        <activity android:name=".Activities.RememberActivity"></activity>
+        <activity android:name=".Activities.MainScreenActivity"></activity>
+        <activity
+            android:name=".Activities.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

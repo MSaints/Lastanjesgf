@@ -8,12 +8,30 @@ public class ContaModel {
 
     private String nomeConta;
     private double saldoConta;
-    private int id_conta;
+    private int id_conta, id_operacao;
 
     public ContaModel(String nomeConta, double saldoConta, int id_conta) {
         this.nomeConta = nomeConta;
         this.saldoConta = saldoConta;
         this.id_conta = id_conta;
+    }
+
+    public ContaModel(double saldoConta, int id_conta, int id_operacao) {
+        this.saldoConta = saldoConta;
+        this.id_conta = id_conta;
+        this.id_operacao = id_operacao;
+    }
+
+    public ContaModel(String nomeConta) {
+        this.nomeConta = nomeConta;
+    }
+
+    public int getId_operacao() {
+        return id_operacao;
+    }
+
+    public void setId_operacao(int id_operacao) {
+        this.id_operacao = id_operacao;
     }
 
     public double getSaldoConta() {

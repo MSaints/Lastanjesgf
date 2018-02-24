@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 userModel = new UserModel(u_numero, pin, nome, email);
                 db.inserirUser(userModel);
                 mensagem("Usuario Registado");
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
             } else {
                 mensagem("O Numero ja foi usado");

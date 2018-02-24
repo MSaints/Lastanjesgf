@@ -10,16 +10,13 @@ import android.widget.TextView;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.models.ContaModel;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static java.lang.String.format;
 
 
-public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ViewHolder> {
+public class ContaRecyclerAdapter extends RecyclerView.Adapter<ContaRecyclerAdapter.ViewHolder> {
 
 
     private List<ContaModel> listaConta = new ArrayList<>();
@@ -40,7 +37,7 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ViewHolder> 
         }
     }
 
-    public ContaAdapter(Context context, List<ContaModel> listaConta){
+    public ContaRecyclerAdapter(Context context, List<ContaModel> listaConta){
         this.listaConta = listaConta;
         this.contex = context;
     }
@@ -54,7 +51,7 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ContaAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ContaRecyclerAdapter.ViewHolder holder, int position) {
         final ContaModel lista_Conta = listaConta.get(position);
 //        holder.title.setText(lista_Conta.getNomeConta().substring(0,1));
 

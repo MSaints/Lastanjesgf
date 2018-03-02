@@ -32,7 +32,7 @@ import android.widget.Toast;
 import com.afrofx.code.anjesgf.BottomNavHelper;
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.Fragments.ClientFragment;
-import com.afrofx.code.anjesgf.Fragments.HelpFragment;
+import com.afrofx.code.anjesgf.Fragments.RelatorioFragment;
 import com.afrofx.code.anjesgf.Fragments.HomeFragment;
 import com.afrofx.code.anjesgf.Fragments.NotificationsFragment;
 import com.afrofx.code.anjesgf.R;
@@ -63,7 +63,7 @@ public class MainScreenActivity extends AppCompatActivity
 
     private ClientFragment clientFragment;
     private HomeFragment homeFragment;
-    private HelpFragment helpFragment;
+    private RelatorioFragment relatorioFragment;
     private NotificationsFragment notificationsFragment;
 
 
@@ -77,19 +77,15 @@ public class MainScreenActivity extends AppCompatActivity
         se = new sessionController(this);
 
 
-
         if (!se.loggedIn()) {
             logout();
         }
 
 
-
         homeFragment = new HomeFragment();
         notificationsFragment = new NotificationsFragment();
-        helpFragment = new HelpFragment();
+        relatorioFragment = new RelatorioFragment();
         clientFragment = new ClientFragment();
-
-
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -101,8 +97,8 @@ public class MainScreenActivity extends AppCompatActivity
 
         setFragment(homeFragment);
 
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String value =(mSharedPreference.getString("NameOfShared", "Default_Value"));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String value = (mSharedPreference.getString("NameOfShared", "Default_Value"));
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -133,9 +129,8 @@ public class MainScreenActivity extends AppCompatActivity
                         setFragment(clientFragment);
                         return true;
                     case R.id.bottomMenu4:
-                        setFragment(helpFragment);
+                        setFragment(relatorioFragment);
                         return true;
-
                     default:
                         return false;
                 }

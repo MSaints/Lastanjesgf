@@ -52,6 +52,7 @@
                 android:maxLength="4" />
 
             <Button
+                android:clickable="true"
                 android:id="@+id/but_login_entrar"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/but_size"
@@ -95,6 +96,7 @@
             android:textColor="@color/but_white" />
 
         <Button
+            android:clickable="true"
             android:id="@+id/but_login_registar"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/but_size"

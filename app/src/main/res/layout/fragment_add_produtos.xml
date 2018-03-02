@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     android:orientation="vertical"
     tools:context="com.afrofx.code.anjesgf.Fragments.AddProdutosFragment">
 
@@ -14,28 +13,48 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/add_nome_produto"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/edit_style"
                 android:hint="Nome do produto"
                 android:inputType="text"
                 android:singleLine="true" />
 
-            <AutoCompleteTextView
-                android:id="@+id/add_categoria"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/edit_style"
-                android:hint="Categoria"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_categoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Categoria"
+                    android:inputType="text"
+                    android:singleLine="true" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/add_fornecedor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Fornecedor"
+                    android:inputType="text"
+                    android:singleLine="true" />
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,34 +66,25 @@
                     android:id="@+id/add_quantidade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="2.5dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_style"
-                    android:hint="Quant."
-                    android:inputType="number"
+                    android:hint="Quantidade"
+                    android:inputType="numberDecimal"
                     android:singleLine="true" />
 
                 <EditText
-                    android:id="@+id/add_preco_compra"
+
+                    android:id="@+id/add_quantidade_minima"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginLeft="2.5dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_style"
-                    android:hint="Custo Total"
+                    android:hint="Stock Minimo"
                     android:inputType="number"
                     android:singleLine="true" />
 
-
-                <EditText
-                    android:tooltipText="Quantidade/Unidade"
-                    android:id="@+id/add_quantidade_unidade"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_style"
-                    android:hint="Q/Uni"
-                    android:inputType="number"
-                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -85,15 +95,47 @@
                 android:orientation="horizontal">
 
 
-
                 <AutoCompleteTextView
                     android:id="@+id/add_unidade"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="2.5dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_style"
-                    android:hint="Unidades"
+                    android:hint="Unidade"
+                    android:inputType="text"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/add_quantidade_unidade"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Q/Unidade"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:tooltipText="Quantidade/Unidade" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/add_preco_compra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_style"
+                    android:hint="Custo Total"
+                    android:inputType="numberDecimal"
                     android:singleLine="true" />
 
 
@@ -101,53 +143,26 @@
                     android:id="@+id/add_preco_venda"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="2.5dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_style"
-                    android:hint="Pre. Venda"
-                    android:inputType="number"
-                    android:singleLine="true" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <AutoCompleteTextView
-                    android:id="@+id/add_fornecedor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_style"
-                    android:hint="Fornecedor"
-                    android:inputType="text"
-                    android:singleLine="true"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText
-
-                    android:layout_marginLeft="5dp"
-                    android:id="@+id/add_quantidade_minima"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_style"
-                    android:hint="Q. Minima"
-                    android:inputType="text"
+                    android:hint="Pre. U. Venda"
+                    android:inputType="numberDecimal"
                     android:singleLine="true" />
 
+
             </LinearLayout>
+
 
             <Button
+                android:clickable="true"
                 android:id="@+id/add_produto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:paddingHorizontal="30dp"
                 android:background="@drawable/but_style_1"
+                android:paddingHorizontal="30dp"
                 android:text="Comprar"
                 android:textColor="@color/white"
                 android:textStyle="bold" />

@@ -139,7 +139,9 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
                 String nomeProduto = txtProduto.getText().toString();
                 final double quantidadeProduto = !txtQuantidade.getText().toString().equals("") ?
                         Double.parseDouble(txtQuantidade.getText().toString()) : 0.0;
-                double precoUnitario = precos[0] * quantidadeProduto;
+
+
+                double precoUnitario = precos[0];
                 String nome = "";
                 for(int i= 0; i<vendasModelList.size();i++){
                     nome = vendasModelList.get(i).getNome();
@@ -157,17 +159,20 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
 
                     vendasModelList.add(vendasModel);
 
-                    double subtotal = 0;
+                    double iva = (quantidadeProduto * precoUnitario)*0.17;
+
+                    double subtotal = (quantidadeProduto * precoUnitario)-iva;
 
                     for(int i= 0; i<vendasModelList.size();i++){
-                        subtotal = subtotal + vendasModelList.get(i).getVenda_preco();
+
+                        subtotal = subtotal + (vendasModelList.get(i).getVenda_preco());
                     }
 
-                    double iva = subtotal * 0.17;
-                    double total = iva+subtotal;
+                    double ivas = quantidadeProduto * precos[0] * 0.17;
+                    double total = ivas+subtotal;
 
                     txtSubtotal.setText(subtotal+" MT");
-                    txtIva.setText(iva+" MT");
+                    txtIva.setText(ivas+" MT");
                     txtTotal.setText(total+" MT");
 
 
@@ -330,9 +335,4 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
                 Toast.LENGTH_LONG).show();
     }
 
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }

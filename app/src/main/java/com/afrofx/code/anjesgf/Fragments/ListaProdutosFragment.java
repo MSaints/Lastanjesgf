@@ -38,6 +38,7 @@ public class ListaProdutosFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(true);
         ProductRecyclerAdpter productRecyclerAdpter = new ProductRecyclerAdpter(getContext(), lstlist);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

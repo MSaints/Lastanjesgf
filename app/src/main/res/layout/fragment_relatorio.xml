@@ -1,13 +1,65 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.afrofx.code.anjesgf.Fragments.HelpFragment">
+    android:orientation="vertical"
+    tools:context="com.afrofx.code.anjesgf.Fragments.RelatorioFragment">
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+            <Button
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@drawable/but_style_red"
+                android:id="@+id/dataInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="De"/>
 
-</FrameLayout>
+            <TextView
+                android:id="@+id/txtDataPara"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/dataPara"
+                android:layout_alignBottom="@+id/dataPara"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right"
+                android:text="20-12-2019" />
+
+            <Button
+                android:id="@+id/dataPara"
+                android:text="para"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/but_style_red"
+                android:layout_below="@id/dataInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="20dp"
+                android:id="@+id/txtDataDe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/dataInicio"
+                android:layout_alignBottom="@+id/dataInicio"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="28-10-2019" />
+
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <ExpandableListView
+            android:id="@+id/lvExp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+</LinearLayout>

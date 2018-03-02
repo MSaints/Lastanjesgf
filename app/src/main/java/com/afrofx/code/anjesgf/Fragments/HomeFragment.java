@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.afrofx.code.anjesgf.Activities.CaixaActivity;
-import com.afrofx.code.anjesgf.Activities.RelatorioActivity;
-import com.afrofx.code.anjesgf.Activities.ScrollingActivity;
+import com.afrofx.code.anjesgf.Activities.DespesasActivity;
 import com.afrofx.code.anjesgf.Activities.StockActivity;
 import com.afrofx.code.anjesgf.Activities.VendasActivity;
 import com.afrofx.code.anjesgf.R;
@@ -24,11 +23,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +52,7 @@ public class HomeFragment extends Fragment {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ScrollingActivity.class));
+                startActivity(new Intent(getContext(), DespesasActivity.class));
             }
         });
 

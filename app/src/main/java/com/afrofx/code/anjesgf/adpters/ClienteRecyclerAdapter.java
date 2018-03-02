@@ -22,7 +22,6 @@ public class ClienteRecyclerAdapter extends RecyclerView.Adapter<ClienteRecycler
 
     private List<ClienteModel> listaClients;
     private Context context;
-    private DatabaseHelper db;
 
     public ClienteRecyclerAdapter(Context context, List<ClienteModel> listaClients){
         this.context = context;
@@ -40,7 +39,6 @@ public class ClienteRecyclerAdapter extends RecyclerView.Adapter<ClienteRecycler
         holder.txt_letra.setText((Letra.toString().substring(0,1)));
         holder.txt_email.setText(listaClienteModel.getNumeroCliente()+"");
 
-        db = new DatabaseHelper(context);
     }
 
     @Override

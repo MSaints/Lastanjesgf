@@ -39,8 +39,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PRODUTO_UNIDADE_TABLE = "moze_produto_unidade";
     private static final String REGISTO_CONTA_TABLE = "moze_registo_conta";
     private static final String REGISTO_OPERACOES_TABLE = "moze_registo_operacao";
-    private static final String OPERACOES_TABLE = "moze_operacoes";
     private static final String CLIENTE_TABLE = "moze_cliente";
+    private static final String DESPESAS_TABLE = "moze_despesas";
+    private static final String DESPESAS_CATEGORIA_TABLE = "moze_despesas_categoria";
 
 
     /*==================COLUNAS DAS TABELAS DA BD MOZE======================*/
@@ -105,13 +106,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String RO_COL_1 = "id_registo_opeacao";
     private static final String RO_COL_2 = "id_conta";
-    private static final String RO_COL_3 = "id_operacao";
+    private static final String RO_COL_3 = "tipo_operacao";
     private static final String RO_COL_4 = "operacao_valor";
     private static final String RO_COL_5 = "operacao_data";
-
-    //==========COLUNAS OPERACOES_TABLE
-    private static final String OP_COL_1 = "id_operacao";
-    private static final String OP_COL_2 = "operacao_nome";
 
 
     //==========COLUNAS VENDAS_TABLE
@@ -137,6 +134,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CL_COL_4 = "cliente_cell";
     private static final String CL_COL_5 = "cliente_email";
     private static final String CL_COL_6 = "cliente_data_registo";
+
+    //==========COLUNAS CLIENTES_TABLE=====================*/
+    private static final String DE_COL_1 = "id_despesa";
+    private static final String DE_COL_2 = "id_categoria_despesa";
+    private static final String DE_COL_3 = "id_registo_opeacao";
+    private static final String DE_COL_4 = "despesa_valor";
+    private static final String DE_COL_5 = "despesa_descricao";
+    private static final String DE_COL_6 = "despesa_data";
+    private static final String DE_COL_7 = "despesa_data_registo";
+
+    //==========COLUNAS CLIENTES_TABLE=====================*/
+    private static final String CD_COL_1 = "id_categoria_despesa";
+    private static final String CD_COL_2 = "despesa_categoria_nome";
+
+    /*==================Criacao da tabela cargos na bd=====================*/
+    private static final String query_despesas = "CREATE TABLE "
+            + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+            + CD_COL_2 + " VARCHAR NOT NULL)";
+
+    /*==================Criacao da tabela cargos na bd=====================*/
+    private static final String query_categoria_despesa = "CREATE TABLE "
+            + DESPESAS_TABLE + "(" + DE_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
+            DE_COL_2 + " INTEGER REFERENCES " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_1 + ") NOT NULL," +
+            DE_COL_3 + " INTEGER REFERENCES " + REGISTO_OPERACOES_TABLE + "(" + RO_COL_1 + ") NOT NULL," +
+            DE_COL_4 + " REAL NOT NULL, " +DE_COL_5+" VARCHAR NOT NULL, " +DE_COL_6+" DATE NOT NULL, "+
+            DE_COL_7+" DATE DEFAULT (CURRENT_TIMESTAMP))";
 
     /*==================Criacao da tabela cargos na bd=====================*/
     private static final String query_cargos = "CREATE TABLE "
@@ -173,7 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String query_fornecedor = "CREATE TABLE " + FORNECEDOR_TABLE + "("
             + FO_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," + FO_COL_2 + " INTEGER REFERENCES " + ENDERECO_TABLE
             + "(" + EN_COL_1 + ")," + FO_COL_3 + " VARCHAR NOT NULL," + FO_COL_4 + " INTEGER," + FO_COL_5 + " VARCHAR," +
-            FO_COL_6 + " VARCHAR,"+ FO_COL_7 + " DATE DEFAULT (CURRENT_TIMESTAMP))";
+            FO_COL_6 + " VARCHAR," + FO_COL_7 + " DATE DEFAULT (CURRENT_TIMESTAMP))";
 
     /*==================Criacao da tabela PRODUTOS na bd=====================*/
     private static final String query_produto = "CREATE TABLE " + PRODUTO_TABLE + "("
@@ -181,8 +204,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             PR_COL_2 + " INTEGER REFERENCES " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_1 + ")DEFAULT 0," +
             PR_COL_3 + " INTEGER REFERENCES " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_1 + ")DEFAULT 0," +
             PR_COL_4 + " INTEGER REFERENCES " + FORNECEDOR_TABLE + "(" + FO_COL_1 + ")DEFAULT 0," +
-            PR_COL_5 + " VARCHAR NOT NULL," + PR_COL_6+ " REAL," + PR_COL_7+ " REAL," +
-            PR_COL_8 + " REAL, " + PR_COL_9+ " REAL ," + PR_COL_10+ " DATE DEFAULT (CURRENT_TIMESTAMP) ," + PR_COL_11 + " DATE)";
+            PR_COL_5 + " VARCHAR NOT NULL," + PR_COL_6 + " REAL," + PR_COL_7 + " REAL," +
+            PR_COL_8 + " REAL, " + PR_COL_9 + " REAL ," + PR_COL_10 + " DATE DEFAULT (CURRENT_TIMESTAMP) ," + PR_COL_11 + " DATE)";
 
     /*==================Criacao da tabela REGISTO VENDA na bd=====================*/
     private static final String query_registo_venda = "CREATE TABLE " + REGISTO_VENDA_TABLE + "("
@@ -204,12 +227,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String query_registo_operecaoes = "CREATE TABLE " + REGISTO_OPERACOES_TABLE + "("
             + RO_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
             RO_COL_2 + " INTEGER REFERENCES " + REGISTO_CONTA_TABLE + "(" + RC_COL_1 + ") NOT NULL," +
-            RO_COL_3 + " INTEGER REFERENCES " + OPERACOES_TABLE + "(" + OP_COL_1 + ") NOT NULL," +
-            RO_COL_4 + " REAL NOT NULL,"+RO_COL_5+" DATE DEFAULT (CURRENT_TIMESTAMP))";
+            RO_COL_3 + " INTEGER NOT NULL," + RO_COL_4 + " REAL NOT NULL," + RO_COL_5 + " DATE DEFAULT (CURRENT_TIMESTAMP))";
 
-    private static final String query_operecaoes = "CREATE TABLE " + OPERACOES_TABLE + "("
-            + OP_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-            OP_COL_2 + " VARCHAR NOT NULL)";
 
     /*==================Criacao da tabela VENDA na bd=====================*/
     private static final String query_registo_conta = "CREATE TABLE " + REGISTO_CONTA_TABLE + "("
@@ -241,19 +260,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         /*==================Criacao da tabela cargos na bd=====================*/
         db.execSQL(query_registo_venda);
         /*==================Criacao da tabela cargos na bd=====================*/
-        db.execSQL(query_operecaoes);
-        /*==================Criacao da tabela cargos na bd=====================*/
         db.execSQL(query_registo_conta);
         /*==================Criacao da tabela cargos na bd=====================*/
         db.execSQL(query_fornecedor);
         /*==================Criacao da tabela cargos na bd=====================*/
         db.execSQL(query_registo_operecaoes);
+         /*==================Criacao da tabela cargos na bd=====================*/
+        db.execSQL(query_categoria_despesa);
+        /*==================Criacao da tabela cargos na bd=====================*/
+        db.execSQL(query_despesas);
 
         db.execSQL("INSERT INTO " + CARGO_TABLE + "(" + CA_COL_2 + ") VALUES('Administrador')");
         db.execSQL("INSERT INTO " + CARGO_TABLE + "(" + CA_COL_2 + ") VALUES('Colaborador')");
 
-        db.execSQL("INSERT INTO " + OPERACOES_TABLE + "(" + OP_COL_2 + ") VALUES('Entrada')");
-        db.execSQL("INSERT INTO " + OPERACOES_TABLE + "(" + OP_COL_2 + ") VALUES('Saida')");
+
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('CREDELEC')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('AGUA')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('TRANSPORTE')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('ALIMENTOS')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('ESCOLA')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('RENDA')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('SAUDE')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('OUTRA')");
+
     }
 
     @Override
@@ -266,11 +295,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + PRODUTO_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + REGISTO_VENDA_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + VENDA_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + OPERACOES_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + REGISTO_CONTA_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + REGISTO_OPERACOES_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + PRODUTO_UNIDADE_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FORNECEDOR_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + DESPESAS_CATEGORIA_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + DESPESAS_TABLE);
         onCreate(db);
     }
 
@@ -379,7 +409,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor listFornecedor(){
+    public Cursor listFornecedor() {
         String sqlQuery = "SELECT * FROM " + FORNECEDOR_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -476,7 +506,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return fornecedorModel;
     }
-
 
 
     public CategoriaModel procurarCategoria(String nome) {
@@ -611,7 +640,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /*    =============Mostra o Valor total do Stock caso sejam vendidos todos os produtos====================*/
     public double saldoCaixa() {
-        String sqlQuery = "SELECT SUM((" + PR_COL_6+ ")*(" + PR_COL_9 + ")) FROM " + PRODUTO_TABLE;
+        String sqlQuery = "SELECT SUM((" + PR_COL_6 + ")*(" + PR_COL_9 + ")) FROM " + PRODUTO_TABLE;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -692,17 +721,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public double SaldoTotal(String nome) {
+
+        double saldo = 0;
+
+        String sqlQuery = "SELECT SUM(CASE WHEN " + RO_COL_3 + " = '" + 1 + "'" +
+                "THEN " + REGISTO_OPERACOES_TABLE + "." + RO_COL_4 + " ELSE 0 END)- SUM(CASE WHEN " + RO_COL_3 + "='" + 0 + "'" +
+                "THEN " + REGISTO_OPERACOES_TABLE + "." + RO_COL_4 + " ELSE 0 END) FROM " + REGISTO_CONTA_TABLE + " NATURAL JOIN " +
+                REGISTO_OPERACOES_TABLE + " WHERE " + REGISTO_CONTA_TABLE + "." + RC_COL_2 + " = '" + nome +
+                "' GROUP BY " + REGISTO_CONTA_TABLE + "." + RC_COL_2;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            saldo = cursor.getInt(0);
+        }
+
+        return saldo;
+    }
+
     public Cursor listOperacoes() {
 
-        String Entrada = "Entrada", Saida = "Saida";
+        String sqlQuery = "SELECT " + REGISTO_CONTA_TABLE + "." + RC_COL_1 + ", " + REGISTO_CONTA_TABLE + "." + RC_COL_2 +
+                ", SUM(CASE WHEN " + RO_COL_3 + " = '" + 1 + "'" +
+                "THEN " + REGISTO_OPERACOES_TABLE + "." + RO_COL_4 + " ELSE 0 END)- SUM(CASE WHEN " + RO_COL_3 + "='" + 0 + "'" +
+                "THEN " + REGISTO_OPERACOES_TABLE + "." + RO_COL_4 + " ELSE 0 END) FROM " + REGISTO_CONTA_TABLE + " NATURAL JOIN " +
+                REGISTO_OPERACOES_TABLE + " GROUP BY " + REGISTO_CONTA_TABLE + "." + RC_COL_2;
 
-        String sqlQuery = "SELECT "+REGISTO_CONTA_TABLE+"."+RC_COL_1+", "+REGISTO_CONTA_TABLE+"."+RC_COL_2+
-                ", SUM(CASE WHEN "+OP_COL_2+" = '"+Entrada+"'"+
-                "THEN "+REGISTO_OPERACOES_TABLE+"."+RO_COL_4+" ELSE 0 END)- SUM(CASE WHEN "+OP_COL_2+"='"+Saida+"'" +
-                "THEN "+REGISTO_OPERACOES_TABLE+"."+RO_COL_4+" ELSE 0 END) FROM "+REGISTO_CONTA_TABLE+ " NATURAL JOIN "+
-                REGISTO_OPERACOES_TABLE+" NATURAL JOIN "+OPERACOES_TABLE+" GROUP BY "+REGISTO_CONTA_TABLE+"."+RC_COL_2;
-
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
 
         cursor = db.rawQuery(sqlQuery, null);
 
@@ -711,7 +760,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public int idConta(String Nome){
+    public int idConta(String Nome) {
         String sqlQuery = "SELECT " + RC_COL_1 + " FROM " + REGISTO_CONTA_TABLE + " WHERE " + RC_COL_2 + " = '" + Nome + "'";
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -725,22 +774,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             id_conta = cursor.getInt(0);
         }
         return id_conta;
-    }
-
-    public int idOperacao(String Nome){
-        String sqlQuery = "SELECT " + OP_COL_1 + " FROM " + OPERACOES_TABLE + " WHERE " + OP_COL_2 + " = '" + Nome + "'";
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        cursor = db.rawQuery(sqlQuery, null);
-
-        int id_operacao = 0;
-
-        cursor.moveToFirst();
-
-        if (cursor.getCount() > 0) {
-            id_operacao = cursor.getInt(0);
-        }
-        return id_operacao;
     }
 
      /*    =============Mostra o Valor total do Stock caso sejam vendidos todos os produtos====================*/
@@ -770,4 +803,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public List<String> listaDespesaCategoria(){
+        List<String> itens = new ArrayList<>();
+
+        String query = "SELECT * FROM " + DESPESAS_CATEGORIA_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                itens.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return itens;
+
+    }
 }

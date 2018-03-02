@@ -33,9 +33,6 @@ public class StockActivity extends AppCompatActivity {
     private PageAdapters pageAdapters;
     private TabLayout tab1;
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter recyclerViewAdpter;
-    private List<StockModel> listItems;
 
     private DatabaseHelper db;
 
@@ -59,7 +56,6 @@ public class StockActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.pageViewer);
 
         pageAdapters = new PageAdapters(getSupportFragmentManager());
-
 
         pageAdapters.AddFragment(new ListaProdutosFragment(), "Stock");
         pageAdapters.AddFragment(new AddProdutosFragment(), "Registar");

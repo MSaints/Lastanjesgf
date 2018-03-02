@@ -123,18 +123,16 @@ public class CaixaActivity extends AppCompatActivity {
         View quantiView = li.inflate(R.layout.prompt_add_saldo, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(quantiView);
         final EditText add_valor = (EditText) quantiView.findViewById(R.id.caixa_add_valor);
 
-        // set dialog message
         alertDialogBuilder.setCancelable(true).setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
                 String addValor = add_valor.getText().toString().trim();
                 final double saldoInicial = !addValor.equals("") ? Double.parseDouble(addValor) : 0;
                 int idConta = db.idConta(nome);
-                int idOperacao  = db.idOperacao("Entrada");
+                int idOperacao  = 1;
                 ContaModel clienteModel = new ContaModel(saldoInicial, idConta, idOperacao);
                 db.registarValor(clienteModel);
             }

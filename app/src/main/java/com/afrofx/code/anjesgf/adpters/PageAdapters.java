@@ -42,4 +42,5 @@ public class PageAdapters extends FragmentStatePagerAdapter {
         istFragement.add(fragment);
         tabTitles.add(title);
     }
+
 }

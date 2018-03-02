@@ -3,6 +3,11 @@
     package="com.afrofx.code.anjesgf">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission
+        android:name="android.permission.CALL_PRIVILEGED"
+        android:protectionLevel="signature|privileged" />
 
     <application
         android:allowBackup="true"
@@ -21,21 +26,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.RegisterActivity"></activity>
-        <activity android:name=".Activities.VendasActivity"></activity>
-        <activity android:name=".Activities.CaixaActivity"></activity>
-        <activity android:name=".Activities.RelatorioActivity"></activity>
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Activities.VendasActivity" />
+        <activity android:name=".Activities.CaixaActivity" />
+        <activity android:name=".Activities.RelatorioActivity" />
         <activity android:name=".Activities.StockActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.LoginActivity"></activity>
-        <activity android:name=".Activities.RememberActivity"></activity>
-        <activity android:name=".Activities.MainScreenActivity"></activity>
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.RememberActivity" />
+        <activity android:name=".Activities.MainScreenActivity" />
         <activity
-            android:name=".Activities.ScrollingActivity"
+            android:name=".Activities.DespesasActivity"
             android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activities.ReportClientes1Activity" />
+        <activity
+            android:name=".Activities.AdicionarDispesaActivity"
+            android:label="@string/title_activity_adicionar_dispesa"
             android:theme="@style/AppTheme"></activity>
     </application>
 

@@ -131,6 +131,8 @@ public class AddProdutosFragment extends Fragment {
 
         final double quantidade_final = produto_quantidade_unidade * produto_quantidade;
 
+        final int[] idConta = new int[1];
+
         if (produto_nome.equals("")) {
             mensagem("Preencha os Campos");
         } else {
@@ -164,7 +166,7 @@ public class AddProdutosFragment extends Fragment {
 
                     db = new DatabaseHelper(getContext());
 
-                    List<String> lables = db.listContas();
+                    final List<String> lables = db.listContas();
 
                     ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, lables);
 
@@ -178,6 +180,7 @@ public class AddProdutosFragment extends Fragment {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             String label = parent.getItemAtPosition(position).toString();
                             saldo = db.SaldoTotal(label);
+                            idConta[0] = db.idConta(label);
                             saldoDisponivel.setText(saldo + " MT");
                         }
 
@@ -196,9 +199,11 @@ public class AddProdutosFragment extends Fragment {
                     alertDialogBuilder.setCancelable(true).setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             if (saldo >= produto_preco_compra) {
+                                ContaModel contaModel = new ContaModel(produto_preco_compra, idConta[0], 0);
+                                db.registarValor(contaModel);
 
                                 stockModel[0] = new StockModel(finalId_categoria, finalId_unidade, finalId_fornecedor, quantidade_final,
-                                        produto_preco_compra, produto_quantidade_minima, produto_preco_venda, produto_nome);
+                                        db.idOperacao(), produto_quantidade_minima, produto_preco_venda, produto_nome);
 
 
                                 db.inserirProduto(stockModel[0]);

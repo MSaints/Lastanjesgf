@@ -26,7 +26,7 @@
                         android:layout_weight="1">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_gravity="center_horizontal"
@@ -39,12 +39,13 @@
                                 android:layout_gravity="center_horizontal"/>
 
                             <TextView
+                                android:textColor="@color/cardview_dark_background"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAlignment="center"
-                                android:text="CONTAS"
+                                android:text="GESTÃO DE CONTAS"
                                 android:layout_marginTop="10dp"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <View
@@ -52,7 +53,7 @@
                                 android:layout_height="1dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="5dp"
-                                android:background="#616161"/>
+                                android:background="@color/colorPrimary"/>
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
                     <android.support.v7.widget.CardView
@@ -63,7 +64,7 @@
                         android:layout_weight="1">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:orientation="vertical"
@@ -76,12 +77,13 @@
                                 android:layout_gravity="center_horizontal"/>
 
                             <TextView
+                                android:textColor="@color/cardview_dark_background"
                                 android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAlignment="center"
-                                android:text="VENDAS"
-                                android:textSize="18sp"
+                                android:text="GESTÃO DE VENDAS"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <View
@@ -89,7 +91,7 @@
                                 android:layout_height="1dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="5dp"
-                                android:background="#616161"/>
+                                android:background="@color/colorPrimary"/>
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
                 </LinearLayout>
@@ -123,10 +125,11 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColor="@color/cardview_dark_background"
                                 android:textAlignment="center"
-                                android:text="DESPESAS"
+                                android:text="DESPESAS E RENDIMENTOS"
                                 android:layout_marginTop="10dp"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <View
@@ -134,7 +137,7 @@
                                 android:layout_height="1dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="5dp"
-                                android:background="#616161"/>
+                                android:background="@color/colorPrimary"/>
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
                     <android.support.v7.widget.CardView
@@ -162,9 +165,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAlignment="center"
+                                android:textColor="@color/cardview_dark_background"
                                 android:layout_marginTop="10dp"
-                                android:text="ESTOQUE"
-                                android:textSize="18sp"
+                                android:text="GESTÃO DE ESTOQUE"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <View
@@ -172,7 +176,7 @@
                                 android:layout_height="1dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="5dp"
-                                android:background="#616161"/>
+                                android:background="@color/colorPrimary"/>
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>

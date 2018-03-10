@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -11,74 +12,97 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp">
+            android:layout_height="wrap_content">
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/dispesa_estado"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignEnd="@+id/icon_dispesa_categoria"
-                android:layout_alignParentTop="true"
-                android:layout_alignRight="@+id/icon_dispesa_categoria"
-                app:backgroundTint="@color/txt_green"
-                app:borderWidth="0dp"
-                app:fabSize="mini"
-                app:srcCompat="@drawable/ic_check_black_24dp" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/icon_dispesa_categoria"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:src="@mipmap/ic_tooth" />
-
-            <TextView
-                android:id="@+id/despesaDescricao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/icon_dispesa_categoria"
-                android:layout_toEndOf="@+id/icon_dispesa_categoria"
-                android:layout_toRightOf="@+id/icon_dispesa_categoria"
-                android:text="Propina Faculdade"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/dispesa_conta_usar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/icon_dispesa_categoria"
-                android:layout_alignLeft="@+id/despesaDescricao"
-                android:layout_alignStart="@+id/despesaDescricao"
-                android:text="MPESA"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-            <TextView
-                android:id="@+id/despesa_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/icon_dispesa_categoria"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
-                android:text="20/10/2017"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_first_aid_kit" />
 
-
-            <TextView
-                android:id="@+id/despesa_valor"
+            <ImageView
+                android:id="@+id/icon_despesa_estado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/icon_dispesa_categoria"
-                android:layout_marginRight="5dp"
-                android:text="0.00MT"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                android:layout_alignEnd="@+id/icon_dispesa_categoria"
+                android:layout_alignRight="@+id/icon_dispesa_categoria"
+                app:srcCompat="@drawable/ic_despesa_paga" />
+
+            <LinearLayout
+                android:id="@+id/linearDispesas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/icon_dispesa_categoria"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/despesaDescricao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="Propina Faculdade"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/despesa_valor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="0.00MT"
+                        android:textColor="@color/cardview_dark_background"
+
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/dispesa_conta_usar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="MPESA"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:id="@+id/despesa_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="20/10/2017"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

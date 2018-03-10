@@ -21,7 +21,6 @@ import com.afrofx.code.anjesgf.models.StockModel;
 import java.util.List;
 
 
-
 public class ProductRecyclerAdpter extends RecyclerView.Adapter<ProductRecyclerAdpter.ViewHolder> {
 
     private List<StockModel> listItems;

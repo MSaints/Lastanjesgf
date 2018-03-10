@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,7 @@ public class RelatorioFragment extends Fragment {
     HashMap<String, List<String>> listDataChild;
 
     private TextView dataInicio, dataFim;
-    private Button butDataInicio, butDataFim;
+    private ImageView butDataInicio, butDataFim;
 
     private boolean click;
 
@@ -55,8 +56,8 @@ public class RelatorioFragment extends Fragment {
 
         dataInicio = (TextView) view.findViewById(R.id.txtDataDe);
         dataFim = (TextView) view.findViewById(R.id.txtDataPara);
-        butDataFim = (Button) view.findViewById(R.id.dataPara);
-        butDataInicio = (Button) view.findViewById(R.id.dataInicio);
+        butDataFim = (ImageView) view.findViewById(R.id.dataPara);
+        butDataInicio = (ImageView) view.findViewById(R.id.dataInicio);
 
 
         listaDeDados();

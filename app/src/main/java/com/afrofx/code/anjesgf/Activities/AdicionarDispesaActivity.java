@@ -1,6 +1,7 @@
 package com.afrofx.code.anjesgf.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
+import com.afrofx.code.anjesgf.models.ContaModel;
+import com.afrofx.code.anjesgf.models.DispesasModel;
 
 import org.w3c.dom.Text;
 
@@ -33,7 +36,9 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
     private Spinner spinnerCategoriaDispesa, spinnerContaDispesa;
     private List<String> dispesaListaCategoria = new ArrayList<>();
     private DatabaseHelper db;
+    private DispesasModel dispesasModel;
     private Calendar myCalendar = Calendar.getInstance();
+    private String data;
 
 
     @Override
@@ -48,14 +53,6 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        dispesaListaCategoria.add("Saude");
-        dispesaListaCategoria.add("Casa");
-        dispesaListaCategoria.add("Escola");
-        dispesaListaCategoria.add("Credelec");
-        dispesaListaCategoria.add("Alimentos");
-        dispesaListaCategoria.add("Agua");
-        dispesaListaCategoria.add("Outra");
 
         List<String> lables = db.listContas();
         List<String> itens_despesa = db.listaDespesaCategoria();
@@ -76,6 +73,7 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lables);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerContaDispesa.setAdapter(adapter2);
+        spinnerContaDispesa.setPrompt("Escolha a Conta");
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -87,6 +85,7 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
                 String myFormat = "MM-dd-yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 txtDataDispesa.setText(sdf.format(myCalendar.getTime()));
+                data = sdf.format(myCalendar.getTime());
             }
 
         };
@@ -104,8 +103,9 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                RegistarDispesa();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
     }
@@ -117,17 +117,42 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
         String Categoria = spinnerCategoriaDispesa.getSelectedItem().toString();
         String data = txtDataDispesa.getText().toString().trim();
         String valor = txtValorDispesa.getText().toString().trim();
-        final double valorDispesa = !valor.equals("") ? Double.parseDouble(valor) : 0.0;
+        double valorDispesa = !valor.equals("") ? Double.parseDouble(valor) : 0.0;
 
+        db = new DatabaseHelper(this);
+
+        int id_conta = db.idConta(Conta);
+        int id_categoria= db.idCategoriaDispesa(Categoria);
         int estadoPagamento = 0;
 
-        if (valorDispesa == 0) {
+        if (valorDispesa == 0.0) {
             Toast.makeText(this, "Adicione o Valor", Toast.LENGTH_LONG).show();
         } else {
-            if (checkEstadoDispesa.isSelected()) {
-                estadoPagamento = 1;
+            if (checkEstadoDispesa.isChecked()) {
+                if(db.SaldoTotal(Conta)>=valorDispesa) {
+                    estadoPagamento = 0;
+                    ContaModel dispesasModel = new ContaModel(valorDispesa, id_conta, estadoPagamento);
+                    db.registarValor(dispesasModel);
+
+
+                    DispesasModel dispesasModel1 = new DispesasModel(id_categoria, db.idOperacao(), descricao, data);
+                    db.apenasRegistaDespesa(dispesasModel1);
+
+                    startActivity(new Intent(this, DespesasActivity.class));
+                }else {
+                    Toast.makeText(this, "Saldo Insuficiente", Toast.LENGTH_LONG).show();
+                }
+
             } else {
-                estadoPagamento = 0;
+                estadoPagamento = 2;
+                ContaModel dispesasModel = new ContaModel(valorDispesa, id_conta, estadoPagamento);
+                db.registarValor(dispesasModel);
+
+                DispesasModel dispesasModel1 = new DispesasModel(id_categoria, db.idOperacao(), descricao, data);
+                db.apenasRegistaDespesa(dispesasModel1);
+
+                Toast.makeText(this, "Dispesa Registada", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, DespesasActivity.class));
             }
         }
     }

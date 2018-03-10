@@ -6,13 +6,49 @@ package com.afrofx.code.anjesgf.models;
 
 public class StockModel {
 
-    private int id_produto, id_categoria, id_unidade, id_fornecedor;
-    private double produto_quantidade, produto_preco_compra,
-            produto_quanti_minima, produto_preco_venda;
+    private int id_produto, id_categoria, id_unidade, id_fornecedor, id_conta,id_registo_operacao, operacao_estado;
+    private double produto_quantidade, produto_preco_compra, produto_quanti_minima,
+            valor_operacao, produto_preco_venda;
     private String produto_nome, produto_data_registo, produto_validade;
     private String categoria;
 
+    public int getId_registo_operacao() {
+        return id_registo_operacao;
+    }
 
+    public void setId_registo_operacao(int id_registo_operacao) {
+        this.id_registo_operacao = id_registo_operacao;
+    }
+
+    public int getId_conta() {
+        return id_conta;
+    }
+
+    public void setId_conta(int id_conta) {
+        this.id_conta = id_conta;
+    }
+
+    public int getOperacao_estado() {
+        return operacao_estado;
+    }
+
+    public void setOperacao_estado(int operacao_estado) {
+        this.operacao_estado = operacao_estado;
+    }
+
+    public double getValor_operacao() {
+        return valor_operacao;
+    }
+
+    public void setValor_operacao(double valor_operacao) {
+        this.valor_operacao = valor_operacao;
+    }
+
+    public StockModel(int id_conta, int operacao_estado, double valor_operacao) {
+        this.id_conta = id_conta;
+        this.operacao_estado = operacao_estado;
+        this.valor_operacao = valor_operacao;
+    }
 
     public StockModel() {
     }

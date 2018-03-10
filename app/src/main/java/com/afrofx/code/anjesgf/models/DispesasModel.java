@@ -6,9 +6,50 @@ package com.afrofx.code.anjesgf.models;
 
 public class DispesasModel {
 
-    private int id_dispesa, estado_dispesa, id_conta, id_categoria;
+    private int id_dispesa, estado_dispesa, id_conta, id_categoria, id_registo_operacao,tipo_operacao;
     private double custo_dispesa;
     private String nome_dispesa, descricao_dispesa, categoria_dispesa, data_registo, data_pagamento, conta_dispesa;
+
+    public DispesasModel(int id_conta, int tipo_operacao, double custo_dispesa) {
+        this.id_conta = id_conta;
+        this.tipo_operacao = tipo_operacao;
+        this.custo_dispesa = custo_dispesa;
+    }
+
+    public DispesasModel(int id_categoria, int id_registo_operacao, String descricao_dispesa, String data_pagamento) {
+        this.id_categoria = id_categoria;
+        this.id_registo_operacao = id_registo_operacao;
+        this.descricao_dispesa = descricao_dispesa;
+        this.data_pagamento = data_pagamento;
+    }
+
+    public DispesasModel(int id_dispesa, int tipo_operacao, double custo_dispesa, String descricao_dispesa, String categoria_dispesa, String data_pagamento, String conta_dispesa) {
+        this.id_dispesa = id_dispesa;
+        this.conta_dispesa = conta_dispesa;
+        this.tipo_operacao = tipo_operacao;
+        this.custo_dispesa = custo_dispesa;
+        this.descricao_dispesa = descricao_dispesa;
+        this.categoria_dispesa = categoria_dispesa;
+        this.data_pagamento = data_pagamento;
+    }
+
+    public int getTipo_operacao() {
+        return tipo_operacao;
+    }
+
+    public void setTipo_operacao(int tipo_operacao) {
+        this.tipo_operacao = tipo_operacao;
+    }
+
+    public int getId_registo_operacao() {
+        return id_registo_operacao;
+    }
+
+    public void setId_registo_operacao(int id_registo_operacao) {
+        this.id_registo_operacao = id_registo_operacao;
+    }
+
+
 
     public DispesasModel() {
     }

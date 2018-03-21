@@ -22,7 +22,7 @@
                         android:id="@+id/card_entrar_caixa"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1">
 
                         <LinearLayout
@@ -35,7 +35,7 @@
                             <ImageView
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
-                                app:srcCompat="@drawable/ic_caixa"
+                                app:srcCompat="@drawable/ic_caixa_home"
                                 android:layout_gravity="center_horizontal"/>
 
                             <TextView
@@ -43,7 +43,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAlignment="center"
-                                android:text="GESTÃO DE CONTAS"
+                                android:text="MOLA"
                                 android:layout_marginTop="10dp"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -60,7 +60,7 @@
                         android:id="@+id/card_entrar_vendas"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1">
 
                         <LinearLayout
@@ -82,7 +82,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAlignment="center"
-                                android:text="GESTÃO DE VENDAS"
+                                android:text="VENDAS"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -106,7 +106,7 @@
                         android:id="@+id/card_entrar_despesas"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1">
 
                         <LinearLayout
@@ -127,7 +127,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/cardview_dark_background"
                                 android:textAlignment="center"
-                                android:text="DESPESAS E RENDIMENTOS"
+                                android:text="DESPESAS"
                                 android:layout_marginTop="10dp"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -144,7 +144,7 @@
                         android:id="@+id/card_entrar_stock"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
                         android:clickable="true">
 
@@ -167,7 +167,7 @@
                                 android:textAlignment="center"
                                 android:textColor="@color/cardview_dark_background"
                                 android:layout_marginTop="10dp"
-                                android:text="GESTÃO DE ESTOQUE"
+                                android:text="MERCADORIA"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 

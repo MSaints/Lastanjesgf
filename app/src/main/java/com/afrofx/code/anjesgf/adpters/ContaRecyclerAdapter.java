@@ -25,15 +25,14 @@ public class ContaRecyclerAdapter extends RecyclerView.Adapter<ContaRecyclerAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView conta_valor, conta_nome, title;
-        private ImageView historico;
+        private TextView conta_valor;
+        private ImageView historico, contaImg;
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            title = (TextView) itemView.findViewById(R.id.title1);
-            conta_nome = (TextView)itemView.findViewById(R.id.conta_nome);
             conta_valor = (TextView)itemView.findViewById(R.id.conta_saldo);
             historico = (ImageView)itemView.findViewById(R.id.historico);
+            contaImg = (ImageView)itemView.findViewById(R.id.contaImg);
         }
     }
 
@@ -53,10 +52,26 @@ public class ContaRecyclerAdapter extends RecyclerView.Adapter<ContaRecyclerAdap
     @Override
     public void onBindViewHolder(ContaRecyclerAdapter.ViewHolder holder, int position) {
         final ContaModel lista_Conta = listaConta.get(position);
-//        holder.title.setText(lista_Conta.getNomeConta().substring(0,1));
+
+        if(lista_Conta.getNomeConta().equals("FNB")){
+            holder.contaImg.setImageResource(R.drawable.ic_fnb);
+        }if(lista_Conta.getNomeConta().equals("BCI")){
+            holder.contaImg.setImageResource(R.drawable.ic_bci);
+        }if(lista_Conta.getNomeConta().equals("M-PESA")){
+            holder.contaImg.setImageResource(R.drawable.ic_mpesa);
+        }if(lista_Conta.getNomeConta().equals("M-KESH")){
+            holder.contaImg.setImageResource(R.drawable.ic_mkesh);
+        }if(lista_Conta.getNomeConta().equals("Moza Banco")){
+            holder.contaImg.setImageResource(R.drawable.ic_moza);
+        }if(lista_Conta.getNomeConta().equals("Standard Bank")){
+            holder.contaImg.setImageResource(R.drawable.ic_standard);
+        }if(lista_Conta.getNomeConta().equals("MIllenium BIM")){
+            holder.contaImg.setImageResource(R.drawable.ic_mbim);
+        }if(lista_Conta.getNomeConta().equals("Caixa")){
+            holder.contaImg.setImageResource(R.drawable.ic_caixa);
+        }
 
         String yourFormattedString = format("%,.2f",lista_Conta.getSaldoConta());
-        holder.conta_nome.setText(lista_Conta.getNomeConta());
         holder.conta_valor.setText(yourFormattedString);
     }
 
@@ -66,8 +81,9 @@ public class ContaRecyclerAdapter extends RecyclerView.Adapter<ContaRecyclerAdap
 
     @Override
     public int getItemCount() {
-        if(listaConta == null)
+        if (listaConta == null) {
             return 0;
+        }
         return listaConta.size();
     }
 }

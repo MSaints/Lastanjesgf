@@ -1,5 +1,6 @@
 package com.afrofx.code.anjesgf.adpters;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -43,4 +44,8 @@ public class PageAdapters extends FragmentStatePagerAdapter {
         tabTitles.add(title);
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
+    }
 }

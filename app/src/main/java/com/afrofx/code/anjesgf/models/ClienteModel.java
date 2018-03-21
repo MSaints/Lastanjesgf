@@ -9,9 +9,8 @@ public class ClienteModel {
     private String nomeCliente, emailCliente, dataRegistoCliente;
     private int idCliente, numeroCliente;
 
-    public ClienteModel(String nomeCliente, String emailCliente, int numeroCliente) {
+    public ClienteModel(String nomeCliente, int numeroCliente) {
         this.nomeCliente = nomeCliente;
-        this.emailCliente = emailCliente;
         this.numeroCliente = numeroCliente;
     }
 

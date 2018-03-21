@@ -16,6 +16,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,12 +39,17 @@ import com.afrofx.code.anjesgf.Fragments.HomeFragment;
 import com.afrofx.code.anjesgf.Fragments.NotificationsFragment;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.adpters.ProdutoAdapter;
+import com.afrofx.code.anjesgf.models.ContaModel;
+import com.afrofx.code.anjesgf.models.RegistoVendaModel;
 import com.afrofx.code.anjesgf.models.StockModel;
 import com.afrofx.code.anjesgf.models.UserModel;
+import com.afrofx.code.anjesgf.models.VendasModel;
 import com.afrofx.code.anjesgf.sessionController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainScreenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
@@ -70,8 +77,6 @@ public class MainScreenActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
         setContentView(R.layout.main_screen);
 
         se = new sessionController(this);
@@ -98,7 +103,7 @@ public class MainScreenActivity extends AppCompatActivity
         setFragment(homeFragment);
 
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String value = (mSharedPreference.getString("NameOfShared", "Default_Value"));
+        String value = (mSharedPreference.getString("name_user", "Default_Value"));
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -182,13 +187,16 @@ public class MainScreenActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.txt_perfil) {
-
+            startActivity(new Intent(this, MinhaBancaActivity.class));
+            finish();
         } else if (id == R.id.txt_mensagens) {
-
+            startActivity(new Intent(this, MensagensActivity.class));
+            finish();
         } else if (id == R.id.txt_sair) {
             logout();
         } else if (id == R.id.txt_definicoes) {
-
+            startActivity(new Intent(this, DefinicoesActivity.class));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -198,8 +206,37 @@ public class MainScreenActivity extends AppCompatActivity
 
     private void logout() {
         se.setLoggedIn(false);
-        finish();
-        startActivity(new Intent(MainScreenActivity.this, LoginActivity.class));
+        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Terminar a Sessão?")
+                .setCancelText("Não")
+                .setConfirmText("Sim")
+                .showCancelButton(true)
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                       sDialog.dismiss();
+                    }
+                })
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+
+                        sDialog.setTitleText("Sessão Terminada!")
+                                .setConfirmText("OK")
+                                .showCancelButton(false)
+                                .setCancelClickListener(null)
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        finish();
+                                        startActivity(new Intent(MainScreenActivity.this, LoginActivity.class));
+                                    }
+                                })
+                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                        sDialog.setCancelable(false);
+                    }
+                })
+                .show();
     }
 
 
@@ -211,38 +248,96 @@ public class MainScreenActivity extends AppCompatActivity
         /*Responsavel por colocar o layout no alertDialog*/
         alertDialogBuilder.setView(vendaView);
 
-        final AutoCompleteTextView nomeProduto = (AutoCompleteTextView) vendaView.findViewById(R.id.venderNome);
-        final EditText quantidadeProduto = (EditText) vendaView.findViewById(R.id.venderQuantidade);
-        final Spinner nomeConta = (Spinner) vendaView.findViewById(R.id.venderConta);
+        final AutoCompleteTextView nomeProduto = (AutoCompleteTextView) vendaView.findViewById(R.id.MainVenderNome);
+        final EditText quantidadeProduto = (EditText) vendaView.findViewById(R.id.MainVenderQuantidade);
+        final Spinner nomeConta = (Spinner) vendaView.findViewById(R.id.MainVenderConta);
+        final TextView precoUn = (TextView) vendaView.findViewById(R.id.MainPrecoUn);
+        final TextView precoTo = (TextView) vendaView.findViewById(R.id.MainPrecoTo);
 
         nomeConta.setOnItemSelectedListener(this);
 
-        DatabaseHelper db = new DatabaseHelper(this);
+        final DatabaseHelper db = new DatabaseHelper(this);
+
+        final double[] preco = {0};
+        final double[] totl = {0};
+        final double[] qua = {0};
+        final double precoP = 0;
 
         produStockModels = addProduto();
         nomeProduto.setThreshold(1);
         produtoAdapter = new ProdutoAdapter(this, R.layout.topbar_body_main_screen, R.layout.linha_categoria, produStockModels);
         nomeProduto.setAdapter(produtoAdapter);
 
-        // Spinner Drop down elements
         List<String> lables = db.listContas();
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, lables);
-
-        // Drop down layout style - list view with radio button
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lables);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
         nomeConta.setAdapter(dataAdapter);
 
-        /*As operacoes que serao feitas no alert Dialog*/
+        nomeProduto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
+                qua[0] = produStockModels.get(pos).getProduto_quantidade();
+                quantidadeProduto.setHint("" + qua[0]);
+                preco[0] = produStockModels.get(pos).getProduto_preco_venda();
+                precoUn.setText(preco[0] + "");
+            }
+        });
+
+
+        quantidadeProduto.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                double quantiPro = !String.valueOf(s).equals("") ? Double.parseDouble(String.valueOf(s)) : 0.0;
+                totl[0] = quantiPro * preco[0];
+                precoTo.setText(totl[0] + "");
+            }
+        });
+
+
         alertDialogBuilder.setCancelable(false).setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                String nomePro = nomeProduto.getText().toString();
-                int quantiPro = Integer.parseInt(quantidadeProduto.getText().toString());
+                final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                double quant = !quantidadeProduto.getText().toString().equals("") ?
+                        Double.parseDouble(quantidadeProduto.getText().toString()) : 0.0;
+                int id_user = (mSharedPreference.getInt("id_user", 0));
+                int idConta = db.idConta(nomeConta.getSelectedItem().toString());
 
+                if (quant == 0.0 || nomeProduto.equals("")) {
+                    Toast.makeText(MainScreenActivity.this, "Preencha Todos Campos", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (qua[0] >= quant) {
+                        ContaModel contaModel = new ContaModel(totl[0], idConta, 1);
+                        db.registarValor(contaModel);
+
+                        int idRegistoConta = db.idOperacao();
+                        RegistoVendaModel registoVendaModel = new RegistoVendaModel(id_user, idRegistoConta, 1);
+                        db.registoVenda(registoVendaModel);
+
+
+                        VendasModel vendasModel = new VendasModel(db.idProduto(nomeProduto.getText().toString()), db.idRegistoVenda(), quant, preco[0]);
+                        db.registoVendas(vendasModel);
+
+                        if (db.updateQuatidade(nomeProduto.getText().toString(), qua[0] - quant)) {
+                            new SweetAlertDialog(MainScreenActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Produto Vendido")
+                                    .show();
+                        } else {
+                            new SweetAlertDialog(MainScreenActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Erro Tecnico")
+                                    .show();
+                        }
+                    } else {
+                        new SweetAlertDialog(MainScreenActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Fora de Stock")
+                                .show();
+                    }
+                }
             }
         }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -265,11 +360,7 @@ public class MainScreenActivity extends AppCompatActivity
 
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
         String label = parent.getItemAtPosition(position).toString();
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "You selected: " + label,
-                Toast.LENGTH_LONG).show();
     }
 
 

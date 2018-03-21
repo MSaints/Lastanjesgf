@@ -38,7 +38,8 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/edit_style"
                 android:hint="@string/hint_numero_telefone"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:maxLength="9" />
 
             <EditText
                 android:id="@+id/edit_login_pin"

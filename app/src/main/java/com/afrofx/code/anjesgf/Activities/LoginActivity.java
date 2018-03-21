@@ -17,6 +17,8 @@ import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.models.UserModel;
 import com.afrofx.code.anjesgf.sessionController;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * Created by Afro FX on 2/2/2018.
  */
@@ -46,10 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         but_login_registar.setOnClickListener(this);
 
         edit_number = (EditText) findViewById(R.id.edit_login_number);
-
         edit_pin = (EditText) findViewById(R.id.edit_login_pin);
-
-
     }
 
     @Override
@@ -61,7 +60,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.but_login_registar:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                finish();
                 break;
             default:
         }
@@ -73,7 +71,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String pinn = edit_pin.getText().toString();
 
         if (num.isEmpty() || pinn.isEmpty() || pinn == "" || num == "") {
-            Toast.makeText(getApplicationContext(), "Preencha os campos", Toast.LENGTH_LONG).show();
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...")
+                    .setContentText("Preencha Todos Campos!")
+                    .show();
         } else {
             int userNumber = Integer.parseInt(num);
             int userPin = Integer.parseInt(pinn);
@@ -81,17 +82,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             UserModel userModel = db.userLogin(userNumber, userPin);
 
             if (userModel != null) {
-
                 se.setLoggedIn(true);
                 Intent s = new Intent(this, MainScreenActivity.class);
                 String nome = userModel.getUsuario_nome();
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("NameOfShared", nome);
+                editor.putString("name_user", nome);
+                editor.putInt("id_user", userModel.getId_usuario());
+                editor.putInt("user_numero", userModel.getUsuario_numero());
                 editor.commit();
                 startActivity(s);
             } else {
-                Toast.makeText(getApplicationContext(), "Dados Errados", Toast.LENGTH_LONG).show();
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText("Dados Errados")
+                        .show();
             }
         }
     }

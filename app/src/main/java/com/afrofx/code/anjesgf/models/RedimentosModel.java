@@ -6,14 +6,38 @@ package com.afrofx.code.anjesgf.models;
 
 public class RedimentosModel {
 
-    private String redimentoDescricao, rendimentoData, rendimentoDataRegisto;
-    private int id_rendimento, id_registo_operacao;
+    private String redimentoDescricao, rendimentoData, rendimentoDataRegisto, conta;
+    private int id_rendimento, id_registo_operacao, tipoOpe;
     private double rendimento_valor;
 
     public RedimentosModel() {
     }
 
+    public String getConta() {
+        return conta;
+    }
 
+    public void setConta(String conta) {
+        this.conta = conta;
+    }
+
+    public int getTipoOpe() {
+        return tipoOpe;
+    }
+
+    public void setTipoOpe(int tipoOpe) {
+        this.tipoOpe = tipoOpe;
+    }
+
+    public RedimentosModel(String redimentoDescricao, String rendimentoData, String conta, int id_rendimento, double rendimento_valor, int tipoOpe, int id_registo_operacao) {
+        this.redimentoDescricao = redimentoDescricao;
+        this.rendimentoData = rendimentoData;
+        this.conta = conta;
+        this.id_rendimento = id_rendimento;
+        this.rendimento_valor = rendimento_valor;
+        this.tipoOpe = tipoOpe;
+        this.id_registo_operacao = id_registo_operacao;
+    }
 
     public RedimentosModel(String redimentoDescricao, String rendimentoData, int id_registo_operacao) {
         this.redimentoDescricao = redimentoDescricao;

@@ -36,26 +36,13 @@ public class RelatorioActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.add_relatorio, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.but_vender) {
-            Toast.makeText(getApplication(), "Criar Relatorio", Toast.LENGTH_LONG).show();
-            return true;
-        } else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             startActivity(new Intent(RelatorioActivity.this, MainScreenActivity.class));
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

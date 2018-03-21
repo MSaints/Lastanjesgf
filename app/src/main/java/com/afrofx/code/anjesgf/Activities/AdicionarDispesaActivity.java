@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class AdicionarDispesaActivity extends AppCompatActivity {
 
@@ -54,7 +57,7 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        List<String> lables = db.listContas();
+        List<String> lables = db.listContas2();
         List<String> itens_despesa = db.listaDespesaCategoria();
 
         txtValorDispesa = (EditText) findViewById(R.id.txtCustoDispesa);
@@ -138,9 +141,31 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
                     DispesasModel dispesasModel1 = new DispesasModel(id_categoria, db.idOperacao(), descricao, data);
                     db.apenasRegistaDespesa(dispesasModel1);
 
-                    startActivity(new Intent(this, DespesasActivity.class));
+                    new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Paga com Sucesso!")
+                            .setConfirmText("OK" )
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    startActivity(new Intent(AdicionarDispesaActivity.this, DespesasActivity.class));
+                                    finish();
+                                    sDialog.dismiss();
+                                    sDialog.setCancelable(false);
+                                }
+                            })
+                            .show();
                 }else {
-                    Toast.makeText(this, "Saldo Insuficiente", Toast.LENGTH_LONG).show();
+                    new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Saldo Insuficiente!")
+                            .setConfirmText("OK" )
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismiss();
+                                    sDialog.setCancelable(false);
+                                }
+                            })
+                            .show();
                 }
 
             } else {
@@ -151,9 +176,32 @@ public class AdicionarDispesaActivity extends AppCompatActivity {
                 DispesasModel dispesasModel1 = new DispesasModel(id_categoria, db.idOperacao(), descricao, data);
                 db.apenasRegistaDespesa(dispesasModel1);
 
-                Toast.makeText(this, "Dispesa Registada", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this, DespesasActivity.class));
+                new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Despesa Registada!")
+                        .setConfirmText("OK" )
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                startActivity(new Intent(AdicionarDispesaActivity.this, DespesasActivity.class));
+                                finish();
+                                sDialog.dismiss();
+                                sDialog.setCancelable(false);
+                            }
+                        })
+                        .show();
+
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+         if (id == android.R.id.home) {
+            startActivity(new Intent(this, DespesasActivity.class));
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

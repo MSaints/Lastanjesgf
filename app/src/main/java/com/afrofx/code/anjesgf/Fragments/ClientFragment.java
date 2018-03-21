@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,8 @@ import com.afrofx.code.anjesgf.models.ClienteModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class ClientFragment extends Fragment {
 
@@ -32,6 +35,8 @@ public class ClientFragment extends Fragment {
     private FloatingActionButton butAddCliente;
 
     private DatabaseHelper db;
+
+    private ClientFragment clientFragment;
 
 
     public ClientFragment() {
@@ -68,20 +73,20 @@ public class ClientFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_client, container, false);
 
-        butAddCliente = (FloatingActionButton)v.findViewById(R.id.add_clienteFragment);
+        butAddCliente = (FloatingActionButton) v.findViewById(R.id.add_clienteFragment);
         db = new DatabaseHelper(getActivity());
 
 
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewClients);
+        final RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewClients);
         recyclerView.setHasFixedSize(true);
-        ClienteRecyclerAdapter clienteRecyclerAdapter = new ClienteRecyclerAdapter(getContext(), listaClients);
+        final ClienteRecyclerAdapter clienteRecyclerAdapter = new ClienteRecyclerAdapter(getContext(), listaClients);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         recyclerView.setAdapter(clienteRecyclerAdapter);
 
         butAddCliente.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 LayoutInflater li = LayoutInflater.from(getActivity());
                 View forneView = li.inflate(R.layout.add_cliente, null);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -90,21 +95,28 @@ public class ClientFragment extends Fragment {
                 alertDialogBuilder.setView(forneView);
 
                 final EditText nomeCliente = (EditText) forneView.findViewById(R.id.add_cliente_nome);
-                final EditText emailCliente = (EditText) forneView.findViewById(R.id.add_cliente_email);
                 final EditText numeroCliente = (EditText) forneView.findViewById(R.id.add_cliente_numero);
 
                 // set dialog message
                 alertDialogBuilder.setCancelable(false).setPositiveButton("Registar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String nomef = nomeCliente.getText().toString();
-                        String tipof = emailCliente.getText().toString();
-                        String emailf = numeroCliente.getText().toString();
                         int numerof = Integer.parseInt(numeroCliente.getText().toString());
 
-                        ClienteModel clienteModel = new ClienteModel(nomef, tipof, numerof);
+                        ClienteModel clienteModel = new ClienteModel(nomef, numerof);
                         db.registarCliente(clienteModel);
-                        mensagem("Cliente Registado");
-
+                        new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Sessão Terminada!")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        clientFragment = new ClientFragment();
+                                        setFragment(clientFragment);
+                                        sDialog.dismiss();
+                                    }
+                                })
+                                .show();
                     }
                 }).setNegativeButton("Fechar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -125,6 +137,11 @@ public class ClientFragment extends Fragment {
         return v;
     }
 
+    private void setFragment(android.support.v4.app.Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
+    }
 
     private void mensagem(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();

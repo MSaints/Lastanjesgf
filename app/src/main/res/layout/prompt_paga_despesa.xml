@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="Conta a debitar"
+        android:textColor="@color/txt_white"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:layout_marginHorizontal="10dp"
+        android:id="@+id/spinnerContaDespesa2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Conta a usar" />
+
+    <View
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_marginVertical="10dp"
+        android:background="@color/colorPrimary" />
+
+    <LinearLayout
+        android:layout_marginHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Saldo Disponivel:" />
+
+        <TextView
+            android:id="@+id/despesaSaldoConta"
+            android:textSize="18dp"
+            android:textAlignment="textEnd"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00MT"
+            android:gravity="end" />
+    </LinearLayout>
+
+
+</LinearLayout>

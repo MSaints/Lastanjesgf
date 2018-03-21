@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.afrofx.code.anjesgf.Activities.CaixaActivity;
 import com.afrofx.code.anjesgf.Activities.DespesasActivity;
+import com.afrofx.code.anjesgf.Activities.MainVendasActivity;
 import com.afrofx.code.anjesgf.Activities.StockActivity;
 import com.afrofx.code.anjesgf.Activities.VendasActivity;
 import com.afrofx.code.anjesgf.R;
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), VendasActivity.class));
+                startActivity(new Intent(getContext(), MainVendasActivity.class));
             }
         });
 

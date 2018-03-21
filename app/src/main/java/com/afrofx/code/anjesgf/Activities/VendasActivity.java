@@ -2,9 +2,11 @@ package com.afrofx.code.anjesgf.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
@@ -38,12 +40,16 @@ import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.adpters.ProdutoAdapter;
 import com.afrofx.code.anjesgf.adpters.VendasRecyclerAdapter;
+import com.afrofx.code.anjesgf.models.ContaModel;
+import com.afrofx.code.anjesgf.models.RegistoVendaModel;
 import com.afrofx.code.anjesgf.models.StockModel;
 import com.afrofx.code.anjesgf.models.VendasModel;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by Afro FX on 2/11/2018.
@@ -59,27 +65,27 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
     private List<StockModel> produStockModels;
     private ProdutoAdapter produtoAdapter;
     private AutoCompleteTextView txtProduto;
-    private Button compraAdicionar, aumentarQuantidade, diminuirQuantidade;
-    private Button ShowSnackbar;
+    private Button compraAdicionar, aumentarQuantidade, diminuirQuantidade, concluirVenda;
+
+    private double precoP = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.topbar_vendas_screen);
 
-        txtProduto = (AutoCompleteTextView)findViewById(R.id.escolheProduto);
+        txtProduto = (AutoCompleteTextView) findViewById(R.id.escolheProduto);
 
-        txtQuantidade = (EditText)findViewById(R.id.escolheQuantidade);
+        txtQuantidade = (EditText) findViewById(R.id.escolheQuantidade);
 
-        txtSubtotal = (TextView)findViewById(R.id.txtSubtotal);
-        txtIva = (TextView)findViewById(R.id.txtIva);
-        txtTotal = (TextView)findViewById(R.id.txtTotal);
+        txtSubtotal = (TextView) findViewById(R.id.txtSubtotal);
+        txtIva = (TextView) findViewById(R.id.txtIva);
+        txtTotal = (TextView) findViewById(R.id.txtTotal);
 
-        compraAdicionar = (Button)findViewById(R.id.compraAdicionar);
-        aumentarQuantidade = (Button)findViewById(R.id.aumentarQuantidade);
-        diminuirQuantidade = (Button)findViewById(R.id.diminuirQuantidade);
+        compraAdicionar = (Button) findViewById(R.id.compraAdicionar);
+        aumentarQuantidade = (Button) findViewById(R.id.aumentarQuantidade);
+        diminuirQuantidade = (Button) findViewById(R.id.diminuirQuantidade);
+        concluirVenda = (Button) findViewById(R.id.concluirVenda);
 
         db = new DatabaseHelper(this);
 
@@ -94,7 +100,7 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
         produtoAdapter = new ProdutoAdapter(this, R.layout.fragment_add_produtos, R.layout.linha_categoria, produStockModels);
         txtProduto.setAdapter(produtoAdapter);
 
-        final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listaCompraRecycler);
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listaCompraRecycler);
         recyclerView.setHasFixedSize(true);
 
         final double[] precos = new double[1];
@@ -102,8 +108,8 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
 
         txtProduto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View arg1, int pos,long id) {
-                txtQuantidade.setHint("Disponivel "+produStockModels.get(pos).getProduto_quantidade());
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
+                txtQuantidade.setHint("Disponivel " + produStockModels.get(pos).getProduto_quantidade());
                 precos[0] = produStockModels.get(pos).getProduto_preco_venda();
             }
         });
@@ -112,7 +118,7 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 quantidade[0]++;
-                txtQuantidade.setText(quantidade[0]+"");
+                txtQuantidade.setText(quantidade[0] + "");
             }
         });
 
@@ -121,60 +127,68 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 quantidade[0]--;
-                if (quantidade[0]<0){
+                if (quantidade[0] < 0) {
                     quantidade[0] = 0;
-                }else{
-                    txtQuantidade.setText(quantidade[0]+"");
+                } else {
+                    txtQuantidade.setText(quantidade[0] + "");
                 }
-
             }
         });
 
 
         vendasModelList = new ArrayList<>();
 
+        concluirVenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(VendasActivity.this, "O produto ja existe na lista", Toast.LENGTH_LONG).show();
+                concluirVenda();
+            }
+        });
+
         compraAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nomeProduto = txtProduto.getText().toString();
-                final double quantidadeProduto = !txtQuantidade.getText().toString().equals("") ?
+                String nomeProduto2 = txtProduto.getText().toString();
+                final double quantidadeProduto1 = !txtQuantidade.getText().toString().equals("") ?
                         Double.parseDouble(txtQuantidade.getText().toString()) : 0.0;
 
 
                 double precoUnitario = precos[0];
                 String nome = "";
-                for(int i= 0; i<vendasModelList.size();i++){
-                    nome = vendasModelList.get(i).getNome();
-                    if (nome == nomeProduto){
-                        nome = nomeProduto;
+                for (int i = 0; i < vendasModelList.size(); i++) {
+                    nome = vendasModelList.get(i).getNomeProduto();
+                    if (nome == nomeProduto2) {
+                        nome = nomeProduto2;
                     }
                 }
 
-                if (nome == nomeProduto) {
-                    Toast.makeText(VendasActivity.this, "O produto ja existe na lista",Toast.LENGTH_LONG);
-                }if(nomeProduto.equals("") || quantidadeProduto == 0){
-                    Toast.makeText(VendasActivity.this, "Preencha todos os campos",Toast.LENGTH_LONG);
-                }else{
-                    VendasModel vendasModel = new VendasModel(quantidadeProduto, precoUnitario, nomeProduto);
+                if (nome == nomeProduto2) {
+                    Toast.makeText(VendasActivity.this, "O produto ja existe na lista", Toast.LENGTH_LONG).show();
+                }
+                if (nomeProduto2.equals("") || quantidadeProduto1 == 0.0) {
+                    Toast.makeText(VendasActivity.this, "Preencha todos os campos", Toast.LENGTH_LONG).show();
+                } else {
+                    VendasModel vendasModel = new VendasModel(quantidadeProduto1, precoUnitario, nomeProduto2);
 
                     vendasModelList.add(vendasModel);
 
-                    double iva = (quantidadeProduto * precoUnitario)*0.17;
+                    double iva = (quantidadeProduto1 * precoUnitario) * 0.17;
 
-                    double subtotal = (quantidadeProduto * precoUnitario)-iva;
+                    double subtotal = (quantidadeProduto1 * precoUnitario) - iva;
 
-                    for(int i= 0; i<vendasModelList.size();i++){
-
+                    for (int i = 0; i < vendasModelList.size(); i++) {
                         subtotal = subtotal + (vendasModelList.get(i).getVenda_preco());
                     }
 
-                    double ivas = quantidadeProduto * precos[0] * 0.17;
-                    double total = ivas+subtotal;
+                    double ivas = quantidadeProduto1 * precos[0] * 0.17;
+                    double total = ivas + subtotal;
 
-                    txtSubtotal.setText(subtotal+" MT");
-                    txtIva.setText(ivas+" MT");
-                    txtTotal.setText(total+" MT");
+                    txtSubtotal.setText(subtotal + " MT");
+                    txtIva.setText(ivas + " MT");
+                    txtTotal.setText(total + " MT");
 
+                    precoP = total;
 
                     final VendasRecyclerAdapter vendasRecyclerAdapter = new VendasRecyclerAdapter(VendasActivity.this, vendasModelList);
                     recyclerView.setLayoutManager(new LinearLayoutManager(VendasActivity.this));
@@ -182,7 +196,8 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
 
                     vendasRecyclerAdapter.notifyDataSetChanged();
 
-                    quantidade[0]=0;
+
+                    quantidade[0] = 0;
 
                     txtProduto.setText(null);
                     txtQuantidade.setText(null);
@@ -190,9 +205,76 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
                 }
             }
         });
-
-
     }
+
+
+    public void concluirVenda() {
+        LayoutInflater li2 = LayoutInflater.from(this);
+        View vendaView2 = li2.inflate(R.layout.prompt_vend_estruturada, null);
+        AlertDialog.Builder alertDialogBuilder2 = new AlertDialog.Builder(this);
+        alertDialogBuilder2.setView(vendaView2);
+
+        final AutoCompleteTextView vendaCliente = (AutoCompleteTextView) vendaView2.findViewById(R.id.vendaCliente);
+        final EditText vendaDesconto = (EditText) vendaView2.findViewById(R.id.vendaDesconto);
+        final Spinner nomeConta2 = (Spinner) vendaView2.findViewById(R.id.venderConta);
+        final TextView precoTota = (TextView) vendaView2.findViewById(R.id.vendaPrecoTotal);
+
+        List<String> labless = db.listContas();
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, labless);
+        nomeConta2.setAdapter(dataAdapter2);
+
+        precoTota.setText((precoP) + " MT");
+
+        double pre = !vendaDesconto.getText().toString().equals("") ?
+                Double.parseDouble(vendaDesconto.getText().toString()) : 0.0;
+
+        vendaDesconto.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                double ff = !String.valueOf(s).equals("") ? Double.parseDouble(String.valueOf(s)) : 0.0;
+                precoTota.setText((precoP - ff) + " MT");
+            }
+        });
+        alertDialogBuilder2.setCancelable(false).setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                int id_user = (mSharedPreference.getInt("id_user", 0));
+                int idConta = db.idConta(nomeConta2.getSelectedItem().toString());
+
+                        ContaModel contaModel = new ContaModel(precoP, idConta, 1);
+                        db.registarValor(contaModel);
+
+                        int idRegistoConta = db.idOperacao();
+                        RegistoVendaModel registoVendaModel = new RegistoVendaModel(id_user, idRegistoConta, 1);
+                        db.registoVenda(registoVendaModel);
+
+                        for (int i = 0; i < vendasModelList.size(); i++) {
+                            String nom = vendasModelList.get(i).getNomeProduto();
+                            VendasModel vendasModel = new VendasModel(db.idProduto(nom), db.idRegistoVenda(),
+                                    vendasModelList.get(i).getVenda_quantidade(), vendasModelList.get(i).getVenda_preco());
+                            db.registoVendas(vendasModel);
+                            db.updateQuatidade(nom, db.quantidadePro(nom)-vendasModelList.get(i).getVenda_quantidade());
+                        }
+
+                Toast.makeText(VendasActivity.this, "Vendido", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(VendasActivity.this, VendasActivity.class));
+            }
+        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder2.create();
+        alertDialog.show();
+    }
+
 
     private List<StockModel> addProduto() {
         List<StockModel> lista = new ArrayList<>();
@@ -231,7 +313,7 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
             fastSale();
             return true;
         } else if (id == android.R.id.home) {
-            startActivity(new Intent(VendasActivity.this, MainScreenActivity.class));
+            startActivity(new Intent(VendasActivity.this, MainVendasActivity.class));
             finish();
             return true;
         }
@@ -247,11 +329,12 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
         /*Responsavel por colocar o layout no alertDialog*/
         alertDialogBuilder.setView(vendaView);
 
-        final AutoCompleteTextView nomeProduto = (AutoCompleteTextView) vendaView.findViewById(R.id.venderNome);
-        final EditText quantidadeProduto = (EditText) vendaView.findViewById(R.id.venderQuantidade);
-        final Spinner nomeConta = (Spinner) vendaView.findViewById(R.id.venderConta);
-        final TextView precoUn = (TextView) vendaView.findViewById(R.id.precoUn);
-        final TextView precoTo = (TextView) vendaView.findViewById(R.id.precoTo);
+        final AutoCompleteTextView nomeProduto = (AutoCompleteTextView) vendaView.findViewById(R.id.MainVenderNome);
+        final EditText quantidadeProduto = (EditText) vendaView.findViewById(R.id.MainVenderQuantidade);
+        final Spinner nomeConta = (Spinner) vendaView.findViewById(R.id.MainVenderConta);
+        final TextView precoUn = (TextView) vendaView.findViewById(R.id.MainPrecoUn);
+        final TextView precoTo = (TextView) vendaView.findViewById(R.id.MainPrecoTo);
+        db = new DatabaseHelper(this);
 
         produStockModels = addProduto();
         nomeProduto.setThreshold(1);
@@ -260,12 +343,14 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
 
         nomeConta.setOnItemSelectedListener(this);
 
-        DatabaseHelper db = new DatabaseHelper(this);
+        final DatabaseHelper db = new DatabaseHelper(this);
 
         // Spinner Drop down elements
         List<String> lables = db.listContas();
 
-        final double [] preco = {0};
+        final double[] preco = {0};
+        final double[] totl = {0};
+        final double[] qua = {0};
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
@@ -277,10 +362,11 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
         nomeConta.setAdapter(dataAdapter);
         nomeProduto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View arg1, int pos,long id) {
-                txtQuantidade.setHint("Disponivel "+produStockModels.get(pos).getProduto_quantidade());
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
+                qua[0] = produStockModels.get(pos).getProduto_quantidade();
+                quantidadeProduto.setHint("" + qua[0]);
                 preco[0] = produStockModels.get(pos).getProduto_preco_venda();
-                precoUn.setText(preco[0]+"");
+                precoUn.setText(preco[0] + "");
             }
         });
 
@@ -290,22 +376,55 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
             public void afterTextChanged(Editable s) {
             }
 
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                int quantiPro = Integer.parseInt(String.valueOf(s));
-                double totl = quantiPro*preco[0];
-                precoTo.setText(totl+"");
+                double quantiPro = !String.valueOf(s).equals("") ? Double.parseDouble(String.valueOf(s)) : 0.0;
+                totl[0] = quantiPro * preco[0];
+                precoTo.setText(totl[0] + "");
             }
         });
 
         /*As operacoes que serao feitas no alert Dialog*/
         alertDialogBuilder.setCancelable(false).setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                double quant = !quantidadeProduto.getText().toString().equals("") ?
+                        Double.parseDouble(quantidadeProduto.getText().toString()) : 0.0;
+                int id_user = (mSharedPreference.getInt("id_user", 0));
+                int idConta = db.idConta(nomeConta.getSelectedItem().toString());
+
+                if (quant == 0.0 || nomeProduto.equals("")) {
+                    Toast.makeText(VendasActivity.this, "Preencha Todos Campos", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (qua[0] >= quant) {
+                        ContaModel contaModel = new ContaModel(totl[0], idConta, 1);
+                        db.registarValor(contaModel);
+
+                        int idRegistoConta = db.idOperacao();
+                        RegistoVendaModel registoVendaModel = new RegistoVendaModel(id_user, idRegistoConta, 1);
+                        db.registoVenda(registoVendaModel);
 
 
+                        VendasModel vendasModel = new VendasModel(db.idProduto(nomeProduto.getText().toString()), db.idRegistoVenda(), quant, preco[0]);
+                        db.registoVendas(vendasModel);
+
+                        if (db.updateQuatidade(nomeProduto.getText().toString(), qua[0] - quant)) {
+                            new SweetAlertDialog(VendasActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Produto Vendido")
+                                    .show();
+                        } else {
+                            new SweetAlertDialog(VendasActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Erro Tecnico")
+                                    .show();
+                        }
+                    } else {
+                        new SweetAlertDialog(VendasActivity.this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Fora de Stock")
+                                .show();
+                    }
+                }
             }
         }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -328,11 +447,7 @@ public class VendasActivity extends AppCompatActivity implements AdapterView.OnI
 
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
         String label = parent.getItemAtPosition(position).toString();
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "You selected: " + label,
-                Toast.LENGTH_LONG).show();
     }
 
 }

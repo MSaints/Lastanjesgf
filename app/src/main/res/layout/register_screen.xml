@@ -74,6 +74,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/edit_style"
                     android:inputType="phone"
+                    android:maxLength="9"
                     android:hint="@string/hint_numero_telefone" />
 
                 <EditText

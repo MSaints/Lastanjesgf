@@ -23,7 +23,7 @@
 
         <AutoCompleteTextView
             android:singleLine="true"
-            android:id="@+id/venderNome"
+            android:id="@+id/MainVenderNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -33,7 +33,7 @@
 
         <EditText
             android:singleLine="true"
-            android:id="@+id/venderQuantidade"
+            android:id="@+id/MainVenderQuantidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -58,7 +58,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/precoUn"
+            android:id="@+id/MainPrecoUn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -85,7 +85,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/precoTo"
+            android:id="@+id/MainPrecoTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -114,7 +114,7 @@
             android:textSize="18dp" />
 
         <Spinner
-            android:id="@+id/venderConta"
+            android:id="@+id/MainVenderConta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>

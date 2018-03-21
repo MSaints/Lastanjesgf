@@ -8,7 +8,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1 Beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.0.2'
     implementation 'com.android.support:support-vector-drawable:27.0.2'
     compile 'com.itextpdf:itextpdf:5.5.11'
+    compile 'com.github.f0ris.sweetalert:library:1.5.2'
 }

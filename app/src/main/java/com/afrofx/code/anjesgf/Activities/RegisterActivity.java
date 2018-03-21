@@ -1,26 +1,18 @@
 package com.afrofx.code.anjesgf.Activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.models.UserModel;
 
-import java.io.ByteArrayOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
-/**
- * Created by Afro FX on 2/2/2018.
- */
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -73,24 +65,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         if (nome == "" || pin != re_pin || edit_numero.length() != 9 || edit_pin.length() != 4) {
 
-            mensagem("Verifique as credenciais");
+            new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    .setContentText("Preencha, Nome,\n Numero e PIN")
+                    .show();
         } else {
             if (userModel == null) {
                 userModel = new UserModel(u_numero, pin, nome, email);
                 db.inserirUser(userModel);
-                mensagem("Usuario Registado");
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
+                new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setContentText("Usuario Registado")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                startActivity(new Intent(getBaseContext(), LoginActivity.class));
+                                finish();
+                            }
+                        })
+                        .show();
+
             } else {
-                mensagem("O Numero ja foi usado");
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setContentText("Numero ja foi usado")
+                        .show();
             }
         }
     }
-
-
-    private void mensagem(String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-    }
-
-
 }

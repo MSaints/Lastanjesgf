@@ -10,7 +10,6 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="46dp"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
@@ -25,38 +24,71 @@
                 android:orientation="vertical"
                 android:padding="5dp">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <Spinner
-                        android:textAlignment="center"
-                        android:id="@+id/rendimentoMes"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/rendimentoTotal"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="0.00MT"
-                        android:textSize="20dp"
-                        android:textColor="@color/txt_green" />
+                        android:orientation="vertical">
 
-                    <TextView
+                        <TextView
+                            android:id="@+id/rendimentoPendente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0.00MT"
+                            android:textSize="16sp"
+                            android:textColor="@color/txt_red" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Pendentes"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Valor Total"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/rendimentoTotal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="0.00MT"
+                            android:textSize="16sp"
+                            android:textColor="@color/txt_green" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Recebidos"
+                            android:textSize="10sp"/>
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -78,11 +110,9 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerViewDispesa"
+                android:id="@+id/recyclerViewRendimentos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
-
         </LinearLayout>
 
     </LinearLayout>

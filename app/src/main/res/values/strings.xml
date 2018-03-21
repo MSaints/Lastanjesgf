@@ -8,7 +8,7 @@
 
 
     <!--======================Navegation Drawer Icon Text=========================-->
-    <string name="drawer_perfil">Minha conta</string>
+    <string name="drawer_perfil">Minha Banca</string>
     <string name="drawer_definicoes">Definições</string>
     <string name="drawer_sair">Sair</string>
     <string name="drawer_mensagens">Mensagens</string>
@@ -59,23 +59,13 @@ Se não possui uma conta clique em REGISTAR.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="stock">Gestão do Stock</string>
     <string name="vendas">Gestão de Vendas</string>
-    <string name="caixa">Gestão do Contas</string>
+    <string name="caixa">Gestão de Contas</string>
     <string name="relatorio">Relatórios</string>
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
 
     <string name="menu_dots">&#8942;</string>
     <string name="bottom_home">Home</string>
-    <string name="bottom_notificatios">Notifificações</string>
+    <string name="bottom_notificatios">Notificações</string>
     <string name="bottom_clientes">Clientes</string>
     <string name="bottom_ajuda">Ajuda</string>
 
@@ -89,6 +79,12 @@ Se não possui uma conta clique em REGISTAR.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_mensagens">Mensagens</string>
+
+
+    <string name="search_hint">Procurar</string>
+    <string name="title_activity_mercadoria_vendida">MercadoriaVendidaActivity</string>
+    <string name="title_activity_minha_banca">Minha Banca</string>
 
 
 </resources>

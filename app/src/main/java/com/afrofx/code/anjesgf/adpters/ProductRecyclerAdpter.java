@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.models.StockModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -67,9 +69,6 @@ public class ProductRecyclerAdpter extends RecyclerView.Adapter<ProductRecyclerA
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.menu1:
-                                //handle menu1 click
-                                break;
                             case R.id.menu2:
                                 LayoutInflater li = LayoutInflater.from(context);
                                 View quantiView = li.inflate(R.layout.prompt_stock, null);
@@ -103,47 +102,6 @@ public class ProductRecyclerAdpter extends RecyclerView.Adapter<ProductRecyclerA
 
                                 break;
 
-                            //Configuracoes da Opcao Editar
-                            case R.id.menu3:
-                                LayoutInflater li2 = LayoutInflater.from(context);
-                                View editView = li2.inflate(R.layout.edit_produto, null);
-                                AlertDialog.Builder alert3 = new AlertDialog.Builder(context);
-
-                                // set prompts.xml to alertdialog builder
-                                alert3.setView(editView);
-
-                                final EditText txt_nome = (EditText) editView.findViewById(R.id.edit_nome);
-                                final EditText txt_preco_compra = (EditText) editView.findViewById(R.id.edit_preco_compra);
-                                final EditText txt_preco_venda = (EditText) editView.findViewById(R.id.edit_preco_venda);
-
-                                txt_nome.setText(listItem.getProduto_nome());
-                                txt_preco_compra.setText(listItem.getProduto_preco_compra() + "");
-                                txt_preco_venda.setText(listItem.getProduto_preco_venda() + "");
-
-                                // set dialog message
-                                alert3.setCancelable(false).setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        double preco_compra = Double.parseDouble(txt_preco_compra.getText().toString());
-                                        double preco_venda = Double.parseDouble(txt_preco_venda.getText().toString());
-                                        String nome_produto = txt_nome.getText().toString();
-
-                                        String nome_conf = listItem.getProduto_nome();
-                                        if (db.updateProduto(nome_conf, nome_produto, preco_compra, preco_venda)) {
-                                            Toast.makeText(context, "Produto Actualizado", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                                // create alert dialog
-                                AlertDialog alertDialog3 = alert3.create();
-
-                                // show it
-                                alertDialog3.show();
-                                break;
                             case R.id.menu4:
                                 String nome = listItem.getProduto_nome();
                                 double quant = listItem.getProduto_quantidade();

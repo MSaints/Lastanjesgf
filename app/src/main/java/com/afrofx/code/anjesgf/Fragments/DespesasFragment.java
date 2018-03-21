@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.Activities.AdicionarDispesaActivity;
+import com.afrofx.code.anjesgf.Activities.DespesasActivity;
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.adpters.DispesasRecyclerAdapter;
@@ -21,6 +22,8 @@ import com.afrofx.code.anjesgf.models.DispesasModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.String.format;
 
 
 public class DespesasFragment extends Fragment {
@@ -59,9 +62,11 @@ public class DespesasFragment extends Fragment {
                 pago = pago + dispesasModelList.get(i).getCusto_dispesa();
             }
         }
+        String pen = format("%,.2f",pendente);
+        String pag = format("%,.2f",pago);
 
-        txtPendente.setText(pendente+" MT");
-        txtPaga.setText(pago+" MT");
+        txtPendente.setText(pen+" MT");
+        txtPaga.setText(pag+" MT");
 
         RecyclerView recyclerView = (RecyclerView)v.findViewById(R.id.recyclerViewDispesa);
         recyclerView.setHasFixedSize(true);
@@ -76,6 +81,7 @@ public class DespesasFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), AdicionarDispesaActivity.class));
+                getActivity().finish();
             }
         });
 
@@ -100,8 +106,9 @@ public class DespesasFragment extends Fragment {
                 String categoria  = (cursor.getString(cursor.getColumnIndex("despesa_categoria_nome")));
                 int est = Integer.parseInt(cursor.getString(cursor.getColumnIndex("tipo_operacao")));
                 String nomeConta = cursor.getString(cursor.getColumnIndex("conta_nome"));
+                int id_op = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_registo_operacao")));
 
-                DispesasModel dispesasModel = new DispesasModel(id_despesa, est, valor, descricao, categoria, data, nomeConta);
+                DispesasModel dispesasModel = new DispesasModel(id_despesa, est, valor, descricao, categoria, data, nomeConta, id_op);
 
                 dispesasModelList.add(dispesasModel);
             }

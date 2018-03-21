@@ -3,7 +3,9 @@ package com.afrofx.code.anjesgf.Fragments;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +15,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.Activities.ReportClientes1Activity;
+import com.afrofx.code.anjesgf.Activities.ReportPodutosEmStockActivity;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.adpters.ExpandableListAdapter;
 
@@ -39,7 +43,9 @@ public class RelatorioFragment extends Fragment {
     HashMap<String, List<String>> listDataChild;
 
     private TextView dataInicio, dataFim;
-    private ImageView butDataInicio, butDataFim;
+    private LinearLayout butDataInicio, butDataFim;
+
+    private String dataIni, dataF;
 
     private boolean click;
 
@@ -56,8 +62,8 @@ public class RelatorioFragment extends Fragment {
 
         dataInicio = (TextView) view.findViewById(R.id.txtDataDe);
         dataFim = (TextView) view.findViewById(R.id.txtDataPara);
-        butDataFim = (ImageView) view.findViewById(R.id.dataPara);
-        butDataInicio = (ImageView) view.findViewById(R.id.dataInicio);
+        butDataFim = (LinearLayout) view.findViewById(R.id.dataPara);
+        butDataInicio = (LinearLayout) view.findViewById(R.id.dataInicio);
 
 
         listaDeDados();
@@ -72,8 +78,15 @@ public class RelatorioFragment extends Fragment {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Toast.makeText(getContext(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition),
                         Toast.LENGTH_SHORT).show();
-                if(listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition)=="Clientes Registados"){
+                if (listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition) == "Clientes Registados") {
                     startActivity(new Intent(getContext(), ReportClientes1Activity.class));
+                }if(listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition) == "Produtos em Stock"){
+                    startActivity(new Intent(getContext(), ReportPodutosEmStockActivity.class));
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("dataInicio", dataIni);
+                    editor.putString("dataFim", dataF);
+                    editor.commit();
                 }
 
                 return false;
@@ -88,14 +101,16 @@ public class RelatorioFragment extends Fragment {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 if (click) {
-                    String myFormat = "MM-dd-yyyy";
+                    String myFormat = "yyyy-MM-dd";
                     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                     dataInicio.setText(sdf.format(myCalendar.getTime()));
+                    dataIni = sdf.format(myCalendar.getTime());
                 }
                 if (!click) {
-                    String myFormat = "MM-dd-yyyy";
+                    String myFormat = "yyyy-MM-dd";
                     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                     dataFim.setText(sdf.format(myCalendar.getTime()));
+                    dataF = sdf.format(myCalendar.getTime());
                 }
             }
 

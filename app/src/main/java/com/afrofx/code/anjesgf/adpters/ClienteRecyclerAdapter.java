@@ -34,9 +34,6 @@ public class ClienteRecyclerAdapter extends RecyclerView.Adapter<ClienteRecycler
 
         String Nome = listaClienteModel.getNomeCliente();
         holder.txt_nome.setText(Nome);
-
-        String Letra = listaClienteModel.getNomeCliente().toUpperCase();
-        holder.txt_letra.setText((Letra.toString().substring(0,1)));
         holder.txt_email.setText(listaClienteModel.getNumeroCliente()+"");
 
     }
@@ -57,14 +54,13 @@ public class ClienteRecyclerAdapter extends RecyclerView.Adapter<ClienteRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView txt_nome, txt_email, txt_letra;
+        private TextView txt_nome, txt_email;
         public ImageView ligarFornecedor;
 
         public ViewHolder(View itemView) {
             super(itemView);
             txt_nome = (TextView) itemView.findViewById(R.id.nomeCliente);
             txt_email = (TextView) itemView.findViewById(R.id.numeroCliente);
-            txt_letra = (TextView) itemView.findViewById(R.id.letraCliente);
             ligarFornecedor = (ImageView) itemView.findViewById(R.id.ligarCliente);
         }
     }

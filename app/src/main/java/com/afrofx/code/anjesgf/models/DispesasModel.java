@@ -23,7 +23,7 @@ public class DispesasModel {
         this.data_pagamento = data_pagamento;
     }
 
-    public DispesasModel(int id_dispesa, int tipo_operacao, double custo_dispesa, String descricao_dispesa, String categoria_dispesa, String data_pagamento, String conta_dispesa) {
+    public DispesasModel(int id_dispesa, int tipo_operacao, double custo_dispesa, String descricao_dispesa, String categoria_dispesa, String data_pagamento, String conta_dispesa, int id_registo_operacao) {
         this.id_dispesa = id_dispesa;
         this.conta_dispesa = conta_dispesa;
         this.tipo_operacao = tipo_operacao;
@@ -31,6 +31,7 @@ public class DispesasModel {
         this.descricao_dispesa = descricao_dispesa;
         this.categoria_dispesa = categoria_dispesa;
         this.data_pagamento = data_pagamento;
+        this.id_registo_operacao = id_registo_operacao;
     }
 
     public int getTipo_operacao() {

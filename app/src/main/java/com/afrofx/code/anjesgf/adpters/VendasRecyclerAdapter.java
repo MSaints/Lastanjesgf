@@ -41,7 +41,7 @@ public class VendasRecyclerAdapter extends RecyclerView.Adapter<VendasRecyclerAd
     @Override
     public void onBindViewHolder(VendasRecyclerAdapter.ViewHolder holder, int position) {
         final VendasModel listaVendasModel = vendasModelList.get(position);
-        String nome = listaVendasModel.getNome();
+        String nome = listaVendasModel.getNomeProduto();
         double quantidade = listaVendasModel.getVenda_quantidade();
         double preco = listaVendasModel.getVenda_preco();
 

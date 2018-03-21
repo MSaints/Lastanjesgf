@@ -38,11 +38,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="2"
+                    android:inputType="numberDecimal"
                     android:background="@drawable/edit_style"
                     android:hint="Quantidade" />
 
                 <Button
-
                     android:id="@+id/aumentarQuantidade"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
@@ -90,7 +90,7 @@
                 android:textColor="@color/white" />
 
             <Button
-
+                android:id="@+id/concluirVenda"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="5dp"

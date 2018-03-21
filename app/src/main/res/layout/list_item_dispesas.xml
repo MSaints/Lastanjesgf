@@ -7,13 +7,13 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/despaesasCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <ImageView
                 android:id="@+id/icon_dispesa_categoria"
@@ -24,7 +24,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
-                app:srcCompat="@drawable/ic_first_aid_kit" />
+                app:srcCompat="@drawable/ic_revenue" />
 
             <ImageView
                 android:id="@+id/icon_despesa_estado"

@@ -166,7 +166,7 @@ public class AddProdutosFragment extends Fragment {
 
                     db = new DatabaseHelper(getContext());
 
-                    final List<String> lables = db.listContas();
+                    final List<String> lables = db.listContas2();
 
                     ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, lables);
 

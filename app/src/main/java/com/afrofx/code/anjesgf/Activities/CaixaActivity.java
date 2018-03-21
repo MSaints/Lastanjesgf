@@ -14,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.DatabaseHelper;
@@ -98,15 +100,17 @@ public class CaixaActivity extends AppCompatActivity {
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(quantiView);
 
-        final EditText add_conta = (EditText) quantiView.findViewById(R.id.caixa_add_conta);
+        final Spinner add_conta = (Spinner) quantiView.findViewById(R.id.caixa_add_conta);
+        List<String> lables = db.listContas();
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lables);
+        add_conta.setAdapter(dataAdapter);
+
 
         // set dialog message
         alertDialogBuilder.setCancelable(true).setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                String nomeConta = add_conta.getText().toString();
-                ContaModel clienteModel = new ContaModel(nomeConta);
-                db.registarConta(clienteModel);
-                addValor(nomeConta);
+                String con = add_conta.getSelectedItem().toString();
+                addValor(con);
             }
         });
 
@@ -145,23 +149,10 @@ public class CaixaActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.add_caixa_menu, menu);
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.but_vender) {
-            Toast.makeText(getApplication(), "Caixa", Toast.LENGTH_LONG).show();
-            return true;
-        } else if (id == android.R.id.home) {
+         if (id == android.R.id.home) {
             startActivity(new Intent(CaixaActivity.this, MainScreenActivity.class));
             finish();
             return true;

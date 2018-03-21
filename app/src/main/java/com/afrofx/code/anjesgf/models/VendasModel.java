@@ -7,36 +7,33 @@ package com.afrofx.code.anjesgf.models;
 public class VendasModel {
     private int id_venda, id_produto, id_registo_venda;
     private double venda_quantidade, venda_preco;
-    private String nome;
+    private String nomeProduto;
 
-    public VendasModel(double venda_quantidade, double venda_preco, String nome) {
+    public VendasModel(int id_produto, int id_registo_venda, double venda_quantidade, double venda_preco) {
+        this.id_produto = id_produto;
+        this.id_registo_venda = id_registo_venda;
         this.venda_quantidade = venda_quantidade;
         this.venda_preco = venda_preco;
-        this.nome = nome;
     }
 
-    public double getVenda_quantidade() {
-        return venda_quantidade;
-    }
-
-    public void setVenda_quantidade(double venda_quantidade) {
+    public VendasModel(int id_produto, double venda_quantidade, double venda_preco) {
+        this.id_produto = id_produto;
         this.venda_quantidade = venda_quantidade;
-    }
-
-    public double getVenda_preco() {
-        return venda_preco;
-    }
-
-    public void setVenda_preco(double venda_preco) {
         this.venda_preco = venda_preco;
     }
 
-    public String getNome() {
-        return nome;
+    public VendasModel(double venda_quantidade, double venda_preco, String nomeProduto) {
+        this.venda_quantidade = venda_quantidade;
+        this.venda_preco = venda_preco;
+        this.nomeProduto = nomeProduto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 
     public int getId_venda() {
@@ -63,4 +60,19 @@ public class VendasModel {
         this.id_registo_venda = id_registo_venda;
     }
 
+    public double getVenda_quantidade() {
+        return venda_quantidade;
+    }
+
+    public void setVenda_quantidade(double venda_quantidade) {
+        this.venda_quantidade = venda_quantidade;
+    }
+
+    public double getVenda_preco() {
+        return venda_preco;
+    }
+
+    public void setVenda_preco(double venda_preco) {
+        this.venda_preco = venda_preco;
+    }
 }

@@ -7,24 +7,21 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Origem"
-        android:textStyle="bold"
-        android:padding="10dp"
+        android:layout_gravity="center"
         android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="Nome Conta"
         android:textColor="@color/txt_white"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
-    <EditText
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="10dp"
+    <Spinner
         android:id="@+id/caixa_add_conta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Conta"
-        android:background="@drawable/edit_style">
-    </EditText>
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"></Spinner>
 
 </LinearLayout>

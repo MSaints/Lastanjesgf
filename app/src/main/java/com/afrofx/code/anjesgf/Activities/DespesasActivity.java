@@ -33,7 +33,7 @@ import java.util.List;
 public class DespesasActivity extends AppCompatActivity {
 
 
-
+    private Toolbar toolbar;
     private ViewPager viewPager;
     private PageAdapters pageAdapters;
     private TabLayout tab1;
@@ -42,6 +42,7 @@ public class DespesasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.topbar_despesas_screen);
+
 
         tab1 = (TabLayout) findViewById(R.id.tabLayout2);
         viewPager = (ViewPager) findViewById(R.id.pageViewer2);

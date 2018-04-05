@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.afrofx.code.anjesgf.Activities.MaisVendidosActivity"
+    tools:showIn="@layout/activity_mais_vendidos">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:weightSum="100"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/txt_black"
+                android:layout_weight="30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome Produto"/>
+
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/txt_black"
+                android:layout_weight="70"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quantidade"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewMaisVendida"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>

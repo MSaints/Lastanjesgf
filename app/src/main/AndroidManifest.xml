@@ -5,10 +5,9 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <permission
-        android:name="android.permission.CALL_PRIVILEGED"
-        android:protectionLevel="signature|privileged" />
+    <permission android:name="android.permission.CALL_PRIVILEGED" />
 
     <application
         android:allowBackup="true"
@@ -49,12 +48,7 @@
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.ReportClientes1Activity" />
-        <activity android:name=".Activities.ReportPodutosEmStockActivity" />
-        <activity
-            android:name=".Activities.AdicionarDispesaActivity"
-            android:label="@string/title_activity_adicionar_dispesa"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".Activities.DefinicoesActivity" />
+        <activity android:name=".Activities.ReportProdutosEmStockActivity" />
         <activity
             android:name=".Activities.MensagensActivity"
             android:label="@string/title_activity_mensagens"
@@ -66,6 +60,21 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Activities.MinhaBancaActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activities.DefinitionsActivity"
+            android:label="@string/title_activity_definitions"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activities.MaisVendidosActivity"
+            android:label="@string/title_activity_mais_vendidos"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Activities.RelatoriosGeradosActivity"
+            android:label="@string/title_activity_relatorios_gerados"/>
+        <activity
+            android:name=".Activities.VisualizadorPDFActivity"
+            android:label="@string/title_activity_visualizador_pdf"
             android:theme="@style/AppTheme"></activity>
     </application>
 

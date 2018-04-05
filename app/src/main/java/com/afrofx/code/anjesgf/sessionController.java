@@ -30,4 +30,13 @@ public class sessionController {
         return prefs.getBoolean("loggedInmode", false);
     }
 
+    public void setIva(boolean iva){
+        editor.putBoolean("activar_iva", iva);
+        editor.commit();
+    }
+
+    public boolean isIva(){
+        return prefs.getBoolean("activar_iva", false);
+    }
+
 }

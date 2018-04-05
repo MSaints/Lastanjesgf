@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.DatabaseHelper;
@@ -26,6 +27,10 @@ import com.afrofx.code.anjesgf.models.ContaModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static java.lang.String.format;
 
 /**
  * Created by Afro FX on 2/7/2018.
@@ -41,6 +46,7 @@ public class CaixaActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
+    private double saldoCaixa;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +75,8 @@ public class CaixaActivity extends AppCompatActivity {
 
         Cursor cursor = db.listOperacoes();
 
+        TextView sal = (TextView)findViewById(R.id.saldoCaixa);
+
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "Nao Contas", Toast.LENGTH_LONG).show();
         } else {
@@ -77,11 +85,19 @@ public class CaixaActivity extends AppCompatActivity {
                     int id_conta = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_conta")));
                     double cont_saldo = Double.parseDouble(cursor.getString(2));
                     String nome_conta= cursor.getString(1);
-                    ContaModel dadosConta = new ContaModel(nome_conta, cont_saldo, id_conta);
-                    listaConta.add(dadosConta);
+                    if(nome_conta.equals("Caixa")){
+                        saldoCaixa = cont_saldo;
+                    }else{
+                        ContaModel dadosConta = new ContaModel(nome_conta, cont_saldo, id_conta);
+                        listaConta.add(dadosConta);
+                    }
+
                 }
             }
         }
+        String yourFormattedString = format("%,.2f",saldoCaixa);
+
+        sal.setText(yourFormattedString);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycleViewConta);
         recyclerView.setHasFixedSize(true);
@@ -111,6 +127,8 @@ public class CaixaActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 String con = add_conta.getSelectedItem().toString();
                 addValor(con);
+
+
             }
         });
 
@@ -139,6 +157,20 @@ public class CaixaActivity extends AppCompatActivity {
                 int idOperacao  = 1;
                 ContaModel clienteModel = new ContaModel(saldoInicial, idConta, idOperacao);
                 db.registarValor(clienteModel);
+
+                new SweetAlertDialog(CaixaActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Conta Registada")
+                        .setConfirmText("OK")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                finish();
+                                startActivity(new Intent(CaixaActivity.this, CaixaActivity.class));
+                                sDialog.dismiss();
+                                sDialog.setCancelable(false);
+                            }
+                        })
+                        .show();
             }
         });
 

@@ -3,6 +3,8 @@ package com.afrofx.code.anjesgf.adpters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -25,7 +27,15 @@ import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.models.DispesasModel;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -98,7 +108,21 @@ public class DispesasRecyclerAdapter extends RecyclerView.Adapter<DispesasRecycl
 
 
         holder.conta_dispesa.setText(listaDispesas.getConta_dispesa());
-        holder.data_dispesa.setText(listaDispesas.getData_pagamento());
+
+
+        String startDateString = listaDispesas.getData_pagamento();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date startDate;
+        try {
+            startDate = df.parse(startDateString);
+            String newDateString = df.format(startDate);
+
+            holder.data_dispesa.setText(newDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         holder.descricao_dispesa.setText(listaDispesas.getDescricao_dispesa());
 
         holder.despesasCard.setOnClickListener(new View.OnClickListener() {
@@ -134,9 +158,6 @@ public class DispesasRecyclerAdapter extends RecyclerView.Adapter<DispesasRecycl
                                     cont.setAdapter(adapter2);
 
                                     final double[] saldo = {0};
-                                    ;
-                                    final int id_con = db.idConta(cont.getSelectedItem().toString());
-                                    final int sso = listaDispesas.getId_registo_operacao();
 
                                     cont.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                         @Override
@@ -144,7 +165,7 @@ public class DispesasRecyclerAdapter extends RecyclerView.Adapter<DispesasRecycl
                                             String label = parent.getItemAtPosition(position).toString();
                                             saldo[0] = db.SaldoTotal(label);
                                             final String sla = format("%,.2f", saldo[0]);
-                                            Saldocont.setText(sla+" MT");
+                                            Saldocont.setText(sla + " MT");
                                         }
 
                                         @Override
@@ -157,8 +178,12 @@ public class DispesasRecyclerAdapter extends RecyclerView.Adapter<DispesasRecycl
                                     // set dialog message
                                     alert3.setCancelable(false).setPositiveButton("Pagar", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
+
+                                            final int id_con = db.idConta(cont.getSelectedItem().toString());
+                                            final int sso = listaDispesas.getId_registo_operacao();
+
                                             if (saldo[0] >= listaDispesas.getCusto_dispesa()) {
-                                                if (!db.pagaRendi(id_con, 1, sso)) {
+                                                if (!db.pagaRendi(id_con, 0, sso)) {
                                                     new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
                                                             .setTitleText("Erro Tecnico!")
                                                             .setConfirmText("OK")

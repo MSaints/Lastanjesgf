@@ -6,36 +6,46 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/txt_perfil"
-            android:icon="@drawable/ic_perfil"
+            android:id="@+id/drawerBanca"
+            android:icon="@drawable/ic_shop"
             android:title="@string/drawer_perfil" />
 
         <item
-            android:id="@+id/txt_mensagens"
-            android:icon="@drawable/ic_mensagem"
-            android:title="@string/drawer_mensagens" />
+            android:id="@+id/drawerMensagens"
+            android:icon="@drawable/ic_chat"
+            android:title="@string/drawer_mensagens"/>
 
         <item
-            android:id="@+id/txt_definicoes"
-            android:icon="@drawable/ic_perfil"
+        android:id="@+id/drawerRelatorio"
+        android:icon="@drawable/ic_server"
+        android:title="@string/drawer_relatorio" />
+
+    </group>
+
+    <group android:id="@+id/group2" android:checkableBehavior="none">
+
+
+        <item
+            android:id="@+id/drawerDefinicoes"
+            android:icon="@drawable/ic_settings"
             android:title="@string/drawer_definicoes" />
 
         <item
-            android:id="@+id/txt_acerca"
-            android:title="Acerca"
-            android:icon="@drawable/ic_assignment"/>
+            android:id="@+id/drawerAcerca"
+            android:title="@string/drawer_acerca"
+            android:icon="@drawable/ic_medical"/>
 
         <item
-            android:id="@+id/txt_ajuda"
+            android:id="@+id/drawerAjuda"
             android:title="@string/bottom_ajuda"
-            android:icon="@drawable/ic_help"/>
-
+            android:icon="@drawable/ic_ajuda"/>
 
         <item
-            android:id="@+id/txt_sair"
-            android:icon="@drawable/ic_sair"
+            android:id="@+id/drawerSair"
+            android:icon="@drawable/ic_logout"
             android:title="@string/drawer_sair" />
     </group>
+
 
 
 

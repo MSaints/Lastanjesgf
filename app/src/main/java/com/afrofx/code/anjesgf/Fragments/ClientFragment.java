@@ -91,13 +91,11 @@ public class ClientFragment extends Fragment {
                 View forneView = li.inflate(R.layout.add_cliente, null);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
-                // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(forneView);
 
                 final EditText nomeCliente = (EditText) forneView.findViewById(R.id.add_cliente_nome);
                 final EditText numeroCliente = (EditText) forneView.findViewById(R.id.add_cliente_numero);
 
-                // set dialog message
                 alertDialogBuilder.setCancelable(false).setPositiveButton("Registar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String nomef = nomeCliente.getText().toString();
@@ -106,7 +104,7 @@ public class ClientFragment extends Fragment {
                         ClienteModel clienteModel = new ClienteModel(nomef, numerof);
                         db.registarCliente(clienteModel);
                         new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
-                                .setTitleText("Sessão Terminada!")
+                                .setTitleText("Cliente Registado")
                                 .setConfirmText("OK")
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
@@ -123,17 +121,10 @@ public class ClientFragment extends Fragment {
                         dialog.cancel();
                     }
                 });
-
-                // Criar O Alerta
                 AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // Mostra o alerta
                 alertDialog.show();
-
             }
         });
-
-
         return v;
     }
 

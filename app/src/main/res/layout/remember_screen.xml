@@ -29,7 +29,6 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/edit_recuperar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -39,7 +38,6 @@
         android:inputType="textEmailAddress" />
 
     <Button
-        android:id="@+id/but_enviar_recuperar"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/but_size"
         android:layout_gravity="center"

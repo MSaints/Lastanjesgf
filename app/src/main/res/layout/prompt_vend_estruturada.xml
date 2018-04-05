@@ -9,49 +9,83 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:padding="10dp"
-        android:text="Efectuar uma venda"
+        android:text="Forma de Pagamento"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18dp"
         android:textStyle="bold" />
 
+
     <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:orientation="vertical">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
+        <RadioGroup
+            android:id="@+id/tipoVenda"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <RadioButton
+                android:id="@+id/vendaFacturaPagamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Factura"
+                android:textSize="18dp" />
 
-        <EditText
-            android:singleLine="true"
-            android:id="@+id/vendaDesconto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:background="@drawable/edit_style"
-            android:hint="Desconto"
-            android:inputType="number" />
+            <RadioButton
+                android:id="@+id/vendaProntoPagamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Pronto Pagamento"
+                android:textSize="18dp" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dadosCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <AutoCompleteTextView
-            android:layout_marginTop="10dp"
-            android:singleLine="true"
-            android:id="@+id/vendaCliente"
+            android:id="@+id/vendaClienteNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:layout_weight="3"
             android:background="@drawable/edit_style"
-            android:hint="Cliente"
-            android:inputType="number" />
+            android:hint="Nome Cliente"
+            android:inputType="text"
+            android:singleLine="true" />
 
+        <EditText
+            android:id="@+id/vendaClienteNumero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="3"
+            android:background="@drawable/edit_style"
+            android:hint="Numero"
+            android:inputType="number"
+            android:singleLine="true" />
     </LinearLayout>
 
 
     <LinearLayout
 
-        android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
@@ -71,6 +105,7 @@
             android:textSize="18dp" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -78,6 +113,7 @@
         android:background="@color/colorPrimary" />
 
     <LinearLayout
+        android:id="@+id/dadosConta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -95,7 +131,7 @@
             android:id="@+id/venderConta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
     </LinearLayout>
 

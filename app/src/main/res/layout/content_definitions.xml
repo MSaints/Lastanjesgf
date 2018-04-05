@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.afrofx.code.anjesgf.Activities.DefinitionsActivity"
+    tools:showIn="@layout/activity_definitions">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/definitonsInfo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:tint="@color/gray_btn_bg_pressed_color"
+            app:srcCompat="@drawable/ic_help_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="Receber Notificações"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/definitionSwitch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/definitonsInfo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:tint="@color/gray_btn_bg_pressed_color"
+            app:srcCompat="@drawable/ic_help_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="Cobrança do IVA"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/definitionSwitch2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/definitonsInfo3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:tint="@color/gray_btn_bg_pressed_color"
+            app:srcCompat="@drawable/ic_help_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="Recibo ou Factura por SMS"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/definitionSwitch3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/definitonsInfo4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:tint="@color/gray_btn_bg_pressed_color"
+            app:srcCompat="@drawable/ic_help_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="Controlo de Segurança"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/definitionSwitch4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/definitonsInfo5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:tint="@color/gray_btn_bg_pressed_color"
+            app:srcCompat="@drawable/ic_help_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="Limite de Vendas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/definitionSwitch5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/definitionsRepor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:text="Repor os Valores de Origem"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="16sp" />
+
+</LinearLayout>

@@ -74,7 +74,7 @@ public class ListaProdutosFragment extends Fragment implements SearchView.OnQuer
             }
         }
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycleViewListaProdutos);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(true);
         productRecyclerAdpter = new ProductRecyclerAdpter(getContext(), lstlist);
@@ -123,7 +123,7 @@ public class ListaProdutosFragment extends Fragment implements SearchView.OnQuer
                 lista.remove(value);
             }
         }
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycleViewListaProdutos);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(true);
         productRecyclerAdpter = new ProductRecyclerAdpter(getContext(), lista);
@@ -135,7 +135,7 @@ public class ListaProdutosFragment extends Fragment implements SearchView.OnQuer
     }
 
     public void resetSearch() {
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycleView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recycleViewListaProdutos);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(true);
         productRecyclerAdpter = new ProductRecyclerAdpter(getContext(), lstlist);

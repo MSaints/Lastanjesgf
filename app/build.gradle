@@ -34,4 +34,6 @@ dependencies {
     implementation 'com.android.support:support-vector-drawable:27.0.2'
     compile 'com.itextpdf:itextpdf:5.5.11'
     compile 'com.github.f0ris.sweetalert:library:1.5.2'
+    compile 'com.github.barteksc:android-pdf-viewer:2.0.3'
+
 }

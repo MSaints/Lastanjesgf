@@ -320,17 +320,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Caixa')");
         db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('M-PESA')");
         db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('M-KESH')");
-        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Ponto 24')");
         db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Moza Banco')");
         db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('MIllenium BIM')");
 
 
         /*================Categorias de Despesas=============================*/
         db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('CREDELEC')");
-        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('AGUA')");
         db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('TRANSPORTE')");
         db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('ALIMENTOS')");
-        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('ESCOLA')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('SALARIOS')");
+        db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('AGUA')");
         db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('RENDA')");
         db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('SAUDE')");
         db.execSQL("INSERT INTO " + DESPESAS_CATEGORIA_TABLE + "(" + CD_COL_2 + ") VALUES('OUTRA')");
@@ -483,7 +482,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /*    =============Lista Todos Os Produtos====================*/
     public Cursor listProdutoRelatorio(String d1, String d2) {
-        String sqlQuery = "SELECT * FROM " + PRODUTO_TABLE + " WHERE " + PR_COL_10 +
+        String sqlQuery = "SELECT * FROM "+PRODUTO_CATEGORIA_TABLE+" NATURAL JOIN "+ PRODUTO_TABLE + " WHERE " + PR_COL_10 +
                 " BETWEEN '" + d1 + " 00:00:00 '" + " AND '" + d2 + " 24:00:00 '";
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1071,6 +1070,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id_registo_venda;
     }
 
+
+    /*    =============Tras o ultimo ID do registo de venda====================*/
+    public int idCliente() {
+        String query = "SELECT " + CL_COL_1 + " FROM " + CLIENTE_TABLE + " order by " + CL_COL_1 + " DESC limit 1";
+
+        int id_cliente = 0;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(query, null);
+
+        cursor.moveToFirst();
+
+        if (cursor.getCount() > 0) {
+            id_cliente = cursor.getInt(0);
+        }
+
+        return id_cliente;
+    }
+
     /*    =============Regista Rendimentos====================*/
     public void registoRendimento(RedimentosModel redimentosModel) {
         ContentValues contentValues = new ContentValues();
@@ -1190,18 +1209,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor listaVendas() {
         String sqlQuery = "SELECT * FROM " + PRODUTO_TABLE + " INNER JOIN " + VENDA_TABLE + " INNER JOIN " +
-                REGISTO_VENDA_TABLE + " WHERE " + PRODUTO_TABLE+"."+PR_COL_1 + " == " + VENDA_TABLE+"."+VE_COL_2 +
-                " AND " + VENDA_TABLE+"."+VE_COL_3 + " == " + REGISTO_VENDA_TABLE+"."+RV_COL_1;
+                REGISTO_VENDA_TABLE + " WHERE " + PRODUTO_TABLE + "." + PR_COL_1 + " == " + VENDA_TABLE + "." + VE_COL_2 +
+                " AND " + VENDA_TABLE + "." + VE_COL_3 + " == " + REGISTO_VENDA_TABLE + "." + RV_COL_1 + " ORDER BY " + VE_COL_1 + " DESC";
 
         SQLiteDatabase db = this.getReadableDatabase();
+        cursor = db.rawQuery(sqlQuery, null);
 
+        return cursor;
+    }
+
+    public Cursor listaMaisVendidos() {
+        String sqlQuery = "SELECT " + PR_COL_5 + "," + PC_COL_2 + ",sum(" + VENDA_TABLE + "." + VE_COL_4 + ") FROM " + PRODUTO_CATEGORIA_TABLE + " INNER JOIN " +
+                PRODUTO_TABLE + " INNER JOIN " + VENDA_TABLE + " INNER JOIN " + REGISTO_VENDA_TABLE + " WHERE " +
+                PRODUTO_TABLE + "." + PR_COL_2 + " == " + PRODUTO_CATEGORIA_TABLE + "." + PC_COL_1 + " AND " +
+                PRODUTO_TABLE + "." + PR_COL_1 + " == " + VENDA_TABLE + "." + VE_COL_2 + " AND " +
+                VENDA_TABLE + "." + VE_COL_3 + " == " + REGISTO_VENDA_TABLE + "." + RV_COL_1 + " GROUP BY " +
+                PR_COL_5 + " ORDER BY SUM(" + VENDA_TABLE + "." + VE_COL_4 + ") DESC";
+
+        SQLiteDatabase db = this.getReadableDatabase();
         cursor = db.rawQuery(sqlQuery, null);
 
         return cursor;
     }
 
 
-    public void registaEmpresa(CompanyModel companyModel){
+    public void registaEmpresa(CompanyModel companyModel) {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(EI_COL_2, companyModel.getId_user());
@@ -1220,7 +1252,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor empresaDetalhes() {
-        String sqlQuery = "SELECT * FROM " + EMPRESA_TABLE ;
+        String sqlQuery = "SELECT * FROM " + EMPRESA_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
 

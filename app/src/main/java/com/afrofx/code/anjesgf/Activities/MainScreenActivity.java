@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -48,6 +49,8 @@ import com.afrofx.code.anjesgf.sessionController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -60,11 +63,7 @@ public class MainScreenActivity extends AppCompatActivity
 
     private ProdutoAdapter produtoAdapter;
 
-    UserModel userModel = new UserModel();
-
     private BottomNavigationView bottomBar;
-
-    private FrameLayout mainFrameLayout;
 
     private DatabaseHelper db;
 
@@ -87,6 +86,30 @@ public class MainScreenActivity extends AppCompatActivity
         }
 
 
+//        int count = 100; //Declare as inatance variable
+//
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//
+//            @Override
+//            public void run() {
+//                runOnUiThread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        displayData();
+//                        Handler handler = new Handler();
+//                        handler.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                            }
+//                        }, 15000);
+//
+//                    }
+//                });
+//            }15000
+//        }, 0, 3000);
+
         homeFragment = new HomeFragment();
         notificationsFragment = new NotificationsFragment();
         relatorioFragment = new RelatorioFragment();
@@ -96,7 +119,7 @@ public class MainScreenActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         bottomBar = (BottomNavigationView) findViewById(R.id.bottonNavBar);
-        mainFrameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+        FrameLayout mainFrameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         BottomNavHelper.disableShiftMode(bottomBar);
 
 
@@ -144,6 +167,23 @@ public class MainScreenActivity extends AppCompatActivity
 
     }
 
+    public void displayData() {
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View v = layoutInflater.inflate(R.layout.prompt_lock_screen, null);
+        AlertDialog.Builder aBuilder = new AlertDialog.Builder(this);
+        aBuilder.setView(v);
+
+        aBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+
+            }
+        });
+
+        AlertDialog alertDialog = aBuilder.create();
+        alertDialog.show();
+    }
+
     private void setFragment(android.support.v4.app.Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fragment);
@@ -186,16 +226,24 @@ public class MainScreenActivity extends AppCompatActivity
         /*Elementos do Navegation Drawer, icons e suas funcionalidades*/
         int id = item.getItemId();
 
-        if (id == R.id.txt_perfil) {
+        if (id == R.id.drawerBanca) {
             startActivity(new Intent(this, MinhaBancaActivity.class));
             finish();
-        } else if (id == R.id.txt_mensagens) {
+        } else if (id == R.id.drawerMensagens) {
             startActivity(new Intent(this, MensagensActivity.class));
             finish();
-        } else if (id == R.id.txt_sair) {
+        } else if (id == R.id.drawerSair) {
             logout();
-        } else if (id == R.id.txt_definicoes) {
-            startActivity(new Intent(this, DefinicoesActivity.class));
+        } else if (id == R.id.drawerRelatorio) {
+            startActivity(new Intent(this, RelatoriosGeradosActivity.class));
+            finish();
+        } else if (id == R.id.drawerAcerca) {
+            startActivity(new Intent(this, DefinitionsActivity.class));
+            finish();
+        } else if (id == R.id.drawerAjuda) {
+
+        } else if (id == R.id.drawerDefinicoes) {
+            startActivity(new Intent(this, DefinitionsActivity.class));
             finish();
         }
 
@@ -214,7 +262,7 @@ public class MainScreenActivity extends AppCompatActivity
                 .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
-                       sDialog.dismiss();
+                        sDialog.dismiss();
                     }
                 })
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {

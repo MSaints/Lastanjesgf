@@ -201,7 +201,6 @@ public class RendimentosRecyclerAdapter extends RecyclerView.Adapter<Rendimentos
                                                         context.startActivity(new Intent(context, DespesasActivity.class));
                                                         sDialog.dismiss();
                                                         sDialog.setCancelable(false);
-                                                        notifyDataSetChanged();
                                                     }
                                                 })
                                                 .show();

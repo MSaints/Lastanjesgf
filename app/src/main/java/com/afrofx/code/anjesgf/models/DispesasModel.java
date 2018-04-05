@@ -6,15 +6,10 @@ package com.afrofx.code.anjesgf.models;
 
 public class DispesasModel {
 
-    private int id_dispesa, estado_dispesa, id_conta, id_categoria, id_registo_operacao,tipo_operacao;
+    private int id_dispesa, estado_dispesa, id_conta, id_categoria, id_registo_operacao, tipo_operacao;
     private double custo_dispesa;
     private String nome_dispesa, descricao_dispesa, categoria_dispesa, data_registo, data_pagamento, conta_dispesa;
 
-    public DispesasModel(int id_conta, int tipo_operacao, double custo_dispesa) {
-        this.id_conta = id_conta;
-        this.tipo_operacao = tipo_operacao;
-        this.custo_dispesa = custo_dispesa;
-    }
 
     public DispesasModel(int id_categoria, int id_registo_operacao, String descricao_dispesa, String data_pagamento) {
         this.id_categoria = id_categoria;
@@ -49,7 +44,6 @@ public class DispesasModel {
     public void setId_registo_operacao(int id_registo_operacao) {
         this.id_registo_operacao = id_registo_operacao;
     }
-
 
 
     public DispesasModel() {

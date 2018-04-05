@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,12 +27,16 @@ import com.afrofx.code.anjesgf.models.FornecedorModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class FornecedorFragment extends Fragment {
 
 
     View v;
 
     private FloatingActionButton add_fornecedor;
+
+    private FornecedorFragment fornecedorFragment;
 
     private List<FornecedorModel> fornecedorList;
 
@@ -85,22 +90,34 @@ public class FornecedorFragment extends Fragment {
 
                         FornecedorModel fornecedorModel = new FornecedorModel(nomef, tipof, emailf, numerof);
                         db.registarFornecedor(fornecedorModel);
-                        mensagem("Produto Adicionado");
+                        new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Fornecedor Registado")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        ViewPager viewPager;
+                                        PageAdapters pageAdapters;
+                                        viewPager = getActivity().findViewById(R.id.pageViewer);
 
-                        ViewPager viewPager;
-                        PageAdapters pageAdapters;
-                        TabLayout tab1 = getActivity().findViewById(R.id.tabLayout);
-                        viewPager = getActivity().findViewById(R.id.pageViewer);
+                                        pageAdapters = new PageAdapters(getActivity().getSupportFragmentManager());
 
-                        pageAdapters = new PageAdapters(getActivity().getSupportFragmentManager());
+                                        pageAdapters.AddFragment(new ListaProdutosFragment(), "Produtos");
+                                        pageAdapters.AddFragment(new AddProdutosFragment(), "Registar");
+                                        pageAdapters.AddFragment(new FornecedorFragment(), "Fornecedor");
 
-                        pageAdapters.AddFragment(new ListaProdutosFragment(), "Estoque");
-                        pageAdapters.AddFragment(new AddProdutosFragment(), "Registar");
-                        pageAdapters.AddFragment(new FornecedorFragment(), "Fornecedor");
+                                        viewPager.setAdapter(pageAdapters);
 
-                        viewPager.setAdapter(pageAdapters);
+                                        viewPager.setCurrentItem(2);
 
-                        tab1.setupWithViewPager(viewPager);
+                                        sDialog.dismiss();
+                                        sDialog.setCancelable(false);
+                                    }
+                                })
+                                .show();
+
+
+
 
                     }
                 }).setNegativeButton("Fechar", new DialogInterface.OnClickListener() {
@@ -131,7 +148,6 @@ public class FornecedorFragment extends Fragment {
         Cursor cursor = db.listFornecedor();
 
         if (cursor.getCount() == 0) {
-            Toast.makeText(getActivity(), "Nao Existem Produtos", Toast.LENGTH_LONG).show();
         } else {
             while (cursor.moveToNext()) {
                 int id_forn = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_fornecedor")));
@@ -146,10 +162,4 @@ public class FornecedorFragment extends Fragment {
             }
         }
     }
-
-    private void mensagem(String msg) {
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
-    }
-
-
 }

@@ -1,11 +1,15 @@
 package com.afrofx.code.anjesgf.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +53,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         edit_number = (EditText) findViewById(R.id.edit_login_number);
         edit_pin = (EditText) findViewById(R.id.edit_login_pin);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                displayData();
+            }
+        }, 5000);
+    }
+
+    public void displayData(){
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View v = layoutInflater.inflate(R.layout.prompt_lock_screen, null);
+        AlertDialog.Builder aBuilder = new AlertDialog.Builder(this);
+        aBuilder.setView(v);
+
+        aBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+
+            }
+        });
+
+        AlertDialog alertDialog = aBuilder.create();
+        alertDialog.show();
     }
 
     @Override

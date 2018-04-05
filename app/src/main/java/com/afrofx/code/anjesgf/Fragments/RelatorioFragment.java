@@ -20,14 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.Activities.ReportClientes1Activity;
-import com.afrofx.code.anjesgf.Activities.ReportPodutosEmStockActivity;
+import com.afrofx.code.anjesgf.Activities.ReportProdutosEmStockActivity;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.adpters.ExpandableListAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -81,7 +80,7 @@ public class RelatorioFragment extends Fragment {
                 if (listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition) == "Clientes Registados") {
                     startActivity(new Intent(getContext(), ReportClientes1Activity.class));
                 }if(listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition) == "Produtos em Stock"){
-                    startActivity(new Intent(getContext(), ReportPodutosEmStockActivity.class));
+                    startActivity(new Intent(getContext(), ReportProdutosEmStockActivity.class));
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("dataInicio", dataIni);
@@ -142,27 +141,23 @@ public class RelatorioFragment extends Fragment {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
         /*------------Cabecalhos nas listas-------------------*/
-        listDataHeader.add("Relatorios de Venda");
-        listDataHeader.add("Relatorios de Stock");
+        listDataHeader.add("Relatorio de Vendas");
+        listDataHeader.add("Relatorio de Stock");
         listDataHeader.add("Relatorios Financeiros");
-        listDataHeader.add("Relatorios de Clientes");
-        listDataHeader.add("Relatorios de Usuarios");
+        listDataHeader.add("Relatorio de Clientes");
+        listDataHeader.add("Relatorio de Usuarios");
 
         /* ---------Adicionando sub itens nas listas------------*/
         List<String> relatorioVendas = new ArrayList<String>();
         relatorioVendas.add("Relatorio de Vendas");
-        relatorioVendas.add("Produtos Mais Vendidos");
         relatorioVendas.add("Total de Vendas");
 
         List<String> relatorioStock = new ArrayList<String>();
         relatorioStock.add("Produtos em Stock");
         relatorioStock.add("Produtos e Precos");
-        relatorioStock.add("Produtos e Categorias");
 
         List<String> relatorioFinanceiro = new ArrayList<String>();
         relatorioFinanceiro.add("Fluxo do Caixa");
-        relatorioFinanceiro.add("Contas a Pagar");
-        relatorioFinanceiro.add("Contas a Receber");
         relatorioFinanceiro.add("Saldos das Contas");
 
         List<String> relatorioClientes = new ArrayList<String>();

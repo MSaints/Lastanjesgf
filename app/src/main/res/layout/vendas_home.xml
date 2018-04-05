@@ -9,25 +9,24 @@
         android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
 
         <TextView
-            android:textColor="@color/txt_black"
+            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Escolher Opção"
-            android:textSize="24dp"/>
+            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:text="Escolha uma Opção"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-        <View
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimary"/>
 
         <android.support.v7.widget.CardView
             android:id="@+id/OpcaoVenda1"
+            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -38,21 +37,21 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
-                android:weightSum="2">
+                android:weightSum="100">
 
                 <ImageView
-                    android:layout_width="45dp"
+                    android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_marginTop="2dp"
-                    android:layout_weight="1"
+                    android:layout_weight="70"
                     android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/ic_local" />
+                    app:srcCompat="@drawable/ic_full_shoping_cart" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="30"
                     android:text="Vender Mercadoria"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"/>
@@ -60,7 +59,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/OpcaoVenda2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,33 +67,34 @@
             app:cardCornerRadius="10dp">
 
             <LinearLayout
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
-                android:weightSum="2">
+                android:weightSum="100">
 
                 <ImageView
-                    android:layout_width="45dp"
+                    android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="2dp"
-                    android:layout_weight="1"
+                    android:layout_weight="70"
                     android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/ic_full_shoping_cart" />
+                    app:srcCompat="@drawable/ic_local" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Mercadoria Vendida"
+                    android:layout_weight="30"
+                    android:text="Registo de Vendas"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/OpcaoVenda3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,21 +106,21 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
-                android:weightSum="2">
+                android:weightSum="100">
 
                 <ImageView
-                    android:layout_width="45dp"
+                    android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_marginTop="2dp"
-                    android:layout_weight="1"
+                    android:layout_weight="70"
                     android:tint="@color/colorPrimary"
                     app:srcCompat="@drawable/ic_label" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="30"
                     android:text="Dividas de Clientes"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"/>
@@ -128,7 +128,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/OpcaoVenda4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -136,25 +136,26 @@
             app:cardCornerRadius="10dp">
 
             <LinearLayout
+                android:weightSum="100"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp">
 
                 <ImageView
-                    android:layout_width="45dp"
+                    android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="2dp"
-                    android:layout_weight="1"
+                    android:layout_weight="70"
                     android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/ic_vender" />
+                    app:srcCompat="@drawable/ic_trending_up" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:text="Vender Mercadoria"
+                    android:layout_weight="30"
+                    android:text="Mais Vendidos"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"/>
             </LinearLayout>

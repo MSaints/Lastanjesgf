@@ -52,7 +52,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Dispesas Pendentes"
+                            android:text="Pendentes"
                             android:textSize="10sp" />
 
                     </LinearLayout>
@@ -85,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Dispesas Pagas"
+                            android:text="Pagas"
                             android:textSize="10sp"/>
                     </LinearLayout>
 
@@ -105,13 +105,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewDispesa"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
 
         </LinearLayout>

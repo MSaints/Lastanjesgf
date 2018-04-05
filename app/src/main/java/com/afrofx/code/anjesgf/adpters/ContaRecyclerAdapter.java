@@ -53,26 +53,28 @@ public class ContaRecyclerAdapter extends RecyclerView.Adapter<ContaRecyclerAdap
     public void onBindViewHolder(ContaRecyclerAdapter.ViewHolder holder, int position) {
         final ContaModel lista_Conta = listaConta.get(position);
 
-        if(lista_Conta.getNomeConta().equals("FNB")){
-            holder.contaImg.setImageResource(R.drawable.ic_fnb);
-        }if(lista_Conta.getNomeConta().equals("BCI")){
+        String yourFormattedString = format("%,.2f",lista_Conta.getSaldoConta());
+
+        if(lista_Conta.getNomeConta().equals("BCI")){
             holder.contaImg.setImageResource(R.drawable.ic_bci);
+            holder.conta_valor.setText(yourFormattedString);
         }if(lista_Conta.getNomeConta().equals("M-PESA")){
             holder.contaImg.setImageResource(R.drawable.ic_mpesa);
+            holder.conta_valor.setText(yourFormattedString);
         }if(lista_Conta.getNomeConta().equals("M-KESH")){
             holder.contaImg.setImageResource(R.drawable.ic_mkesh);
+            holder.conta_valor.setText(yourFormattedString);
         }if(lista_Conta.getNomeConta().equals("Moza Banco")){
             holder.contaImg.setImageResource(R.drawable.ic_moza);
+            holder.conta_valor.setText(yourFormattedString);
         }if(lista_Conta.getNomeConta().equals("Standard Bank")){
             holder.contaImg.setImageResource(R.drawable.ic_standard);
+            holder.conta_valor.setText(yourFormattedString);
         }if(lista_Conta.getNomeConta().equals("MIllenium BIM")){
             holder.contaImg.setImageResource(R.drawable.ic_mbim);
-        }if(lista_Conta.getNomeConta().equals("Caixa")){
-            holder.contaImg.setImageResource(R.drawable.ic_caixa);
+            holder.conta_valor.setText(yourFormattedString);
         }
 
-        String yourFormattedString = format("%,.2f",lista_Conta.getSaldoConta());
-        holder.conta_valor.setText(yourFormattedString);
     }
 
 

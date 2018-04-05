@@ -208,8 +208,6 @@ public class AddProdutosFragment extends Fragment {
 
                                 db.inserirProduto(stockModel[0]);
 
-                                mensagem("Produto Adicionado");
-
                                 ViewPager viewPager;
                                 PageAdapters pageAdapters;
                                 TabLayout tab1 = getActivity().findViewById(R.id.tabLayout);

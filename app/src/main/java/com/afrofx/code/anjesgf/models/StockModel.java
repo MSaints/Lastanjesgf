@@ -20,6 +20,19 @@ public class StockModel {
         this.id_registo_operacao = id_registo_operacao;
     }
 
+    public StockModel(double produto_quantidade, double produto_preco_venda, String produto_nome, String categoria) {
+        this.produto_quantidade = produto_quantidade;
+        this.produto_preco_venda = produto_preco_venda;
+        this.produto_nome = produto_nome;
+        this.categoria = categoria;
+    }
+
+    public StockModel(double produto_quantidade, String produto_nome, String categoria) {
+        this.produto_quantidade = produto_quantidade;
+        this.produto_nome = produto_nome;
+        this.categoria = categoria;
+    }
+
     public StockModel(double produto_quantidade, double produto_preco_venda, String produto_nome, String produto_data_registo, int id_produto) {
         this.produto_quantidade = produto_quantidade;
         this.id_produto = id_produto;

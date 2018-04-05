@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fileMenu1"
+        android:title="Partilhar"
+        android:icon="@drawable/ic_share"/>
+
+    <item
+        android:id="@+id/fileMenu2"
+        android:title="Imprimir"
+        android:icon="@drawable/ic_printer"/>
+
+</menu>

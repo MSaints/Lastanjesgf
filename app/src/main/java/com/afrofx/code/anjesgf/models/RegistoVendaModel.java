@@ -15,6 +15,13 @@ public class RegistoVendaModel {
         this.venda_estado = venda_estado;
     }
 
+    public RegistoVendaModel(int id_user, int id_registo_operacao, int venda_estado, int id_cliente) {
+        this.id_user = id_user;
+        this.id_registo_operacao = id_registo_operacao;
+        this.venda_estado = venda_estado;
+        this.id_cliente = id_cliente;
+    }
+
     public int getId_user() {
         return id_user;
     }

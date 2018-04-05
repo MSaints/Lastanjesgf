@@ -14,7 +14,11 @@ public class ClienteModel {
         this.numeroCliente = numeroCliente;
     }
 
-
+    public ClienteModel(String nomeCliente, int idCliente, int numeroCliente) {
+        this.nomeCliente = nomeCliente;
+        this.idCliente = idCliente;
+        this.numeroCliente = numeroCliente;
+    }
 
     public ClienteModel(){
 

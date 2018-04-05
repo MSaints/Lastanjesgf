@@ -6,8 +6,68 @@
     android:layout_height="match_parent"
     tools:context="com.afrofx.code.anjesgf.Activities.CaixaActivity">
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/descCaixa"
+        app:cardCornerRadius="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Saldo do Caixa"/>
+
+            <TextView
+                android:id="@+id/saldoCaixa"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="32dp"
+                android:textColor="@color/txt_green"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0.00"/>
+
+            <TextView
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/txt_green"
+                android:textSize="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MZN"/>
+
+            <View
+                android:background="@color/colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <TextView
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Outras Contas"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
 
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/descCaixa"
     android:id="@+id/recycleViewConta"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">

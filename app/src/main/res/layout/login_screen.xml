@@ -64,7 +64,6 @@
                 android:textColor="@color/txt_white" />
 
             <TextView
-                android:id="@+id/txt_recuperar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

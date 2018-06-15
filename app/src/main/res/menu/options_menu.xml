@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Vender..." />
+    <item android:id="@+id/menu1"
+        android:title="Vender..." />
 
     <item
         android:id="@+id/menu2"
-        android:title="Repor..." />
-
-    <item android:title="Editar..." />
+        android:title="Aumentar Stock" />
 
     <item
         android:id="@+id/menu4"
-        android:title="Eliminar..." />
-
-
-
-
+        android:title="Adicionar Quebras" />
 </menu>

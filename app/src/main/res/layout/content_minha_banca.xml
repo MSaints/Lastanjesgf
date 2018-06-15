@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="80dp"
+    android:layout_marginTop="66dp"
     android:orientation="vertical"
-    tools:context="com.afrofx.code.anjesgf.Activities.MinhaBancaActivity">
+    tools:context="com.afrofx.code.anjesgf.Activities.home.MinhaBancaActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -17,13 +17,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="40dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="30dp"
                 android:background="@color/white"
                 android:orientation="vertical">
 
@@ -33,14 +33,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Mouzinho dos Santos"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Aministrador"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/txt_black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/txt_empresa_num_user"
@@ -48,14 +43,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="844145100"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textSize="16sp" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textSize="14sp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/imagePerfil2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/circle"
             android:elevation="3dp"
@@ -70,263 +67,266 @@
         android:layout_marginHorizontal="10dp">
 
         <TextView
+            android:id="@+id/definitionInfoTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="10dp"
             android:text="Informação do Negócio"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
-        <ScrollView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="40dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/butImposto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:background="@drawable/but_style_red"
+                    android:text="Activar Imposto"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="60"
-                        app:srcCompat="@drawable/ic_street_name" />
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="40"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Nome da Banca"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-                        <TextView
-                            android:id="@+id/txt_empresa_nome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Nome da Banca"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="60"
-                        app:srcCompat="@drawable/ic_placeholder" />
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="40"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Endereço"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-                        <TextView
-                            android:id="@+id/txt_empresa_endereco"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rua, Avenida ou Bairro"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="60"
-                        app:srcCompat="@drawable/ic_mail" />
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="40"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Correio Electronico"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-                        <TextView
-                            android:id="@+id/txt_empresa_email"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="hhhh"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="60"
-                        app:srcCompat="@drawable/ic_id_card" />
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="40"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="NUIT"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-                        <TextView
-                            android:id="@+id/txt_empresa_nuit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Identificacao Tributaria"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="60"
-                        app:srcCompat="@drawable/ic_user" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="40"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Proprietario"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-                        <TextView
-                            android:id="@+id/txt_empresa_proprietario"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Nome do Responsavel"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="60"
-                        app:srcCompat="@drawable/ic_phone_book" />
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="40"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Contacto"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-                        <TextView
-                            android:id="@+id/txt_empresa_contacto"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Numero do Responsavel"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:text="Ex: Iva (17%, etc.)"
+                    android:textSize="12dp" />
             </LinearLayout>
 
+            <View
+                android:id="@+id/v1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:background="@color/colorPrimary" />
 
-        </ScrollView>
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="60"
+                            app:srcCompat="@drawable/ic_street_name" />
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="40"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nome da Banca"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                            <TextView
+                                android:id="@+id/txt_empresa_nome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nome da Banca"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="60"
+                            app:srcCompat="@drawable/ic_user" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="40"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Proprietario"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                            <TextView
+                                android:id="@+id/txt_empresa_proprietario"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nome Completo"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="60"
+                            app:srcCompat="@drawable/ic_id_card" />
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="40"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="NUIT"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                            <TextView
+                                android:id="@+id/txt_empresa_nuit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Identificação Tributaria"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="60"
+                            app:srcCompat="@drawable/ic_phone_book" />
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="40"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Contacto"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                            <TextView
+                                android:id="@+id/txt_empresa_contacto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Numero do Cell/Telefone"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="60"
+                            app:srcCompat="@drawable/ic_placeholder" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="40"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Endereço"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                            <TextView
+                                android:id="@+id/txt_empresa_endereco"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rua, Avenida ou Bairro"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
-
-
 </LinearLayout>

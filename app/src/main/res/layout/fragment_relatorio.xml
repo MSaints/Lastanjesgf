@@ -1,87 +1,122 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/bg_grey"
     tools:context="com.afrofx.code.anjesgf.Fragments.RelatorioFragment">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Data de Inicio:"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="@dimen/font16sp" />
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/dataInicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="DE:"
-                    android:textColor="@color/txt_black"
-                    android:textSize="16dp" />
-
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/colorPrimary" />.
-
-                <TextView
-                    android:id="@+id/txtDataDe"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="01-01-2018"
-                    android:textColor="@color/txt_black"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:tint="@color/gray_btn_bg_color"
+                        app:srcCompat="@drawable/ic_date" />
 
-            <LinearLayout
-                android:id="@+id/dataPara"
+                    <TextView
+                        android:id="@+id/data1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="01/10/2018"
+                        android:textColor="@color/txt_black"
+                        android:textSize="@dimen/font16sp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:text="Data Fim:"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="@dimen/font16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="PARA:"
-                    android:textColor="@color/txt_black"
-                    android:textSize="16dp" />
+            <android.support.v7.widget.CardView
+                android:id="@+id/dataFim"
+                android:layout_marginHorizontal="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="10dp">
 
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/colorPrimary" />.
-
-                <TextView
-                    android:id="@+id/txtDataPara"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="31-12-2018"
-                    android:textColor="@color/txt_black"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:layout_marginVertical="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:tint="@color/gray_btn_bg_color"
+                        app:srcCompat="@drawable/ic_date" />
+
+                    <TextView
+                        android:id="@+id/data2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="01/10/2018"
+                        android:textColor="@color/txt_black"
+                        android:textSize="@dimen/font16sp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
     <ExpandableListView
         android:id="@+id/lvExp"

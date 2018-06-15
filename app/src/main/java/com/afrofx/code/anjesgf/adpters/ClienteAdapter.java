@@ -41,11 +41,11 @@ public class ClienteAdapter extends ArrayAdapter<ClienteModel> {
         View view = convertView;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.linha_categoria, parent, false);
+            view = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);
         }
         ClienteModel cmodel = items.get(position);
         if (cmodel != null) {
-            TextView lblName = (TextView) view.findViewById(R.id.lbl_name);
+            TextView lblName = (TextView) view.findViewById(android.R.id.text1);
             if (lblName != null)
                 lblName.setText(cmodel.getNomeCliente());
         }

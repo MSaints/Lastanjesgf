@@ -1,11 +1,15 @@
 package com.afrofx.code.anjesgf.Fragments;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +21,7 @@ import android.widget.Toast;
 
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
-import com.afrofx.code.anjesgf.adpters.ClienteRecyclerAdapter;
+import com.afrofx.code.anjesgf.Recyclers.ClienteRecyclerAdapter;
 import com.afrofx.code.anjesgf.models.ClienteModel;
 
 import java.util.ArrayList;
@@ -37,7 +41,6 @@ public class ClientFragment extends Fragment {
     private DatabaseHelper db;
 
     private ClientFragment clientFragment;
-
 
     public ClientFragment() {
         // Required empty public constructor
@@ -75,7 +78,6 @@ public class ClientFragment extends Fragment {
 
         butAddCliente = (FloatingActionButton) v.findViewById(R.id.add_clienteFragment);
         db = new DatabaseHelper(getActivity());
-
 
         final RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewClients);
         recyclerView.setHasFixedSize(true);
@@ -137,5 +139,6 @@ public class ClientFragment extends Fragment {
     private void mensagem(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
     }
+
 
 }

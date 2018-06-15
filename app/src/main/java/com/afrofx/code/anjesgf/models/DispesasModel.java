@@ -6,19 +6,19 @@ package com.afrofx.code.anjesgf.models;
 
 public class DispesasModel {
 
-    private int id_dispesa, estado_dispesa, id_conta, id_categoria, id_registo_operacao, tipo_operacao;
+    private long id_dispesa, estado_dispesa, id_conta, id_categoria, id_registo_operacao, tipo_operacao;
     private double custo_dispesa;
     private String nome_dispesa, descricao_dispesa, categoria_dispesa, data_registo, data_pagamento, conta_dispesa;
 
 
-    public DispesasModel(int id_categoria, int id_registo_operacao, String descricao_dispesa, String data_pagamento) {
+    public DispesasModel(long id_categoria, long id_registo_operacao, String descricao_dispesa, String data_pagamento) {
         this.id_categoria = id_categoria;
         this.id_registo_operacao = id_registo_operacao;
         this.descricao_dispesa = descricao_dispesa;
         this.data_pagamento = data_pagamento;
     }
 
-    public DispesasModel(int id_dispesa, int tipo_operacao, double custo_dispesa, String descricao_dispesa, String categoria_dispesa, String data_pagamento, String conta_dispesa, int id_registo_operacao) {
+    public DispesasModel(long id_dispesa, long tipo_operacao, double custo_dispesa, String descricao_dispesa, String categoria_dispesa, String data_pagamento, String conta_dispesa, long id_registo_operacao) {
         this.id_dispesa = id_dispesa;
         this.conta_dispesa = conta_dispesa;
         this.tipo_operacao = tipo_operacao;
@@ -29,19 +29,19 @@ public class DispesasModel {
         this.id_registo_operacao = id_registo_operacao;
     }
 
-    public int getTipo_operacao() {
+    public long getTipo_operacao() {
         return tipo_operacao;
     }
 
-    public void setTipo_operacao(int tipo_operacao) {
+    public void setTipo_operacao(long tipo_operacao) {
         this.tipo_operacao = tipo_operacao;
     }
 
-    public int getId_registo_operacao() {
+    public long getId_registo_operacao() {
         return id_registo_operacao;
     }
 
-    public void setId_registo_operacao(int id_registo_operacao) {
+    public void setId_registo_operacao(long id_registo_operacao) {
         this.id_registo_operacao = id_registo_operacao;
     }
 
@@ -49,19 +49,19 @@ public class DispesasModel {
     public DispesasModel() {
     }
 
-    public int getId_conta() {
+    public long getId_conta() {
         return id_conta;
     }
 
-    public void setId_conta(int id_conta) {
+    public void setId_conta(long id_conta) {
         this.id_conta = id_conta;
     }
 
-    public int getId_categoria() {
+    public long getId_categoria() {
         return id_categoria;
     }
 
-    public void setId_categoria(int id_categoria) {
+    public void setId_categoria(long id_categoria) {
         this.id_categoria = id_categoria;
     }
 
@@ -73,19 +73,19 @@ public class DispesasModel {
         this.conta_dispesa = conta_dispesa;
     }
 
-    public int getId_dispesa() {
+    public long getId_dispesa() {
         return id_dispesa;
     }
 
-    public void setId_dispesa(int id_dispesa) {
+    public void setId_dispesa(long id_dispesa) {
         this.id_dispesa = id_dispesa;
     }
 
-    public int getEstado_dispesa() {
+    public long getEstado_dispesa() {
         return estado_dispesa;
     }
 
-    public void setEstado_dispesa(int estado_dispesa) {
+    public void setEstado_dispesa(long estado_dispesa) {
         this.estado_dispesa = estado_dispesa;
     }
 

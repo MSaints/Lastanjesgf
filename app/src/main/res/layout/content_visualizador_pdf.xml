@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?android:attr/actionBarSize"
-    tools:context="com.afrofx.code.anjesgf.Activities.VisualizadorPDFActivity"
+    tools:context="com.afrofx.code.anjesgf.Activities.drawer.VisualizadorPDFActivity"
     tools:showIn="@layout/activity_visualizador_pdf">
 
     <com.github.barteksc.pdfviewer.PDFView

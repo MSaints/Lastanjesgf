@@ -6,23 +6,30 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/drawerBanca"
-            android:icon="@drawable/ic_shop"
-            android:title="@string/drawer_perfil" />
+            android:id="@+id/drawerPersonalizar"
+            android:icon="@drawable/ic_drawing"
+            android:title="@string/drawerPersonalize" />
 
         <item
             android:id="@+id/drawerMensagens"
             android:icon="@drawable/ic_chat"
-            android:title="@string/drawer_mensagens"/>
+            android:title="@string/drawer_mensagens" />
 
         <item
-        android:id="@+id/drawerRelatorio"
-        android:icon="@drawable/ic_server"
-        android:title="@string/drawer_relatorio" />
+            android:id="@+id/drawerRelatorio"
+            android:icon="@drawable/ic_server"
+            android:title="@string/drawer_relatorio" />
+
+        <item
+            android:id="@+id/drawerBackup"
+            android:icon="@drawable/ic_backup"
+            android:title="@string/drawer_backup" />
 
     </group>
 
-    <group android:id="@+id/group2" android:checkableBehavior="none">
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="none">
 
 
         <item
@@ -32,21 +39,19 @@
 
         <item
             android:id="@+id/drawerAcerca"
-            android:title="@string/drawer_acerca"
-            android:icon="@drawable/ic_medical"/>
+            android:icon="@drawable/ic_medical"
+            android:title="@string/drawer_acerca" />
 
         <item
             android:id="@+id/drawerAjuda"
-            android:title="@string/bottom_ajuda"
-            android:icon="@drawable/ic_ajuda"/>
+            android:icon="@drawable/ic_ajuda"
+            android:title="@string/bottom_ajuda" />
 
         <item
             android:id="@+id/drawerSair"
             android:icon="@drawable/ic_logout"
             android:title="@string/drawer_sair" />
     </group>
-
-
 
 
 </menu>

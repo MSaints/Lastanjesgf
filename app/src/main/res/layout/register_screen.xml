@@ -4,116 +4,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cinza"
+    android:background="@color/bg_grey"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
-    tools:context="com.afrofx.code.anjesgf.Activities.RegisterActivity">
+    tools:context="com.afrofx.code.anjesgf.Activities.root.RegisterActivity">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <LinearLayout
-        android:orientation="vertical"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarRegistarUser"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Registar Usuário" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_margin="20dp">
 
-                <ImageView
-                    android:clickable="true"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    app:srcCompat="@drawable/ic_add_photo"/>
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/add_foto"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/edit_nome_completo"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edit_style"
-                    android:hint="@string/hint_nome_completo"
-                    android:inputType="textPersonName" />
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edit_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edit_style"
-                    android:hint="@string/hint_email"
-                    android:inputType="textEmailAddress" />
+                    <ImageView
+                        android:id="@+id/perfilImagem"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/pic" />
 
-                <EditText
-                    android:id="@+id/edit_numero"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edit_style"
-                    android:inputType="phone"
-                    android:maxLength="9"
-                    android:hint="@string/hint_numero_telefone" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Escolher Foto" />
 
-                <EditText
-                    android:id="@+id/edit_pin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edit_style"
-                    android:hint="@string/hint_pin"
-                    android:inputType="numberPassword"
-                    android:maxLength="4" />
+                    <EditText
+                        android:id="@+id/edit_nome_completo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edit_style"
+                        android:hint="@string/hint_nome_completo"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
 
-                <EditText
-                    android:id="@+id/edit_repetir_pin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:inputType="numberPassword"
-                    android:background="@drawable/edit_style"
-                    android:hint="@string/hint_repetir_pin"
-                    android:maxLength="4" />
+                    <EditText
+                        android:id="@+id/edit_numero"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edit_style"
+                        android:hint="@string/hint_numero_telefone"
+                        android:inputType="phone"
+                        android:maxLength="9"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
 
-                <Button
-                    android:id="@+id/but_registar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/but_size"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/but_style_red"
-                    android:clickable="true"
-                    android:text="@string/but_registar"
-                    android:textColor="@color/txt_white" />
+                    <EditText
+                        android:id="@+id/edit_pin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edit_style"
+                        android:hint="@string/hint_pin"
+                        android:inputType="numberPassword"
+                        android:maxLength="4"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
 
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    <EditText
+                        android:id="@+id/edit_repetir_pin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edit_style"
+                        android:hint="@string/hint_repetir_pin"
+                        android:inputType="numberPassword"
+                        android:maxLength="4"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
 
-    </LinearLayout>
+                    <Button
+                        android:id="@+id/but_registar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/but_size"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/but_style_red"
+                        android:clickable="true"
+                        android:text="@string/but_registar"
+                        android:textColor="@color/txt_white"
+                        android:textStyle="bold" />
 
-</ScrollView>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

@@ -14,11 +14,11 @@
     <item
         android:id="@+id/bottomMenu3"
         android:title="@string/bottom_clientes"
-        android:icon="@drawable/ic_clientes"/>
+        android:icon="@drawable/ic_id_card"/>
 
     <item
         android:id="@+id/bottomMenu4"
-        android:title="Relatório"
-        android:icon="@drawable/ic_equalizer"/>
+        android:title="Relatórios"
+        android:icon="@drawable/ic_bar_chart"/>
 
 </menu>

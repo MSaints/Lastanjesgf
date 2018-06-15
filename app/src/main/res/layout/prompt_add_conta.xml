@@ -5,6 +5,8 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/definitionInfoTitle"
+        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -12,14 +14,16 @@
         android:padding="10dp"
         android:text="Nome Conta"
         android:textColor="@color/txt_white"
-        android:textSize="18dp"
+        android:textSize="@dimen/font16sp"
         android:textStyle="bold" />
 
-    <Spinner
+    <AutoCompleteTextView
         android:id="@+id/caixa_add_conta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="10dp"></Spinner>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
+        android:hint="Nome da Conta"/>
 
 </LinearLayout>

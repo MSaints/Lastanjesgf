@@ -39,11 +39,11 @@ public class UnidadeAdapter extends ArrayAdapter<UnidadeModel> {
         View view = convertView;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.linha_categoria, parent, false);
+            view = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);
         }
         UnidadeModel uModel = itens.get(position);
         if (uModel != null) {
-            TextView lblName = (TextView) view.findViewById(R.id.lbl_name);
+            TextView lblName = (TextView) view.findViewById(android.R.id.text1);
             if (lblName != null)
                 lblName.setText(uModel.getUnidadee_nome());
         }

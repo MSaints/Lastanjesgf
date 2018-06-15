@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bancabg"
-    tools:context="com.afrofx.code.anjesgf.Activities.MinhaBancaActivity">
+    tools:context="com.afrofx.code.anjesgf.Activities.home.MinhaBancaActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -15,10 +15,41 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarMinhaBanca"
             android:layout_width="match_parent"
-            app:titleTextColor="@color/white"
-            app:title="Minha Banca"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppThemeBanca" />
+            android:layout_height="56dp"
+            app:popupTheme="@style/AppThemeBanca">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minha Banca"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:layout_marginHorizontal="@dimen/margin10dp"
+                    android:id="@+id/fastSale"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
+                    android:textSize="10dp"
+                    android:text="VENDER"
+                    android:textStyle="bold"
+                    android:background="@drawable/but_style_white"
+                    android:textColor="@color/txt_black"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -31,5 +62,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_create_black_24dp" />
+
 
 </android.support.design.widget.CoordinatorLayout>

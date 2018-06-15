@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.afrofx.code.anjesgf.Activities.MercadoriaVendidaActivity">
+    tools:context="com.afrofx.code.anjesgf.Activities.vendas.MercadoriaVendidaActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -14,8 +14,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarMercadoriasVendidas"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="56dp"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="Registo de Vendas"/>
 
@@ -25,6 +24,7 @@
 
 
         <LinearLayout
+            android:id="@+id/valorTotalVendas"
             android:background="@color/colorPrimary"
             android:layout_gravity="bottom"
             android:padding="10dp"

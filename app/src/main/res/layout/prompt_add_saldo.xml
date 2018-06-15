@@ -5,6 +5,8 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/definitionInfoTitle"
+        android:textAlignment="center"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +15,7 @@
         android:padding="10dp"
         android:background="@color/colorPrimary"
         android:textColor="@color/txt_white"
-        android:textSize="18dp"/>
+        android:textSize="@dimen/font16sp"/>
 
     <EditText
         android:layout_marginTop="10dp"

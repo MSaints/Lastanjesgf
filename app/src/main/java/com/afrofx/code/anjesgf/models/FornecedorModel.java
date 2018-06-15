@@ -17,7 +17,7 @@ public class FornecedorModel {
         this.fornecedor_nome = fornecedor_nome;
     }
 
-    public FornecedorModel(String fornecedor_nome, String fornecedor_tipo, String fornecedor_email, int fornecedor_contacto) {
+    public FornecedorModel(String fornecedor_nome, String fornecedor_tipo,  int fornecedor_contacto) {
         this.fornecedor_contacto = fornecedor_contacto;
         this.fornecedor_nome = fornecedor_nome;
         this.fornecedor_email = fornecedor_email;

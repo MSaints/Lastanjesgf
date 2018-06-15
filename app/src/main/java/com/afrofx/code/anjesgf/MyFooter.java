@@ -17,7 +17,7 @@ public class MyFooter extends PdfPageEventHelper {
 
     public void onEndPage(PdfWriter writer, Document document) {
         PdfContentByte cb = writer.getDirectContent();
-        Phrase header = new Phrase("MOZÊ - Gestão de Vendas", ffont);
+        Phrase header = new Phrase("E-CONTA - Contar Dinheiro Contar Produtos", ffont);
         Phrase footer = new Phrase("PÁGINA. " + document.getPageNumber(), ffont);
         ColumnText.showTextAligned(cb, Element.ALIGN_CENTER,
                 header,

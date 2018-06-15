@@ -6,7 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.Toast;
 
+import com.afrofx.code.anjesgf.Dialogs.DialogFastSale;
 import com.afrofx.code.anjesgf.models.CategoriaModel;
 import com.afrofx.code.anjesgf.models.ClienteModel;
 import com.afrofx.code.anjesgf.models.CompanyModel;
@@ -20,18 +24,26 @@ import com.afrofx.code.anjesgf.models.UnidadeModel;
 import com.afrofx.code.anjesgf.models.UserModel;
 import com.afrofx.code.anjesgf.models.VendasModel;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     /*================Nome da Base de Dados============================*/
-    private static final String DB_NAME = "moze.db";
+    public static final String DB_NAME = "moze.db";
+
+    public static final int DB_VERSION = 1;
 
     private Cursor cursor;
 
-    /*==================Tabelas a Serem Criadas======================*/
+    /*==================Tabelas a Serem Criadas==================================================*/
     private static final String ENDERECO_TABLE = "moze_endereco";
     private static final String USUARIO_TABLE = "moze_usuario";
     private static final String CARGO_TABLE = "moze_cargo";
@@ -48,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DESPESAS_CATEGORIA_TABLE = "moze_despesas_categoria";
     private static final String RENDIMENTOS_TABLE = "moze_rendimentos";
     private static final String EMPRESA_TABLE = "moze_empresa";
+    private static final String QUEBRAS_TABLE = "moze_produto_quebra";
 
 
     /*==================COLUNAS DAS TABELAS DA BD MOZE======================*/
@@ -169,6 +182,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String RE_COL_4 = "rendimento_data";
     private static final String RE_COL_5 = "rendimento_data_registo";
 
+    //==========COLUNAS RENDIMENTOS_TABLE=====================*/
+    private static final String QE_COL_1 = "id_quebra";
+    private static final String QE_COL_2 = "id_produto";
+    private static final String QE_COL_3 = "quebra_descricao";
+    private static final String QE_COL_4 = "quebra_data_registo";
+    private static final String QE_COL_5 = "quebra_valor";
+    private static final String QE_COL_6 = "quantidade_valor";
+
+
+    /*==================Criacao da tabela Rendimentos na bd=====================*/
+    private static final String query_quebras = "CREATE TABLE "
+            + QUEBRAS_TABLE + "(" + QE_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+            + QE_COL_2 + " INTEGER REFERENCES " + PRODUTO_TABLE + "(" + PR_COL_1 + ") NOT NULL," + QE_COL_6 + " REAL NOT NULL, " +
+            QE_COL_3 + " VARCHAR NOT NULL, " + QE_COL_5 + " REAL NOT NULL, " + QE_COL_4 + " DATE DEFAULT (CURRENT_TIMESTAMP))";
+
 
     /*==================Criacao da tabela Rendimentos na bd=====================*/
     private static final String query_redimentos = "CREATE TABLE "
@@ -193,7 +221,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*==================Criacao da tabela cargos na bd=====================*/
     private static final String query_cargos = "CREATE TABLE "
             + CARGO_TABLE + "(" + CA_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-            + CA_COL_2 + " VARCHAR NOT NULL DEFAULT Administrador)";
+            + CA_COL_2 + " VARCHAR  DEFAULT ('\"Administrador\"') NOT NULL)";
 
     /*==================Criacao da tabela localidade na bd=====================*/
     private static final String query_endereco = "CREATE TABLE "
@@ -239,7 +267,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*==================Criacao da tabela REGISTO VENDA na bd=====================*/
     private static final String query_registo_venda = "CREATE TABLE " + REGISTO_VENDA_TABLE + "("
             + RV_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-            RV_COL_2 + " INTEGER REFERENCES " + CLIENTE_TABLE + "(" + CL_COL_1 + ") DEFAULT Anonimo," +
+            RV_COL_2 + " INTEGER REFERENCES " + CLIENTE_TABLE + "(" + CL_COL_1 + ") DEFAULT ('\"Anonimo\"')," +
             RV_COL_3 + " INTEGER REFERENCES " + USUARIO_TABLE + "(" + US_COL_1 + ") NOT NULL," +
             RV_COL_4 + " INTEGER REFERENCES " + REGISTO_OPERACOES_TABLE + "(" + RO_COL_1 + ")," +
             RV_COL_5 + " REAL," + RV_COL_6 + " INTEGER NOT NULL," + RV_COL_7 + " DATE DEFAULT (CURRENT_TIMESTAMP)," +
@@ -270,9 +298,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String query_registo_conta = "CREATE TABLE " + REGISTO_CONTA_TABLE + "("
             + RC_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
             RC_COL_2 + " VARCHAR NOT NULL)";
+    private Context mContext;
 
     public DatabaseHelper(Context context) {
-        super(context, DB_NAME, null, 1);
+        super(context, DB_NAME, null, DB_VERSION);
+        this.mContext=context;
     }
 
     @Override
@@ -301,7 +331,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query_fornecedor);
         /*==================Criacao da tabela Operacoes na bd=====================*/
         db.execSQL(query_registo_operecaoes);
-         /*==================Criacao da tabela Categorias de Despesas na bd=====================*/
+        /*==================Criacao da tabela Categorias de Despesas na bd=====================*/
         db.execSQL(query_categoria_despesa);
         /*==================Criacao da tabela Despesas na bd=====================*/
         db.execSQL(query_despesas);
@@ -309,10 +339,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query_redimentos);
         /*==================Criacao da tabela Rendimentos na bd=====================*/
         db.execSQL(query_empresa);
+        /*==================Criacao da tabela Rendimentos na bd=====================*/
+        db.execSQL(query_quebras);
 
         /*================Cargos de Usuarios=============================*/
         db.execSQL("INSERT INTO " + CARGO_TABLE + "(" + CA_COL_2 + ") VALUES('Administrador')");
         db.execSQL("INSERT INTO " + CARGO_TABLE + "(" + CA_COL_2 + ") VALUES('Colaborador')");
+
+        /*================Contas=============================*/
+        db.execSQL("INSERT INTO " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_2 + ") VALUES('KG')");
+        db.execSQL("INSERT INTO " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_2 + ") VALUES('ML')");
+        db.execSQL("INSERT INTO " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_2 + ") VALUES('Gramas')");
+        db.execSQL("INSERT INTO " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_2 + ") VALUES('Caixa')");
+        db.execSQL("INSERT INTO " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_2 + ") VALUES('Embalagem')");
+        db.execSQL("INSERT INTO " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_2 + ") VALUES('Litros')");
+        db.execSQL("INSERT INTO " + PRODUTO_UNIDADE_TABLE + "(" + PU_COL_2 + ") VALUES('Pacote')");
 
 
         /*================Contas=============================*/
@@ -322,6 +363,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('M-KESH')");
         db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Moza Banco')");
         db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('MIllenium BIM')");
+        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Banco Unico')");
+        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Barclays')");
+        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('FNB')");
+        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('EMola')");
+        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Ecobank')");
+        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Socremo')");
+        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Capital Bank')");
+        db.execSQL("INSERT INTO " + REGISTO_CONTA_TABLE + "(" + RC_COL_2 + ") VALUES('Standard Bank')");
+
+
+                /*================Contas=============================*/
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Refrigerante')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Legume')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Doces')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Cereal')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Sumo')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Bebidas Alcoolicas')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Farinha de Trigo')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Farinha de Milho')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Carne')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Manteiga')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Verduras')");
+        db.execSQL("INSERT INTO " + PRODUTO_CATEGORIA_TABLE + "(" + PC_COL_2 + ") VALUES('Frutas')");
 
 
         /*================Categorias de Despesas=============================*/
@@ -353,7 +417,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DESPESAS_CATEGORIA_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + DESPESAS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + RENDIMENTOS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QUEBRAS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + EMPRESA_TABLE);
         onCreate(db);
+    }
+
+    public static int getDatabaseVersion() {
+        return DB_VERSION;
     }
 
     /*===========================================INICIO DOS METODOS DO USUARIO(REGISTO/LOGIN)======================================*/
@@ -363,8 +433,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         contentValues.put(US_COL_4, userModel.getUsuario_nome());
         contentValues.put(US_COL_5, userModel.getUsuario_numero());
-        contentValues.put(US_COL_6, userModel.getUsuario_email());
         contentValues.put(US_COL_7, userModel.getUsuario_password());
+        contentValues.put(US_COL_9, userModel.getUsuario_imagem());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -373,8 +443,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public String nomeUsuario(int x) {
-        String sqlQuery = "SELECT " + US_COL_4 + " FROM " + USUARIO_TABLE + " WHERE " + US_COL_1 + " = " + x;
+
+    public boolean inserirQuebra(float id, String desc, double quantidade, double preco) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(QE_COL_2, id);
+        contentValues.put(QE_COL_3, desc);
+        contentValues.put(QE_COL_6, quantidade);
+        contentValues.put(QE_COL_5, preco);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(QUEBRAS_TABLE, null, contentValues);
+
+        db.close();
+
+        return true;
+    }
+
+    public String nomeUsuario(long x) {
+        String sqlQuery = "SELECT " + US_COL_4 + " FROM " + USUARIO_TABLE + " WHERE " + US_COL_5 + " = " + x;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -392,7 +480,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /* ======================procura o usuario na hora do registo Usuario================================*/
-    public UserModel procurar(int userNumber) {
+    public Cursor procUser() {
+        String sqlQuery = "SELECT * FROM " + USUARIO_TABLE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+    }
+
+    /* ======================procura o usuario na hora do registo Usuario================================*/
+    public UserModel procurar(long userNumber) {
         String sqlQuery = "SELECT * FROM " + USUARIO_TABLE + " WHERE " + US_COL_5 + " = " + userNumber;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -404,6 +503,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
             userModel.setId_usuario(Integer.parseInt(cursor.getString(cursor.getColumnIndex(US_COL_1))));
+            userModel.setUsuario_password(Long.parseLong(cursor.getString(cursor.getColumnIndex(US_COL_7))));
             cursor.close();
         } else {
             userModel = null;
@@ -414,7 +514,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /* ======================Valida a existencia de dados na BD para acessar o sistema================================*/
-    public UserModel userLogin(int userNumber, int userPin) {
+    public UserModel userLogin(long userNumber, long userPin) {
         String sqlQuery = "SELECT * FROM " + USUARIO_TABLE + " WHERE " + US_COL_5 + " = " + userNumber + " AND " + US_COL_7 + " = " + userPin + "";
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -446,6 +546,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userModel;
     }
 
+    public Bitmap getImage(long i) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String qu = "select " + US_COL_9 + " from " + USUARIO_TABLE + "  where " + US_COL_1 + " = " + i;
+        Cursor cur = db.rawQuery(qu, null);
+
+        if (cur.moveToFirst()) {
+            byte[] imgByte = cur.getBlob(0);
+            cur.close();
+            return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+        }
+        if (cur != null && !cur.isClosed()) {
+            cur.close();
+        }
+
+        return null;
+    }
+
     /* ======================Verifica a existencia do produto no sistema================================*/
     public StockModel procuraProduto(String nome) {
         String sqlQuery = "SELECT * FROM " + PRODUTO_TABLE + " WHERE " + PR_COL_5 + " = '" + nome + "'";
@@ -471,7 +589,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /*    =============Lista Todos Os Produtos====================*/
     public Cursor listProduto() {
-        String sqlQuery = "SELECT * FROM " + PRODUTO_TABLE + " NATURAL JOIN " + PRODUTO_CATEGORIA_TABLE + " ORDER BY " + PR_COL_5;
+        String sqlQuery = "SELECT * FROM " + PRODUTO_TABLE + " NATURAL JOIN " + PRODUTO_CATEGORIA_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -482,8 +600,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /*    =============Lista Todos Os Produtos====================*/
     public Cursor listProdutoRelatorio(String d1, String d2) {
-        String sqlQuery = "SELECT * FROM "+PRODUTO_CATEGORIA_TABLE+" NATURAL JOIN "+ PRODUTO_TABLE + " WHERE " + PR_COL_10 +
+        String sqlQuery = "SELECT * FROM " + PRODUTO_CATEGORIA_TABLE + " NATURAL JOIN " + PRODUTO_TABLE + " WHERE " + PR_COL_10 +
                 " BETWEEN '" + d1 + " 00:00:00 '" + " AND '" + d2 + " 24:00:00 '";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+    }
+
+    /*    =============Lista Todos Os Produtos====================*/
+    public Cursor listVendaRelatorio(String d1, String d2) {
+        String sqlQuery = "SELECT " + PRODUTO_TABLE + "." + PR_COL_5 + ", SUM(" + VENDA_TABLE + "." + VE_COL_4 + "), " +
+                VENDA_TABLE + "." + VE_COL_5 + " * " + " SUM( " + VENDA_TABLE + "." + VE_COL_4 + ")," + REGISTO_VENDA_TABLE + "." + RV_COL_7 +
+                " FROM " + PRODUTO_TABLE + " JOIN " + VENDA_TABLE + " JOIN " + REGISTO_VENDA_TABLE + " WHERE " + PRODUTO_TABLE + "." + PR_COL_1 + " = " +
+                VENDA_TABLE + "." + VE_COL_2 + " AND " + VENDA_TABLE + "." + VE_COL_3 + "=" + REGISTO_VENDA_TABLE + "." + RV_COL_1 +
+                " BETWEEN '" + d1 + " 00:00:00 '" + " AND '" + d2 + " 24:00:00 ' GROUP BY " + PRODUTO_TABLE + "." + PR_COL_5;
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -551,6 +684,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PR_COL_7, stockModel.getProduto_quanti_minima());
         contentValues.put(PR_COL_8, stockModel.getId_registo_operacao());
         contentValues.put(PR_COL_9, stockModel.getProduto_preco_venda());
+        contentValues.put(PR_COL_11, stockModel.getProduto_validade());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -757,7 +891,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         contentValues.put(FO_COL_3, fornecedorModel.getFornecedor_nome());
         contentValues.put(FO_COL_4, fornecedorModel.getFornecedor_contacto());
-        contentValues.put(FO_COL_5, fornecedorModel.getFornecedor_email());
         contentValues.put(FO_COL_6, fornecedorModel.getFornecedor_tipo());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -807,6 +940,76 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public double saldoValorStock() {
+        double saldo = 0;
+
+        String sqlQuery = "SELECT SUM(" + PR_COL_6 + " * " + PR_COL_9 + ") FROM " + PRODUTO_TABLE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            saldo = cursor.getInt(0);
+        }
+
+        return saldo;
+    }
+
+    public double saldoValorQuebras() {
+        double saldo = 0;
+
+        String sqlQuery = "SELECT SUM(" + QE_COL_5 + ") FROM " + QUEBRAS_TABLE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            saldo = cursor.getInt(0);
+        }
+
+        return saldo;
+    }
+
+    public double saldoValorVendas() {
+        double saldo = 0;
+
+        String sqlQuery = "SELECT SUM( " + VE_COL_5 + " * " + VE_COL_4 + " ) FROM " + VENDA_TABLE + " NATURAL JOIN " + REGISTO_VENDA_TABLE
+                + " WHERE " + RV_COL_6 + " = " + 1;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            saldo = cursor.getInt(0);
+        }
+
+        return saldo;
+    }
+
+    public double saldoValorDividas() {
+        double saldo = 0;
+
+        String sqlQuery = "SELECT SUM( " + VE_COL_5 + " * " + VE_COL_4 + "  ) FROM " + VENDA_TABLE + " NATURAL JOIN " + REGISTO_VENDA_TABLE
+                + " WHERE " + RV_COL_6 + " = " + 0;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            saldo = cursor.getInt(0);
+        }
+
+        return saldo;
+    }
+
     /*    =============Tras o saldo total de uma determinada conta====================*/
     public double SaldoTotal(String nome) {
         double saldo = 0;
@@ -846,14 +1049,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /*    =============Tras o ID da Conta Apartir do Nome====================*/
-    public int idConta(String Nome) {
+    public long idConta(String Nome) {
         String sqlQuery = "SELECT " + RC_COL_1 + " FROM " + REGISTO_CONTA_TABLE + " WHERE " + RC_COL_2 + " = '" + Nome + "'";
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         cursor = db.rawQuery(sqlQuery, null);
 
-        int id_conta = 0;
+        long id_conta = 0;
 
         cursor.moveToFirst();
 
@@ -951,6 +1154,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return labels;
     }
 
+
+    /*    =============Lista de Todas as Contas Que ja foram operadas====================*/
+    public Cursor listContasSaldo(String d1, String d2) {
+        String selectQuery = "SELECT " + REGISTO_CONTA_TABLE + "." + RC_COL_1 + ", " + REGISTO_CONTA_TABLE +
+                "." + RC_COL_2 + ", SUM(CASE WHEN " + RO_COL_3 + " = '" + 1 + "'" + "THEN " + REGISTO_OPERACOES_TABLE +
+                "." + RO_COL_4 + " ELSE 0 END)- SUM(CASE WHEN " + RO_COL_3 + "='" + 0 + "'" + "THEN " + REGISTO_OPERACOES_TABLE +
+                "." + RO_COL_4 + " ELSE 0 END) FROM " + REGISTO_CONTA_TABLE + " NATURAL JOIN " + REGISTO_OPERACOES_TABLE + " WHERE " + RO_COL_5 +
+                " BETWEEN '" + d1 + " 00:00:00 '" + " AND '" + d2 + " 24:00:00 ' GROUP BY " + REGISTO_CONTA_TABLE + "." + RC_COL_2;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        return cursor;
+
+    }
+
     /*==================Lista de Despesas e Categorias=====================*/
     public List<String> listaDespesaCategoria() {
         List<String> itens = new ArrayList<>();
@@ -976,8 +1196,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /*    =============Tras o ID da Categoria da Despesa====================*/
-    public int idCategoriaDispesa(String categoria) {
-        int id_categoria = 0;
+    public long idCategoriaDispesa(String categoria) {
+        long id_categoria = 0;
 
         String query = "SELECT " + CD_COL_1 + " FROM " + DESPESAS_CATEGORIA_TABLE + " WHERE " + CD_COL_2 + " = '" + categoria + "'";
 
@@ -1090,6 +1310,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id_cliente;
     }
 
+    /*    =============Tras o ultimo ID do registo de venda====================*/
+    public String nomeCliente(long id) {
+        String query = "SELECT * FROM " + CLIENTE_TABLE + " WHERE " + CL_COL_1 + " = " + id;
+
+        String id_cliente = "";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(query, null);
+
+        cursor.moveToFirst();
+
+        if (cursor.getCount() > 0) {
+            id_cliente = cursor.getString(cursor.getColumnIndex("cliente_nome"));
+        }
+
+        return id_cliente;
+    }
+
+
     /*    =============Regista Rendimentos====================*/
     public void registoRendimento(RedimentosModel redimentosModel) {
         ContentValues contentValues = new ContentValues();
@@ -1112,6 +1352,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(RV_COL_3, registoVendaModel.getId_user());
         contentValues.put(RV_COL_4, registoVendaModel.getId_registo_operacao());
         contentValues.put(RV_COL_6, registoVendaModel.getVenda_estado());
+
+        contentValues.put(RV_COL_2, registoVendaModel.getId_cliente());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -1154,7 +1396,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return quantidade;
     }
 
-    public boolean deleteDespesa(int id_Despesa, int id_Operacao) {
+    public boolean deleteDespesa(long id_Despesa, long id_Operacao) {
         boolean result = false;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1186,7 +1428,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean pagaRendi(int sss, int opca, int idop) {
+    public boolean pagaRendi(long sss, long opca, long idop) {
 
         boolean ss = false;
         ContentValues contentValues = new ContentValues();
@@ -1207,6 +1449,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ss;
     }
 
+
+    public boolean pagaDivida( long opca, long idop) {
+
+        boolean ss = false;
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(RV_COL_6, opca);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int f = db.update(REGISTO_VENDA_TABLE, contentValues, RV_COL_1 + " = '" + idop + "'", null);
+
+        if (f > 0) {
+            ss = true;
+        }
+
+        db.close();
+
+        return ss;
+    }
+
+
+    public boolean updateEmpresa(CompanyModel companyModel) {
+
+        boolean update = false;
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(EI_COL_2, companyModel.getId_user());
+        contentValues.put(EI_COL_3, companyModel.getNome_empresa());
+        contentValues.put(EI_COL_4, companyModel.getEndereco());
+        contentValues.put(EI_COL_5, companyModel.getNuit());
+        contentValues.put(EI_COL_6, companyModel.getEmail());
+        contentValues.put(EI_COL_7, companyModel.getNome_proprietario());
+        contentValues.put(EI_COL_8, companyModel.getContacto());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int f = db.update(EMPRESA_TABLE, contentValues, null, null);
+
+        if (f > 0) {
+           update = true;
+        }
+
+        db.close();
+
+        return update;
+    }
+
     public Cursor listaVendas() {
         String sqlQuery = "SELECT * FROM " + PRODUTO_TABLE + " INNER JOIN " + VENDA_TABLE + " INNER JOIN " +
                 REGISTO_VENDA_TABLE + " WHERE " + PRODUTO_TABLE + "." + PR_COL_1 + " == " + VENDA_TABLE + "." + VE_COL_2 +
@@ -1225,6 +1516,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 PRODUTO_TABLE + "." + PR_COL_1 + " == " + VENDA_TABLE + "." + VE_COL_2 + " AND " +
                 VENDA_TABLE + "." + VE_COL_3 + " == " + REGISTO_VENDA_TABLE + "." + RV_COL_1 + " GROUP BY " +
                 PR_COL_5 + " ORDER BY SUM(" + VENDA_TABLE + "." + VE_COL_4 + ") DESC";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+    }
+
+    public Cursor listaQuebras() {
+        String sqlQuery = "SELECT  * FROM " + QUEBRAS_TABLE + " NATURAL JOIN " +
+                PRODUTO_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
         cursor = db.rawQuery(sqlQuery, null);
@@ -1261,4 +1562,166 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public void registaConta(ContaModel contaModel){
+        ContentValues cv = new ContentValues();
+
+        cv.put(RC_COL_2, contaModel.getNomeConta());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(REGISTO_CONTA_TABLE, null, cv);
+
+        db.close();
+    }
+
+    public ContaModel procurarConta(String nome) {
+        String sqlQuery = "SELECT * FROM " + REGISTO_CONTA_TABLE + " WHERE " + RC_COL_2 + " = '" + nome + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(sqlQuery, null);
+
+        ContaModel contaModel = new ContaModel();
+
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+
+            contaModel.setNomeConta(cursor.getString(cursor.getColumnIndex(RC_COL_2)));
+            contaModel.setId_conta(Integer.parseInt(cursor.getString(cursor.getColumnIndex(RC_COL_1))));
+
+            cursor.close();
+        } else {
+            contaModel = null;
+        }
+
+        db.close();
+
+        return contaModel;
+    }
+
+    /*    =============Lista Todos Os Produtos====================*/
+    public Cursor listaCliente(String d1, String d2) {
+        String sqlQuery = "SELECT * FROM " + CLIENTE_TABLE + " WHERE " + CL_COL_6 +
+                " BETWEEN '" + d1 + " 00:00:00 '" + " AND '" + d2 + " 24:00:00 '";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+    }
+
+    /*    =============Lista Todos Os Produtos====================*/
+    public Cursor listaUsuarios(String d1, String d2) {
+        String sqlQuery = "SELECT * FROM " + USUARIO_TABLE + " JOIN "+ CARGO_TABLE +" WHERE " +CARGO_TABLE+"."+ CA_COL_1 +" = "+
+               USUARIO_TABLE +"."+US_COL_2+" AND "+US_COL_8+" BETWEEN '" + d1 + " 00:00:00 '" + " AND '" + d2 + " 24:00:00 '";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+    }
+
+    /*    =============Lista Todos Os Produtos====================*/
+    public Cursor usuarioReceita(String d1, String d2) {
+        String sqlQuery = "SELECT "+US_COL_4+", "+US_COL_5+", SUM(" + VENDA_TABLE +"." + VE_COL_4 + "*"+VENDA_TABLE+"."+VE_COL_5+") FROM "
+        + USUARIO_TABLE + " JOIN "+ REGISTO_VENDA_TABLE+ " JOIN "+ VENDA_TABLE +" WHERE " + USUARIO_TABLE +"."+US_COL_1+" = "+REGISTO_VENDA_TABLE +
+        "."+RV_COL_3+" AND "+REGISTO_VENDA_TABLE +"."+RV_COL_1+" = "+VENDA_TABLE +"."+VE_COL_3+" AND "+RV_COL_7+" BETWEEN '" +
+         d1 + " 00:00:00 '" + " AND '" + d2 + " 24:00:00 ' GROUP BY " +US_COL_4;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        cursor = db.rawQuery(sqlQuery, null);
+
+        return cursor;
+    }
+
+
+
+    public void backup(String outFileName) {
+
+        final String inFileName = mContext.getDatabasePath(DB_NAME).toString();
+
+        try {
+
+            File dbFile = new File(inFileName);
+            FileInputStream fis = new FileInputStream(dbFile);
+
+            // Open the empty db as the output stream
+            OutputStream output = new FileOutputStream(outFileName);
+
+            // Transfer bytes from the input file to the output file
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                output.write(buffer, 0, length);
+            }
+
+            // Close the streams
+            output.flush();
+            output.close();
+            fis.close();
+
+            janelaSucesso(null, "Copia Efectuada");
+
+        } catch (Exception e) {
+            janelaErro(null, "Ocorreu um erro, Tente Novamente");
+            e.printStackTrace();
+        }
+    }
+
+    public void importDB(String inFileName) {
+
+        final String outFileName = mContext.getDatabasePath(DB_NAME).toString();
+
+        try {
+
+            File dbFile = new File(inFileName);
+            FileInputStream fis = new FileInputStream(dbFile);
+
+            // Open the empty db as the output stream
+            OutputStream output = new FileOutputStream(outFileName);
+
+            // Transfer bytes from the input file to the output file
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                output.write(buffer, 0, length);
+            }
+
+            // Close the streams
+            output.flush();
+            output.close();
+            fis.close();
+
+            janelaSucesso(null, "Dados recuperados");
+
+        } catch (Exception e) {
+            janelaErro(null, "Ocorreu um erro, Tente Novamente");
+            e.printStackTrace();
+        }
+    }
+
+    public void closeDB() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        if (db != null && db.isOpen())
+            db.close();
+    }
+
+
+    public void janelaErro(String titlo, String msg) {
+        new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText(titlo)
+                .setContentText(msg)
+                .show();
+    }
+
+    public void janelaSucesso(String titlo, String msg) {
+        new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText(titlo)
+                .setContentText(msg)
+                .show();
+    }
 }

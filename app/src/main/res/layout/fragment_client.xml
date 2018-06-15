@@ -8,7 +8,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewClients"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -20,6 +20,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/ic_add_fornecedor" />
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 
 </RelativeLayout>

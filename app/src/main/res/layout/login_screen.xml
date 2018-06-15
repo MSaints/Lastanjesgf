@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.afrofx.code.anjesgf.Activities.LoginActivity"
+    tools:context="com.afrofx.code.anjesgf.Activities.root.LoginActivity"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:focusableInTouchMode="true"
     android:background="@color/cinza"
     android:orientation="vertical">
 
@@ -20,39 +21,48 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
             android:orientation="vertical">
 
             <ImageView
+                android:layout_weight="1"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@null"
                 app:srcCompat="@drawable/ic_keys" />
 
             <EditText
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
                 android:id="@+id/edit_login_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
+                android:textAlignment="center"
                 android:background="@drawable/edit_style"
                 android:hint="@string/hint_numero_telefone"
                 android:inputType="phone"
                 android:maxLength="9" />
 
             <EditText
+                android:layout_weight="1"
+                android:layout_marginHorizontal="20dp"
                 android:id="@+id/edit_login_pin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
+                android:textAlignment="center"
                 android:background="@drawable/edit_style"
                 android:hint="@string/hint_pin"
                 android:inputType="numberPassword"
-                android:maxLength="4" />
+                android:maxLength="4"/>
 
             <Button
+                android:layout_weight="1"
+                android:textStyle="bold"
                 android:clickable="true"
                 android:id="@+id/but_login_entrar"
                 android:layout_width="wrap_content"
@@ -64,13 +74,16 @@
                 android:textColor="@color/txt_white" />
 
             <TextView
+                android:layout_weight="1"
+                android:id="@+id/recuperaPin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/link_recuperar_senha"
                 android:textColor="#212121"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -78,6 +91,7 @@
     </android.support.v7.widget.CardView>
 
     <LinearLayout
+        android:id="@+id/loginDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -90,7 +104,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-
             android:text="@string/txt_login"
             android:textAlignment="center"
             android:textColor="@color/but_white" />
@@ -101,6 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/but_size"
             android:layout_gravity="center"
+            android:textStyle="bold"
             android:background="@drawable/but_style_white"
             android:text="@string/but_registar"
             android:layout_marginTop="10dp"

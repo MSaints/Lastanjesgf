@@ -1,17 +1,26 @@
 <resources>
-    <string name="app_name">MOZÊ</string>
-    <string name="home_name">MOZÊ</string>
+    <string name="app_name">E-CONTA</string>
+    <string name="home_name">E-CONTA</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="app_version">Versão 1.0.1 Beta</string>
+    <string name="app_version">Versão 1.1.1 Beta</string>
+
+    <!--======================Navegation Drawer Icon Text=========================-->
+    <string name="home_banca">Minha Banca</string>
+    <string name="home_mola">Mola</string>
+    <string name="home_mercadoria">Mercadoria</string>
+    <string name="home_despesas">Despesas</string>
+    <string name="home_rendimentos">Rendimentos</string>
+    <string name="home_vendas">Vendas</string>
 
 
     <!--======================Navegation Drawer Icon Text=========================-->
     <string name="drawer_perfil">Minha Banca</string>
     <string name="drawer_definicoes">Definições</string>
     <string name="drawer_relatorio">Relatórios Criados</string>
+    <string name="drawer_backup">Cópia de Segurança</string>
     <string name="drawer_sair">Sair</string>
-    <string name="drawer_mensagens">Mensagens</string>
+    <string name="drawer_mensagens">Analises</string>
     <string name="drawer_acerca">Acerca</string>
 
     <!--================== butoes ==================-->
@@ -25,7 +34,7 @@
     <!--================== Form ==================-->
 
     <!--================== texto ==================-->
-    <string name="txt_login">Preecha os campos acima e clique em ENTRAR.
+    <string name="txt_login">Preencha os campos acima e clique em ENTRAR.
 Se não possui uma conta clique em REGISTAR.</string>
 
     <string name="txt_recuperar_pin">Recuperar PIN</string>
@@ -45,8 +54,8 @@ Se não possui uma conta clique em REGISTAR.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="stock">Mercadoria</string>
-    <string name="vendas">Gestão de Vendas</string>
-    <string name="caixa">Gestão de Contas</string>
+    <string name="vendas">Vendas</string>
+    <string name="caixa">Contas</string>
     <string name="relatorio">Relatórios</string>
 
 
@@ -70,11 +79,49 @@ Se não possui uma conta clique em REGISTAR.</string>
 
     <string name="info_notifications">Receber notificações de estado de estoque, notificações de clientes com dividas e de Despesas e Rendimentos</string>
     <string name="info_iva">Efectuar Cobrança de 17% de IVA em todas as vendas</string>
+    <string name="info_simplificado">Efectuar Cobrança de 5% de Imposto Simplificado</string>
+    <string name="info_costum">Introduza a percentagem de imposto caso seja diferente do IVA ou Imposto Simplificado e clique em ligar</string>
     <string name="info_sms">Abilitar a partilha de um Recibo ou Factura por SMS (Esta Opção Usara suas SMSs se estiver Activa)</string>
     <string name="info_vendas">Esta opção coloca o limite de numero de produtos na lista para(5), e a quantidade do produto das vendas rapidas para 5</string>
     <string name="info_seguranca">Solicitar Codigo sempre depois 15 segundos sem mexer o aplicativo...</string>
+    <string name="info_ico_ajuda">O cultar os pequenos icones de ajuda nos icones do ecrã principal...</string>
+
+
     <string name="title_activity_mais_vendidos">Mais Vendidos</string>
     <string name="title_activity_relatorios_gerados">Relatórios</string>
     <string name="title_activity_visualizador_pdf">Leitor de Relatorio</string>
+    <string name="title_activity_rendimentos">RendimentosActivity</string>
+    <string name="drawerPersonalize">Personalizar</string>
+    <string name="title_activity_personalizar">PersonalizarActivity</string>
+
+    <string name="info_mola">Opção para Visualizar, Registar valores nas contas bancarias ou caixa...</string>
+    <string name="info_banca">Visualizar, Registar informação do seu negócio, assim como o imposto sob vendas...</string>
+    <string name="info_venda">Efectuar, Visualizar vendas, dívidas, etc</string>
+    <string name="info_mercadoria">Adicionar mercadoria, fornecedores e visualizar a lista de produtos</string>
+    <string name="info_despesa">Registe despesas do seu negócio, Ex: renda, etc...</string>
+    <string name="info_rendimento">Registe seus redimentos por exemplo: salário, xitique, etc...</string>
+    <string name="acerca_e_conta">Sistema de gestão de finaceira para micro, pequenas e médias empresas.</string>
+    <string name="acerca_e_conta2">Associação Nacional de Jovens Empresários  (2018)</string>
+    <string name="acerca_e_conta3">(+258) 84 33 66 993</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_backup">BackupActivity</string>
+    <string name="select_folder">Selecionar Pasta</string>
+    <string name="select_file">Selecionar Ficheiro</string>
+    <string name="file_created">Ficherio Criado</string>
+    <string name="file_create_error">Erro ao criar o ficheiro</string>
+    <string name="activity_backup_drive_desc">Efectuar a cópia de segurança para o Google Drive</string>
+    <string name="activity_restore_drive_desc">Recuperar Dados Anteriores</string>
+    <string name="activity_backup_drive_button_backup">EFECTUAR CÓPIA</string>
+    <string name="activity_backup_drive_last">Ultima Cópia</string>
+    <string name="activity_backup_drive_folder">Armazenamento</string>
+    <string name="activity_backup_drive_button_open_drive">Abrir o Drive</string>
+    <string name="activity_backup_drive_recent">Cópias Recentes</string>
+    <string name="activity_backup_drive_dialog_restore_title">Restaurar a versão anterior</string>
+    <string name="activity_backup_drive_dialog_restore_desc">Restaurar a nova versao ira substituir todos os novos dados</string>
+    <string name="activity_backup_drive_dialog_restore_details">Detalhes da Cópia</string>
+    <string name="activity_backup_drive_dialog_restore_button_cancel">Cancelar</string>
+    <string name="activity_backup_drive_dialog_restore_button_restore">Restaurar</string>
 
 </resources>

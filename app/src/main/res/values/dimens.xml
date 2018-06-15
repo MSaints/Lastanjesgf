@@ -5,4 +5,11 @@
     <dimen name="nav_header_height">120dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="but_size">40dp</dimen>
+    <dimen name="margin5dp">5dp</dimen>
+    <dimen name="margin10dp">10dp</dimen>
+    <dimen name="size20dp">20dp</dimen>
+    <dimen name="size15dp">15dp</dimen>
+    <dimen name="size0dp">0dp</dimen>
+    <dimen name="font16sp">14sp</dimen>
+    <dimen name="size1dp">1dp</dimen>
 </resources>

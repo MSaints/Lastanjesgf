@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.afrofx.code.anjesgf.Activities.VisualizadorPDFActivity">
+    tools:context="com.afrofx.code.anjesgf.Activities.drawer.VisualizadorPDFActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -14,8 +14,8 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="56dp"
+            app:title="Leitor de PDF"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             />
 

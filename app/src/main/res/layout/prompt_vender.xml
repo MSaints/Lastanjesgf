@@ -2,60 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/fastSaleTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:padding="10dp"
-        android:text="Efectuar uma venda"
+        android:textAlignment="center"
+        android:text="Efectuar Venda"
         android:textColor="@color/white"
-        android:textSize="18dp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <AutoCompleteTextView
-            android:singleLine="true"
             android:id="@+id/MainVenderNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1.5"
             android:background="@drawable/edit_style"
-            android:hint="Produto" />
+            android:hint="Produto"
+            android:singleLine="true" />
 
         <EditText
-            android:singleLine="true"
             android:id="@+id/MainVenderQuantidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:background="@drawable/edit_style"
-            android:hint="Quantidade"
-            android:inputType="number" />
+            android:hint="Quanti."
+            android:inputType="number"
+            android:singleLine="true" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Preço unitario"
-            android:textSize="18dp" />
+            android:text="Preço unitário"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/MainPrecoUn"
@@ -63,17 +66,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="0.00 MT"
-            android:textSize="18dp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
 
-
     <LinearLayout
 
-        android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
@@ -82,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Total a Pagar"
-            android:textSize="18dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/MainPrecoTo"
@@ -90,36 +92,54 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="0.00 MT"
-            android:textSize="18dp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
+
     <View
+        android:id="@+id/fastSaleLine1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:background="@color/colorPrimary" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="Paga via:"
-            android:textSize="18dp" />
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/MainVenderConta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="2" />
     </LinearLayout>
 
+    <View
+        android:id="@+id/fastSaleLine2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/but_style_red"
+        android:text="Concluir"
+        android:id="@+id/fastSaleConcluir"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 </LinearLayout>

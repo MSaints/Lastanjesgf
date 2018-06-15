@@ -23,8 +23,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="Produto"
+                android:textColor="@color/txt_black"
+                android:singleLine="true"
                 android:textStyle="bold"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/lista_descricao"

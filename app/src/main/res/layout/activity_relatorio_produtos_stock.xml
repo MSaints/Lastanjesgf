@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.afrofx.code.anjesgf.Activities.ReportClientes1Activity">
+    tools:context="com.afrofx.code.anjesgf.Activities.relatorios.ReportProdutosEmStockActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -14,10 +14,9 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarRelatorioStock"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="56dp"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Relatório de Stock"/>
+            app:title="Relatório de Stock" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -32,104 +31,29 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
+                android:textColor="@color/txt_black"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Mercearia Laurinda"
-                android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:gravity="start"
+                android:text="Relatório dos produtos em stock"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/stockDataInicial"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start"
-                android:text="Mercado Zimpeto"
-                android:textAlignment="center"
+                android:text="08/12/2018"
+                android:textAlignment="textStart"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorPrimary" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:gravity="center"
-                android:text="Relatorio do Stock"
-                android:textAlignment="center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_gravity="left"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:text="Data Inicial:"
-                        android:textAlignment="textStart"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/stockDataInicial"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:text="08/12/2018"
-                        android:textAlignment="textStart"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_gravity="right"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_gravity="right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:text="Data Final:"
-                        android:textAlignment="textStart"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/stockDataFinal"
-                        android:layout_gravity="right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:text="08/12/2018"
-                        android:textAlignment="textStart"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-            <View
+                android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginVertical="5dp"
@@ -139,32 +63,33 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="10dp"
                 android:orientation="horizontal"
                 android:weightSum="5">
 
                 <TextView
+                    android:textColor="@color/txt_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Produto" />
 
                 <TextView
+                    android:textColor="@color/txt_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Quant." />
 
                 <TextView
+                    android:textColor="@color/txt_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:textAlignment="textEnd"
                     android:layout_weight="2"
                     android:text="Valor" />
             </LinearLayout>
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 
 

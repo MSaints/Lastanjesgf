@@ -15,7 +15,8 @@
         android:text="Efectuar Venda"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="center_horizontal" />
 
     <LinearLayout
         android:layout_width="match_parent"

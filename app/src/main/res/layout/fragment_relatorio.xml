@@ -25,9 +25,10 @@
                 android:text="Data de Inicio:"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textSize="@dimen/font16sp" />
+                android:textSize="@dimen/font16sp"
+                android:gravity="center_horizontal" />
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/dataInicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +62,7 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
@@ -77,9 +78,10 @@
                 android:text="Data Fim:"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textSize="@dimen/font16sp" />
+                android:textSize="@dimen/font16sp"
+                android:gravity="center_horizontal" />
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/dataFim"
                 android:layout_marginHorizontal="5dp"
                 android:layout_width="match_parent"
@@ -112,7 +114,7 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

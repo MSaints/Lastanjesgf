@@ -3,18 +3,16 @@ package com.afrofx.code.anjesgf.Fragments;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 
 import com.afrofx.code.anjesgf.Activities.home.DespesasActivity;
 import com.afrofx.code.anjesgf.Activities.home.MercadoriaActivity;
@@ -25,7 +23,6 @@ import com.afrofx.code.anjesgf.Activities.home.VendasActivity;
 import com.afrofx.code.anjesgf.Dialogs.DialogInfo;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.ThemeSettings.Constant;
-import com.afrofx.code.anjesgf.ThemeSettings.ThemeColor;
 
 public class HomeFragment extends Fragment {
 

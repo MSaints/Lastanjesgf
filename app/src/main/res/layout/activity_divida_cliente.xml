@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.afrofx.code.anjesgf.Activities.vendas.DividasClienteActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarDividasCliente"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Dividas"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_divida_cliente" />
+
+
+        <LinearLayout
+            android:id="@+id/bottomTotalDividas"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="bottom"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_weight="30"
+                android:textSize="16dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:text="Total de Dividas:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:id="@+id/dividaTotal"
+                android:layout_weight="70"
+                android:textSize="16dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:text="0.00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

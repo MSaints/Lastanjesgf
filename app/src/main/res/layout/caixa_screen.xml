@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.afrofx.code.anjesgf.Activities.home.MolaActivity">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/descCaixa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +31,8 @@
                     android:text="0.00"
                     android:textAlignment="center"
                     android:textColor="@color/txt_green"
-                    android:textSize="30dp" />
+                    android:textSize="30dp"
+                    android:gravity="center_horizontal" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -41,7 +42,8 @@
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/txt_green"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
 
             <TextView
@@ -51,21 +53,22 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:gravity="center_horizontal" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewConta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/descCaixa">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/caixa_adicionar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

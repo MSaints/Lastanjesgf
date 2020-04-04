@@ -3,11 +3,10 @@ package com.afrofx.code.anjesgf.Activities.drawer;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.ThemeSettings.ThemeColor;
@@ -15,6 +14,7 @@ import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.shockwave.pdfium.PdfDocument;
 
 import java.util.List;

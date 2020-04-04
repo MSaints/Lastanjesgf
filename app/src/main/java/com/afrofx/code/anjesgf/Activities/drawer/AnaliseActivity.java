@@ -3,25 +3,20 @@ package com.afrofx.code.anjesgf.Activities.drawer;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.afrofx.code.anjesgf.Activities.root.MainScreenActivity;
 import com.afrofx.code.anjesgf.DatabaseHelper;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.ThemeSettings.ThemeColor;
-import com.afrofx.code.anjesgf.models.ContaModel;
 import com.afrofx.code.anjesgf.models.DispesasModel;
 import com.afrofx.code.anjesgf.models.StockModel;
 import com.github.mikephil.charting.charts.PieChart;

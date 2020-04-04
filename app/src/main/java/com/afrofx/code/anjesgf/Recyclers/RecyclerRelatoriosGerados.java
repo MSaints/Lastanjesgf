@@ -2,7 +2,6 @@ package com.afrofx.code.anjesgf.Recyclers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afrofx.code.anjesgf.Activities.drawer.RelatoriosGeradosActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.afrofx.code.anjesgf.Activities.drawer.VisualizadorPDFActivity;
 import com.afrofx.code.anjesgf.R;
 
@@ -29,7 +29,7 @@ public class RecyclerRelatoriosGerados extends RecyclerView.Adapter<RecyclerRela
     private Context context;
     private ArrayList<File> al_pdf;
 
-    public RecyclerRelatoriosGerados(RelatoriosGeradosActivity context, ArrayList<File> al_pdf) {
+    public RecyclerRelatoriosGerados(Context context, ArrayList<File> al_pdf) {
         this.context = context;
         this.al_pdf = al_pdf;
     }

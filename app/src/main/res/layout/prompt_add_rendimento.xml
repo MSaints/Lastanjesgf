@@ -15,7 +15,8 @@
         android:textAlignment="center"
         android:textColor="@color/txt_white"
         android:textSize="@dimen/font16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="center_horizontal" />
 
     <ScrollView
         android:layout_width="match_parent"

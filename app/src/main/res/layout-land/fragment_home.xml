@@ -1,0 +1,446 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_grey"
+    android:orientation="horizontal"
+    tools:context="com.afrofx.code.anjesgf.Fragments.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:orientation="vertical">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/infoCardMola"
+                android:layout_width="@dimen/size20dp"
+                android:layout_height="@dimen/size20dp"
+                android:layout_marginEnd="@dimen/size15dp"
+                android:layout_marginRight="@dimen/size15dp"
+                android:layout_marginTop="@dimen/size15dp"
+                android:elevation="20dp"
+                app:layout_anchor="@+id/card_entrar_caixa"
+                app:layout_anchorGravity="right|top"
+                app:srcCompat="@drawable/ic_info_card" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_entrar_caixa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin5dp"
+                android:layout_marginEnd="@dimen/margin5dp"
+                android:layout_marginLeft="@dimen/margin10dp"
+                android:layout_marginRight="@dimen/margin5dp"
+                android:layout_marginStart="@dimen/margin10dp"
+                android:layout_marginTop="@dimen/margin10dp"
+                app:cardCornerRadius="@dimen/margin10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/margin10dp"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/home3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin10dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_caixa"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/home_mola"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/font16sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/homeLine1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/infoCardBanca"
+                android:layout_width="@dimen/size20dp"
+                android:layout_height="@dimen/size20dp"
+                android:layout_marginEnd="@dimen/size15dp"
+                android:layout_marginRight="@dimen/size15dp"
+                android:layout_marginTop="@dimen/size15dp"
+                android:elevation="@dimen/margin5dp"
+                app:layout_anchor="@+id/card_entrar_banca"
+                app:layout_anchorGravity="right|top"
+                app:srcCompat="@drawable/ic_info_card" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_entrar_banca"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin10dp"
+                android:layout_marginEnd="@dimen/margin5dp"
+                android:layout_marginLeft="@dimen/margin10dp"
+                android:layout_marginRight="@dimen/margin5dp"
+                android:layout_marginStart="@dimen/margin10dp"
+                android:layout_marginTop="@dimen/margin5dp"
+                app:cardCornerRadius="@dimen/margin10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/margin10dp"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/home2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin10dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_shop"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/home_banca"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/font16sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/homeLine2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_rowWeight="1"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/infoCardVendas"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="@dimen/size15dp"
+                android:layout_marginRight="@dimen/size15dp"
+                android:layout_marginTop="@dimen/size15dp"
+                android:elevation="@dimen/margin5dp"
+                app:layout_anchor="@+id/card_entrar_vendas"
+                app:layout_anchorGravity="right|top"
+                app:srcCompat="@drawable/ic_info_card" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_entrar_vendas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin5dp"
+                android:layout_marginEnd="@dimen/margin5dp"
+                android:layout_marginLeft="@dimen/margin5dp"
+                android:layout_marginRight="@dimen/margin5dp"
+                android:layout_marginStart="@dimen/margin5dp"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/margin10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/margin10dp"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/home1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin10dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_vendas"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/home_vendas"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/font16sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/homeLine3"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/infoCardMercadoria"
+                android:layout_width="@dimen/size20dp"
+                android:layout_height="@dimen/size20dp"
+                android:layout_marginEnd="@dimen/size15dp"
+                android:layout_marginRight="@dimen/size15dp"
+                android:layout_marginTop="@dimen/size15dp"
+                android:elevation="5dp"
+                app:layout_anchor="@+id/card_entrar_stock"
+                app:layout_anchorGravity="right|top"
+                app:srcCompat="@drawable/ic_info_card" />
+
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/card_entrar_stock"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin10dp"
+                android:layout_marginEnd="@dimen/margin5dp"
+                android:layout_marginLeft="@dimen/margin5dp"
+                android:layout_marginRight="@dimen/margin5dp"
+                android:layout_marginStart="@dimen/margin5dp"
+                android:layout_marginTop="@dimen/margin5dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                app:cardCornerRadius="@dimen/margin10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/home4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin10dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_stock"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/home_mercadoria"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/font16sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/homeLine4"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimary" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_rowWeight="1"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/infoCardDespesas"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:elevation="5dp"
+                app:layout_anchor="@+id/card_entrar_despesas"
+                app:layout_anchorGravity="right|top"
+                app:srcCompat="@drawable/ic_info_card" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_entrar_despesas"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin5dp"
+                android:layout_marginLeft="@dimen/margin5dp"
+                android:layout_marginRight="@dimen/margin10dp"
+                android:layout_marginTop="@dimen/margin10dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/margin10dp"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/home5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/margin10dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_despesas"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_despesas"
+                        android:textAlignment="center"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/font16sp"
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
+
+                    <View
+                        android:id="@+id/homeLine5"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/infoCardRendimentos"
+                android:layout_width="@dimen/size20dp"
+                android:layout_height="@dimen/size20dp"
+                android:layout_marginEnd="@dimen/size15dp"
+                android:layout_marginRight="@dimen/size15dp"
+                android:layout_marginTop="@dimen/size15dp"
+                android:elevation="5dp"
+                app:layout_anchor="@+id/card_entrar_rendimentos"
+                app:layout_anchorGravity="right|top"
+                app:srcCompat="@drawable/ic_info_card" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_entrar_rendimentos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin10dp"
+                android:layout_marginEnd="@dimen/margin10dp"
+                android:layout_marginLeft="@dimen/margin5dp"
+                android:layout_marginRight="@dimen/margin10dp"
+                android:layout_marginStart="@dimen/margin5dp"
+                android:layout_marginTop="@dimen/margin5dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/margin10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/margin10dp"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/home6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_redimentos"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/home_rendimentos"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/font16sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/homeLine6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/colorPrimary" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+</LinearLayout>

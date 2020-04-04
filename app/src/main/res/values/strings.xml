@@ -3,7 +3,7 @@
     <string name="home_name">E-CONTA</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="app_version">Versão 1.1.1 Beta</string>
+    <string name="app_version">Versão 1.2.2 Beta</string>
 
     <!--======================Navegation Drawer Icon Text=========================-->
     <string name="home_banca">Minha Banca</string>

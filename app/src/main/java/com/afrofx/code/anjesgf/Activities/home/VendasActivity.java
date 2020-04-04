@@ -2,15 +2,15 @@ package com.afrofx.code.anjesgf.Activities.home;
 
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.afrofx.code.anjesgf.Activities.root.MainScreenActivity;
 import com.afrofx.code.anjesgf.Activities.vendas.DividasClienteActivity;
@@ -30,7 +30,7 @@ import com.google.android.gms.ads.MobileAds;
 
 import java.util.List;
 
-public class VendasActivity extends AppCompatActivity{
+public class VendasActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private CardView OpcaoVenda1, OpcaoVenda2, OpcaoVenda3, OpcaoVenda4;

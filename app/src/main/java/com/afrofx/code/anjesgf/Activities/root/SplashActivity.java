@@ -3,9 +3,9 @@ package com.afrofx.code.anjesgf.Activities.root;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.ThemeSettings.ThemeColor;

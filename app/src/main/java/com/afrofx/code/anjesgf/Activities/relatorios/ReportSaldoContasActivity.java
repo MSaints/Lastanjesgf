@@ -1,32 +1,31 @@
 package com.afrofx.code.anjesgf.Activities.relatorios;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.afrofx.code.anjesgf.Activities.root.MainScreenActivity;
 import com.afrofx.code.anjesgf.DatabaseHelper;
-import com.afrofx.code.anjesgf.Manifest;
 import com.afrofx.code.anjesgf.MyFooter;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.Recyclers.Report.ReportSaldoContasRecycler;

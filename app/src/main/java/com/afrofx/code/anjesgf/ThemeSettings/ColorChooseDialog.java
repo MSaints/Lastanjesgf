@@ -1,17 +1,13 @@
 package com.afrofx.code.anjesgf.ThemeSettings;
 
 import android.annotation.TargetApi;
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;

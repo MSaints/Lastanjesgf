@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/ic_mkesh" />
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,6 +63,6 @@
         android:layout_alignRight="@+id/conta_linear"
         android:layout_centerVertical="true" />-->
 
-    </android.support.v7.widget.CardView></RelativeLayout>
+    </androidx.cardview.widget.CardView></RelativeLayout>
 
     </LinearLayout>

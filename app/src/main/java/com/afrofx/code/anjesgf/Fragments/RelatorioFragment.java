@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,17 @@ import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import com.afrofx.code.anjesgf.Activities.relatorios.*;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
+import com.afrofx.code.anjesgf.Activities.relatorios.ReportClientesRegistadosActivity;
+import com.afrofx.code.anjesgf.Activities.relatorios.ReportDiarioActivity;
+import com.afrofx.code.anjesgf.Activities.relatorios.ReportProdutosEmStockActivity;
+import com.afrofx.code.anjesgf.Activities.relatorios.ReportProdutosForaStockActivity;
+import com.afrofx.code.anjesgf.Activities.relatorios.ReportSaldoContasActivity;
+import com.afrofx.code.anjesgf.Activities.relatorios.ReportUsuarioReceitaActivity;
+import com.afrofx.code.anjesgf.Activities.relatorios.ReportUsuariosRegistadosActivity;
+import com.afrofx.code.anjesgf.Activities.relatorios.ReportVendasActivity;
 import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.adpters.ExpandableListAdapter;
 
@@ -196,7 +204,7 @@ public class RelatorioFragment extends Fragment {
 
         /* ---------Adicionando sub itens nas listas------------*/
         List<String> relatorioVendas = new ArrayList<>();
-        relatorioVendas.add("Relatório Diário");
+        //relatorioVendas.add("Relatório Diário");
         relatorioVendas.add("Total de Vendas");
 
         List<String> relatorioStock = new ArrayList<>();

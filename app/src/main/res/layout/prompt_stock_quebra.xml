@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fastSaleTitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:text="Adicionar Quebra"
+        android:textColor="@color/txt_white"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+        <EditText
+            android:layout_marginTop="@dimen/margin10dp"
+            android:layout_marginHorizontal="@dimen/margin10dp"
+            android:id="@+id/quebraQuantidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quantidade"
+            android:singleLine="true"
+            android:inputType="number"
+            android:background="@drawable/edit_style"/>
+
+        <EditText
+            android:layout_margin="@dimen/margin10dp"
+            android:id="@+id/quebraDescricao"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descrição"
+            android:inputType="text"
+            android:background="@drawable/edit_style"/>
+
+</LinearLayout>

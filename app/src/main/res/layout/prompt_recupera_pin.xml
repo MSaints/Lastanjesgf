@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/reccuperaEcra"
+    android:background="@color/colorPrimary"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_remember" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/txt_recuperar_pin"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:maxLength="9"
+            android:id="@+id/recupera_numero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:background="@drawable/edit_style"
+            android:hint="Numero de Telefone"
+            android:singleLine="true"
+            android:gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/but_size"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/but_style_white"
+            android:text="@string/but_recuperar"
+            android:id="@+id/submeterPin"
+            android:textColor="#000" />
+    </LinearLayout>
+</LinearLayout>

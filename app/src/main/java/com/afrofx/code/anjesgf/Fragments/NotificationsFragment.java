@@ -1,39 +1,143 @@
 package com.afrofx.code.anjesgf.Fragments;
 
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.afrofx.code.anjesgf.Activities.root.MainScreenActivity;
-import com.afrofx.code.anjesgf.R;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
+import com.afrofx.code.anjesgf.DatabaseHelper;
+import com.afrofx.code.anjesgf.NotificationControl;
+import com.afrofx.code.anjesgf.R;
+import com.afrofx.code.anjesgf.Recyclers.RecyclerNotificacoes;
+import com.afrofx.code.anjesgf.models.NotificationModel;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class NotificationsFragment extends Fragment {
 
-    public NotificationsFragment() {
-        // Required empty public constructor
-    }
+    private View v;
+
+    private List<NotificationModel> notificationModelList;
+
+    private DatabaseHelper db;
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+    SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd-MM-yyyy");
+    Calendar calendar = Calendar.getInstance();
+
+    public NotificationsFragment(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        db = new DatabaseHelper(getActivity());
+
+        notificationModelList = new ArrayList<>();
+
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        boolean value1 = (mSharedPreference.getBoolean("activa_notificacao", false));
+
+        if(value1){
+            stockNotification();
+        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifications, container, false);
+        v =  inflater.inflate(R.layout.fragment_notifications, container, false);
+
+        final RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyclerViewNotifications);
+        recyclerView.setHasFixedSize(true);
+        final RecyclerNotificacoes recyclerNotificacoes = new RecyclerNotificacoes(getContext(), notificationModelList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(recyclerNotificacoes);
+
+        return v;
     }
+
+
+
+    private void dividaNotification(){
+
+    }
+
+
+    private void validadeNotification(){
+
+    }
+
+
+    private void stockNotification(){
+        db = new DatabaseHelper(getContext());
+
+        Cursor cursor = db.listProduto();
+
+       /* Intent intent = new Intent(getContext(), MainScreenActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+*/
+
+        if(cursor.getCount()==0){
+        }else {
+            while (cursor.moveToNext()){
+                double minima = cursor.getDouble(cursor.getColumnIndex("produto_quanti_minima"));
+                double total = cursor.getDouble(cursor.getColumnIndex("produto_quantidade"));
+
+                String msg, data, hora, tipo;
+
+                msg = "Estado do Stock";
+
+                hora = dateFormat.format(calendar.getTime());
+                data = dateFormat2.format(calendar.getTime());
+                NotificationModel notificationModel;
+
+                if(total == 0){
+                    tipo = cursor.getString(cursor.getColumnIndex("produto_nome"))+ " Acabou";
+
+                    NotificationControl notificationControl;
+                    notificationControl = new NotificationControl(getContext());
+                    notificationControl.sendNotification(msg,tipo);
+
+                    notificationModel = new NotificationModel(tipo, msg, hora, data);
+                    notificationModelList.add(notificationModel);
+                }
+                if(total<=minima & total != 0){
+                    tipo = "Ficaram apenas "+total+" "+cursor.getString(cursor.getColumnIndex("produto_nome"));
+                    hora = dateFormat.format(calendar.getTime());
+                    data = dateFormat2.format(calendar.getTime());
+
+                    NotificationControl notificationControl;
+                    notificationControl = new NotificationControl(getContext());
+                    notificationControl.sendNotification(msg,tipo);
+
+                    notificationModel = new NotificationModel(tipo, msg, hora, data);
+                    notificationModelList.add(notificationModel);
+
+                }
+
+            }
+        }
+    }
+
+
+    private void analiseNotification(){
+
+    }
+
+
 
 /*    private void addNotification() {
         NotificationCompat.Builder builder =

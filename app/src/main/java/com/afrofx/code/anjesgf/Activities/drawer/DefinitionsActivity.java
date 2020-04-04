@@ -5,14 +5,14 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.afrofx.code.anjesgf.Activities.root.MainScreenActivity;
 import com.afrofx.code.anjesgf.Dialogs.DialogInfo;
@@ -20,11 +20,11 @@ import com.afrofx.code.anjesgf.R;
 import com.afrofx.code.anjesgf.ThemeSettings.ThemeColor;
 import com.afrofx.code.anjesgf.sessionController;
 
-public class DefinitionsActivity extends AppCompatActivity{
+public class DefinitionsActivity extends AppCompatActivity {
 
     private sessionController se;
 
-    private  Toolbar toolbar;
+    private Toolbar toolbar;
 
     private ImageView info1, info3, info4, info2;
 
@@ -68,6 +68,21 @@ public class DefinitionsActivity extends AppCompatActivity{
         final SharedPreferences.Editor editor = mSharedPreference.edit();
         boolean value1 = (mSharedPreference.getBoolean("activa_limite", false));
         boolean value2 = (mSharedPreference.getBoolean("activa_seguranca", false));
+        boolean value3 = (mSharedPreference.getBoolean("activa_notificacao", false));
+        boolean value4 = (mSharedPreference.getBoolean("activa_recibo", false));
+
+        if (value1) {
+            infoSwitch4.setChecked(true);
+        }
+        if (value2) {
+            infoSwitch3.setChecked(true);
+        }
+        if (value3) {
+            infoSwitch1.setChecked(true);
+        }
+        if (value4) {
+            infoSwitch2.setChecked(true);
+        }
 
 
         infoSwitch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -77,6 +92,42 @@ public class DefinitionsActivity extends AppCompatActivity{
                     editor.commit();
                 }else{
                     editor.putBoolean("activa_seguranca", false);
+                    editor.commit();
+                }
+            }
+        });
+
+        infoSwitch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    editor.putBoolean("activa_limite", true);
+                    editor.commit();
+                }else{
+                    editor.putBoolean("activa_limite", false);
+                    editor.commit();
+                }
+            }
+        });
+
+        infoSwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    editor.putBoolean("activa_recibo", true);
+                    editor.commit();
+                }else{
+                    editor.putBoolean("activa_recibo", false);
+                    editor.commit();
+                }
+            }
+        });
+
+        infoSwitch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    editor.putBoolean("activa_notificacao", true);
+                    editor.commit();
+                }else{
+                    editor.putBoolean("activa_notificacao", false);
                     editor.commit();
                 }
             }

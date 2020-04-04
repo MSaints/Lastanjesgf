@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/definitionInfoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="Acerca"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:gravity="center_horizontal" />
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:layout_width="220dp"
+        android:layout_height="140dp"
+        app:srcCompat="@drawable/ic_econtafullnoshadow"/>
+
+  <!--  <TextView
+        android:id="@+id/definitionInfoDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autoSizeTextType="uniform"
+        android:lineSpacingExtra="5dp"
+        android:text="@string/acerca_e_conta"
+        android:textAlignment="center"
+        android:textColor="@color/txt_black"
+        android:textSize="16sp" />
+-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autoSizeTextType="uniform"
+        android:lineSpacingExtra="5dp"
+        android:text="@string/acerca_e_conta2"
+        android:textAlignment="center"
+        android:textColor="@color/txt_black"
+        android:textSize="16sp"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:autoSizeTextType="uniform"
+        android:lineSpacingExtra="5dp"
+        android:text="@string/acerca_e_conta3"
+        android:textAlignment="center"
+        android:textColor="@color/txt_black"
+        android:textSize="16sp"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/aboutVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autoSizeTextType="uniform"
+        android:lineSpacingExtra="5dp"
+        android:textAlignment="center"
+        android:textColor="@color/txt_black"
+        android:textSize="10sp"
+        android:gravity="center_horizontal" />
+
+</LinearLayout>

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -46,7 +46,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textSize="14sp" />
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imagePerfil2"
@@ -60,7 +60,7 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
@@ -76,7 +76,8 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:gravity="center_horizontal" />
 
 
         <LinearLayout
@@ -328,5 +329,5 @@
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

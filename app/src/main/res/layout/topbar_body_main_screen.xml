@@ -7,12 +7,12 @@
     android:background="@color/bg_grey"
     tools:context="com.afrofx.code.anjesgf.Activities.root.MainScreenActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarMainScreen"
             android:layout_width="match_parent"
             android:layout_height="56dp"
@@ -48,8 +48,8 @@
             </RelativeLayout>
 
 
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <FrameLayout
@@ -60,13 +60,13 @@
 
     </FrameLayout>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         app:cardCornerRadius="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <android.support.design.widget.BottomNavigationView
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottonNavBar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
@@ -74,9 +74,9 @@
             app:menu="@menu/bottom_navegation">
 
 
-        </android.support.design.widget.BottomNavigationView>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

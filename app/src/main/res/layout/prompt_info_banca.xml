@@ -16,7 +16,8 @@
         android:text="Informação do Negócio"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:gravity="center_horizontal" />
 
         <LinearLayout
             android:orientation="vertical"

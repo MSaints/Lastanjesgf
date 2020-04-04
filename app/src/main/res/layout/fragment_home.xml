@@ -15,7 +15,7 @@
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -32,7 +32,7 @@
                 app:layout_anchorGravity="right|top"
                 app:srcCompat="@drawable/ic_info_card" />
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_entrar_caixa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -78,11 +78,11 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@color/colorPrimary" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -99,7 +99,7 @@
                 app:layout_anchorGravity="right|top"
                 app:srcCompat="@drawable/ic_info_card" />
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_entrar_banca"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -145,8 +145,8 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@color/colorPrimary" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </android.support.design.widget.CoordinatorLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -156,7 +156,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -174,7 +174,7 @@
                 app:srcCompat="@drawable/ic_info_card" />
 
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_entrar_vendas"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -221,11 +221,11 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@color/colorPrimary" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </android.support.design.widget.CoordinatorLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -243,7 +243,7 @@
                 app:srcCompat="@drawable/ic_info_card" />
 
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
 
                 android:id="@+id/card_entrar_stock"
                 android:layout_width="match_parent"
@@ -292,8 +292,8 @@
                         android:background="@color/colorPrimary" />
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-        </android.support.design.widget.CoordinatorLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
 
 
@@ -304,7 +304,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -321,7 +321,7 @@
                 app:srcCompat="@drawable/ic_info_card" />
 
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_entrar_despesas"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -357,7 +357,8 @@
                         android:textAlignment="center"
                         android:textColor="@color/cardview_dark_background"
                         android:textSize="@dimen/font16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal" />
 
                     <View
                         android:id="@+id/homeLine5"
@@ -366,11 +367,11 @@
                         android:layout_gravity="center_horizontal"
                         android:background="@color/colorPrimary" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -388,7 +389,7 @@
                 app:srcCompat="@drawable/ic_info_card" />
 
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_entrar_rendimentos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -435,8 +436,8 @@
                         android:background="@color/colorPrimary" />
 
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
 </LinearLayout>
